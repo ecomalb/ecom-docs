@@ -73,6 +73,7 @@
   * [OpenCart](platizhni-vidzheti-dlya-cms/opencart/README.md)
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/opencart/instrukciya-po-vstanovlennyu.md)
     * [Функціонал та опис платіжного модуля](platizhni-vidzheti-dlya-cms/opencart/funkcional-ta-opis-platizhnogo-modulya.md)
+    * [Структура бази даних](platizhni-vidzheti-dlya-cms/opencart/struktura-bazi-danikh.md)
 * [Довідники](dovidniki/README.md)
   * [Статус транзакції](dovidniki/status-tranzakciyi.md)
   * [Тест кейси](dovidniki/test-keisi.md)
