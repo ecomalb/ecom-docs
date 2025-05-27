@@ -4,6 +4,7 @@
 
 * status - "SUCCESS"
 * approvalCode&#x20;
+* code - "approved"
 * actionCode - "0"
 * responseCode - "00"
 
