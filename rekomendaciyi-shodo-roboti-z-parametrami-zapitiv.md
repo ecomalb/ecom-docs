@@ -18,9 +18,3 @@
    * Пропускайте параметр у запиті, якщо він не використовується;
    * Уникайте передачі явних `null` або порожніх значень.
 
-**Приклад:**\
-Якщо параметр `txnType` є необов'язковим, коректно:
-
-* **Не передавати:** `POST /ecom/execute_request/payments/v3/create/purchase`
-* **Помилково:** `POST /ecom/execute_request/payments/v3/create/purchase?txnType=null` (викличе помилку).
-
