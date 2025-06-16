@@ -8,6 +8,7 @@
 * [Опис роботи з ключами](opis-roboti-z-klyuchami/README.md)
   * [Приклад PURCHASE колекції](opis-roboti-z-klyuchami/priklad-purchase-kolekciyi.md)
   * [Приклад А2С колекції](opis-roboti-z-klyuchami/priklad-a2s-kolekciyi.md)
+* [Рекомендації щодо роботи з параметрами запитів](rekomendaciyi-shodo-roboti-z-parametrami-zapitiv.md)
 * [Платіжні методи H2H](platizhni-metodi-h2h/README.md)
   * [PURCHASE](platizhni-metodi-h2h/purchase/README.md)
     * [Запит проведення PURCHASE Крок 1](platizhni-metodi-h2h/purchase/zapit-provedennya-purchase-krok-1.md)
