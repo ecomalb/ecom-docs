@@ -23,7 +23,7 @@
       const tokenizationSpecification = {
         type: "PAYMENT_GATEWAY",
         parameters: {
-          gateway: "alliance_bank", // TODO: вказуємо потрібний gateway
+          gateway: "timeproject", // TODO: вказуємо потрібний gateway
           gatewayMerchantId: "123123123123324", // TODO: вказуємо потрібний merchantId
         },
       };
@@ -150,7 +150,7 @@
               ...paymentData,
               merchantInfo: {
                 merchantId: '123123123123324', // TODO: вказуємо потрібний gatewayMerchantId
-                gateway: 'alliance_bank' // TODO: вказуємо потрібний gateway
+                gateway: 'timeproject' // TODO: вказуємо потрібний gateway
               },
             },
             environment: 'TEST', // або PRODUCTION
