@@ -40,7 +40,7 @@
   * [GooglePay™ encrypted](platizhni-metodi-h2h/googlepay-tm-encrypted/README.md)
     * [Докуменація GooglePay™](platizhni-metodi-h2h/googlepay-tm-encrypted/dokumenaciya-googlepay-tm.md)
     * [Запит підтримки GooglePay™ на сторінці](platizhni-metodi-h2h/googlepay-tm-encrypted/zapit-pidtrimki-googlepay-tm-na-storinci.md)
-    * [Запит отримання данних мерчанта GooglePay™](platizhni-metodi-h2h/googlepay-tm-encrypted/zapit-otrimannya-dannikh-merchanta-googlepay-tm.md)
+    * [Запит отримання даних мерчанта GooglePay™](platizhni-metodi-h2h/googlepay-tm-encrypted/zapit-otrimannya-dannikh-merchanta-googlepay-tm.md)
     * [Запит проведення платежу](platizhni-metodi-h2h/googlepay-tm-encrypted/zapit-provedennya-platezhu.md)
   * [REFUND](platizhni-metodi-h2h/refund.md)
   * [TOKEN](platizhni-metodi-h2h/token/README.md)
