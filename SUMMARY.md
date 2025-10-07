@@ -1,6 +1,6 @@
 # Table of contents
 
-* [E Commerce платформа AlliancePay v2.39.0](README.md)
+* [E Commerce платформа AlliancePay v2.42.0](README.md)
 * [Аутентифікація](autentifikaciya.md)
 * [Криптування даних](kriptuvannya-danikh.md)
 * [Авторизація](avtorizaciya.md)
