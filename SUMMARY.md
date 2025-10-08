@@ -61,7 +61,6 @@
   * [Preauthorization and completion](platizhni-metodi-h2h/purchase-1/README.md)
     * [Запит проведення Preauth Крок 1](platizhni-metodi-h2h/purchase-1/zapit-provedennya-purchase-krok-1.md)
     * [Запит проведення Preauth Крок 2](platizhni-metodi-h2h/purchase-1/zapit-provedennya-purchase-krok-2.md)
-    * [Запит проведення Completion](platizhni-metodi-h2h/purchase-1/refund.md)
   * [Отримання даних](platizhni-metodi-h2h/otrimannya-danikh/README.md)
     * [по OPERATION\_ID](platizhni-metodi-h2h/otrimannya-danikh/po-operation_id.md)
     * [по merchantRequestId](platizhni-metodi-h2h/otrimannya-danikh/po-merchantrequestid.md)
