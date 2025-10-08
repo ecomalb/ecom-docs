@@ -1,2 +1,0 @@
-# Preauthorization and completion
-
