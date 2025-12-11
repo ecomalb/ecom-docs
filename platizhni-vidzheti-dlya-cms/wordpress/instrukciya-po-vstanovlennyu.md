@@ -4,21 +4,15 @@
 
 {% file src="../../.gitbook/assets/alb-hpp-alliancepay.zip" %}
 
+1.  Завантажте архів плагіна й встановіть через _Плагіни → Додати новий → Завантажити плагін_.\\
 
-
-1.  Завантажте архів плагіна й встановіть через _Плагіни → Додати новий → Завантажити плагін_.\
-
-
-    <figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 2. Активуйте плагін.
 3. У меню Адмін‑панелі з’явиться пункт **AlliancePay**
-4.  Потім перейдіть в налаштування Woocommerce і активуйте плагін. (скрін 2) woocommerce->settings->payments\
+4.  Потім перейдіть в налаштування Woocommerce і активуйте плагін. (скрін 2) woocommerce->settings->payments\\
 
-
-    <figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
 5. На сторінці оплати повинен бути шорткод \[woocommerce\_checkout]
-
-
 
 ## Вимоги
 

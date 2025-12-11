@@ -4,7 +4,7 @@
 
 Перейдіть до _AlliancePay → Налаштування_ і заповніть всі поля. Зверніть уагу, що деякі поля надаються банком і **настисніть кнопку зберегти і тільки після цього виконуйте авторизацію.**
 
-<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 **Обов'язково, всі поля повинні бути заповнені, щоб платіжний плагін працював правильно**
 
@@ -21,8 +21,6 @@
 
 Переконайтеся, що у _Налаштування → Загальні → Часовий пояс_ вибрано **Київ**. У плагіні дата `tokenExpiration` парситься та показується у локальному часі сайту.
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
-
-
+<figure><img src="../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
 
 ##
