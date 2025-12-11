@@ -19,8 +19,7 @@
 На Продакшн середовищі, Мерчант самостійно повинен виконувати криптування на своїй стороні.
 
 5\. Encrypt create purchase request body — `{{url}}/cipher/encrypt_by_jwk?message={{body_request}}`\
-\{{body\_request\}} - повинно відповідати обов'язковим вхідним параметрам [PURCHASE](https://docs.merchant.alb.ua/platizhni-metodi-h2h/purchase/zapit-provedennya-purchase-krok-1)[ корок 1](https://docs.merchant.alb.ua/platizhni-metodi-h2h/purchase/zapit-provedennya-purchase-krok-1)\
-За допомогою розкриптованого серверного ключа - serverPublicKey, котрий отримано на кроках 1 і 2, виконується криптування тіла запиту для створення платежу на стороні Мерчанта. \
+\{{body\_request\}} - повинно відповідати обов'язковим вхідним параметрам [Запит проведення PURCHASE Крок 1](https://docs.merchant.alb.ua/platizhni-metodi-h2h/purchase/zapit-provedennya-purchase-krok-1) За допомогою розкриптованого серверного ключа - serverPublicKey, котрий отримано на кроках 1 і 2, виконується криптування тіла запиту для створення платежу на стороні Мерчанта. \
 У відповідь отримуємо  зашифроване тіло запиту - \{{encryptJweT\}}\
 Для тестів допускається використання допоміжного методу "/ecom/help/encrypt\_ru\_jwk"
 

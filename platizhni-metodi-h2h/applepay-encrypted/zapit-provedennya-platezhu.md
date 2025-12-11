@@ -280,7 +280,6 @@ description: '{{url}}/ecom/execute_request/payments/v1/apple_pay/token/purchase'
 }
 ```
 
-\
+<br>
 
-
-\
+<br>

@@ -6,6 +6,10 @@ description: '{{url}}/ecom/execute_request/payments/v3/refund'
 
 Повернення застосовується у разі необхідності повернути кошти клієнту по успішно здійсненій операції Платежу. В результаті даної операції кошти будуть повернені на ту карту, з якої проводився розрахунок по оригінальній операції.
 
+Помітка по роботі з запитом.
+
+Перед виконанням запиту всі вхідні параметри повинні бути **зашифровані відповідно до вимог, описаних у** [документації](https://docs.merchant.alb.ua/autentifikaciya#dlya-shifruvannya-ta-rozshifruvannya-vikoristovuyetsya), з використанням **`serverPublicKey`**, отриманого під час авторизації.
+
 #### **Вхідні параметри:**
 
 <table data-full-width="true"><thead><tr><th>Параметр</th><th>Опис</th><th width="154">Формат даних</th><th width="149">Обов'язковість</th><th>Приклад</th></tr></thead><tbody><tr><td>merchantRequestId</td><td>унікальний ідентифікатор згенерований системою мерчанта, використовується для можливості дізнатися статусоперації якщо запит закінчився невідомою помилкою чи дісконектом</td><td>string (36)</td><td>Так</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>merchantId</td><td>Id мерчанту згенерований в Єкомі</td><td>string(36)</td><td>Так</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>operationId</td><td>ідентифікатор платіжної операції згенерований КБ по якій проводиться повернення</td><td>string</td><td>Так</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>coinAmount</td><td>сума повернення в копійках</td><td>string</td><td>Так</td><td>2500</td></tr><tr><td>date</td><td>дата та час платежу</td><td>string</td><td>Так</td><td>{{currentdateT}}.00+00:00 </td></tr><tr><td>notificationUrl</td><td>url, на який буде відправлено CallBack</td><td>string (1000)</td><td>Ні</td><td>https://merchant.notification_url</td></tr><tr><td>notificationEncryption</td><td>ознака криптування данних CallBack</td><td>string</td><td>Ні</td><td><p>true/false</p><p>Якщо параметр не передано або передано false, то дані в CallBack будуть не закриптовані</p></td></tr><tr><td>merchantComment</td><td>додаткова інформація\коментар мерчанта по замовленню</td><td><p>string(255) </p><p>a-zA-Z0-9 ,.;:@#$%'-=+1,256$</p></td><td>Ні</td><td>merchant Comment id 1258728c1</td></tr></tbody></table>
@@ -16,8 +20,6 @@ description: '{{url}}/ecom/execute_request/payments/v3/refund'
 | ----------------------- | -------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
 | type                    | тип транзакції                                           | string       | REFUND                                                                                                       |
 | rrn                     | rrn номер транзакції в МПС                               | string       | 2554256963                                                                                                   |
-| purpose                 | призначення платежу                                      | string       | За товар                                                                                                     |
-| comment                 | коментар                                                 | string       | тест                                                                                                         |
 | coinAmount              | сума повернення в копійках                               | int          | 2000                                                                                                         |
 | merchantId              | Id мерчанту                                              | string       | 137d9304-0368-11ed-b939-0242ac120002                                                                         |
 | operationId             | Id транзакціі                                            | string       | 1712844596346b9F-WwrWZpq                                                                                     |
@@ -33,7 +35,6 @@ description: '{{url}}/ecom/execute_request/payments/v3/refund'
 | modificationDateTime    | дата модифікаціі платежу                                 | string       | 2024.09.19 15:29:25.675                                                                                      |
 | actionCode              | код відповіді                                            | string       | 0                                                                                                            |
 | responseCode            | деталі відповіді                                         | string       | 0                                                                                                            |
-| description             | опис відповіді                                           | string       | approved                                                                                                     |
 | processingMerchantId    | Id мерчанту в ПЦ                                         | string       | AE100000                                                                                                     |
 | processingTerminalId    | Id терміналу в ПЦ                                        | string       | AE100000                                                                                                     |
 | bankCode                | назва банку емітента                                     | string       | BANK\_ALLIANCE                                                                                               |
@@ -42,10 +43,13 @@ description: '{{url}}/ecom/execute_request/payments/v3/refund'
 | notificationUrl         | url, на який відправлено CallBack                        | string       | [https://merchant.notification\_url/](https://merchant.notification_url/)                                    |
 | paymentServiceType      | тип оплати                                               | string       | CARD/APPLE\_PAY/GOOGLE\_PAY                                                                                  |
 | notificationEncryption  | ознака криптування данних CallBack                       | string       | <p>true/false<br>Якщо параметр не передано або передано false, то дані в CallBack будуть не закриптовані</p> |
+| hppOrderId              | Id замовлення                                            | string       | 1764688635274xVtoUo7bDcn                                                                                     |
 | originalOperationId     | id під яким створено оригінальну операцію                | string       | 1712843529623cHAHkmt-G5u                                                                                     |
 | originalCoinAmount      | Сума оригінального платежу                               | int          | 100                                                                                                          |
 | originalEcomOperationId | id в системі Еком під яким створено оригінальну операцію | string       | c25ee1cb-a052-439b-b075-bcb632615b11                                                                         |
 | rrnOriginal             | rrn номер оригінальної транзакції в МПС                  | string       | 123456789                                                                                                    |
+| creatorSystem           | назва системи, що сформувала запит                       | string       | HPP                                                                                                          |
+| externalCardToken       | id токену                                                | string       | tmkEYenZSa8FV03aawVXxbep                                                                                     |
 
 #### Приклад тіла запиту&#x20;
 
@@ -67,8 +71,6 @@ description: '{{url}}/ecom/execute_request/payments/v3/refund'
 {
     "type": "REFUND",
     "rrn": "410213187861",
-    "purpose": null,
-    "comment": null,
     "coinAmount": 100,
     "merchantId": "137d9304-0368-11ed-b939-0242ac120002",
     "operationId": "1712843529623cHAHkmt-G5u",
@@ -80,12 +82,11 @@ description: '{{url}}/ecom/execute_request/payments/v3/refund'
     "merchantRequestId": "21f8ab16-3d4e-4ece-a3f5-ecb406c394ff",
     "transactionCurrency": "980",
     "merchantCommission": null,
-    "createDateTime": "2024.09.19 15:29:25.675",
+    "creationDateTime": "2024.09.19 15:29:25.675",
     "modificationDateTime": "2024.09.19 15:29:25.675",
     "transactionResponseInfo": {
         "actionCode": null,
-        "responseCode": null,
-        "description": "Операція успішна"
+        "responseCode": null
     },
     "bankCode": null,
     "paymentSystem": null,
@@ -93,10 +94,11 @@ description: '{{url}}/ecom/execute_request/payments/v3/refund'
     "notificationUrl": "https://api-ecom-prod.bankalliance.ua/mock",
     "paymentServiceType": null,
     "notificationEncryption": false,
+    "hppOrderId": "1764688635274xVtoUo7bDcn",
     "rrnOriginal": "410213187861",
     "originalOperationId": "1712843529623cHAHkmt-G5u",
     "originalCoinAmount": 100,
-    "cardNumberMask": null,
+    "externalCardToken": null,
     "originalEcomOperationId": "c25ee1cb-a052-439b-b075-bcb632615b11"
 }
 ```

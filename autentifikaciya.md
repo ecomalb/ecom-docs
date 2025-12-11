@@ -4,7 +4,7 @@ description: Початок роботи
 
 # Аутентифікація
 
-Для початку роботи з платформою AlliancePay необхідно:
+### Для початку роботи з платформою AlliancePay необхідно:
 
 1\. Звернутись до АТ “БАНК АЛЬЯНС” для отримання інформації щодо умов послуги інтернет-еквайринг.
 
@@ -18,9 +18,7 @@ description: Початок роботи
 
 6\. Почати користуватись послугою інтернет-еквайрингу.
 
-\
-Процес створення нового сеансу безпеки користувача
---------------------------------------------------
+### Процес створення нового сеансу безпеки користувача
 
 Процес створення нового сеансу безпеки користувача включає в себе ряд послідовних дій, таких як:
 
@@ -28,58 +26,52 @@ description: Початок роботи
 * Отримуємо зашифровані авторизаційні дані зашифрувавши тіло запиту “Процес створення JWE зашифрованих даних” та відправити “Запит створення технічної сесії”
 * Розшифровуємо отримані дані&#x20;
 
-Уточнення: URL криптування і розкриптування
+Уточнення: URL криптування і розкриптування :
 
-\{{url\}}cipher/decrypt\_by\_jwk?message=
+<kbd>\{{url\}}cipher/decrypt\_by\_jwk?message=</kbd>
 
-\{{url\}}cipher/encrypt\_by\_jwk?message=
+<kbd>\{{url\}}cipher/encrypt\_by\_jwk?message=</kbd>
 
+**! тільки для допомоги під час тестів!  Їх заборонено виконувати з прод ключами.**
 
+### **Для шифрування та розшифрування використовується :**&#x20;
 
-#### &#x20;**- тільки для допомоги під час тестів!  Їх заборонено виконувати з прод ключами.**
+* Алгоритм шифрування ключів (alg) - <kbd>ECDH-ES+A256KW</kbd>
+* Шифрування тіла запиту по алгоритму (enc) - <kbd>A256GCM</kbd>
 
 #### **Приклад по encrypt/decrypt**&#x20;
 
-```
+```python
 def encrypt_data(self, msg: str, use_server_public_key: bool = False) -> str:
         """Get compact JWE token with encrypted data"""
-
 
         if not use_server_public_key:
             with open(self.public_key, 'rb') as public_key_file:
                 public_key_raw = json.loads(public_key_file.read().decode())
-
 
         public_key = jwk.JWK()
         key_raw = self.server_public_key if use_server_public_key else public_key_raw
         public_key.import_key(**key_raw)
         protected_header = {'alg': 'ECDH-ES+A256KW', 'enc': 'A256GCM'}
 
-
         jwetoken = jwe.JWE(msg.encode('utf-8'), recipient=public_key, protected=protected_header)
         return jwetoken.serialize(compact=True)
-
 
     def decrypt_data(self, msg: str) -> str:
         """Get decrypted data (from JWE)"""
 
-
         with open(self.private_key, 'rb') as private_key_file:
             private_key_raw = json.loads(private_key_file.read().decode())
 
-
         private_key = jwk.JWK()
         private_key.import_key(**private_key_raw)
-
 
         jwetoken = jwe.JWE()
         jwetoken.deserialize(msg, key=private_key)
         return jwetoken.payload.decode()
 ```
 
-
-
-#### Процес генерації комунікаційних JWK ключів клієнта
+### Процес генерації комунікаційних JWK ключів клієнта
 
 Генерація публічного та приватного ключа (JSON Web Key) здійснюється з наступними параметрами:
 
