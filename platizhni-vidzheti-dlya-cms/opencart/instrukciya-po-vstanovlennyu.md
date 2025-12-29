@@ -1,8 +1,16 @@
 # Інструкція по встановленню
 
-Платіжний віджет OpenCart:&#x20;
+### Платіжний віджет OpenCart:&#x20;
 
-{% file src="../../.gitbook/assets/payment_widget_opencart.zip" %}
+{% tabs %}
+{% tab title="OpenCart 3.0" %}
+{% file src="../../.gitbook/assets/alliance.ocmod.zip" %}
+{% endtab %}
+
+{% tab title="OpenCart 4.0" %}
+{% file src="../../.gitbook/assets/alliance.ocmod (1).zip" %}
+{% endtab %}
+{% endtabs %}
 
 ## Покрокова інструкція, встановлення платіжного віджета:&#x20;
 
