@@ -38,4 +38,12 @@ _Натисність "Завантажити модуль"_ та виберіт
 {% endstep %}
 {% endstepper %}
 
-&#x20;
+### Вимоги до серверу де встановлювати платіжний модуль <a href="#vimogi-do-serveru-de-vstanovlyuvati-platizhnii-modul" id="vimogi-do-serveru-de-vstanovlyuvati-platizhnii-modul"></a>
+
+1. Версія PHP 7.4 або вище
+2. Для дешифрування і комунікації з Ecom, платіжний модуль використовує наступну бібліотеку - [GitHub - kelvinmo/simplejwt: A simple JSON web token library written in PHP.](https://github.com/kelvinmo/simplejwt) , яка вбудована в сам модуль
+3. На сервері повинно бути ввімкнено розширення для пхп - **gmp** \[для роботи бібліотеки simplejwt]
+4. На сервері повинно бути ввімкнено розширення для пхп - **hash** \[для роботи бібліотеки simplejwt]
+5. На сервері повинно бути ввімкнено розширення для пхп - **openssl** \[для роботи бібліотеки simplejwt]
+6. На сервері повинно бути ввімкнено розширення для пхп - **sodium** \[для роботи бібліотеки simplejwt]
+
