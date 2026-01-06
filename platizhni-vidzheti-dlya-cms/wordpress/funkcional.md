@@ -26,6 +26,6 @@ Callback не отримано, тоді дані беруться прямим 
 
 Віджет оплати:
 
-<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 після оплати, Ecom повинен прислати нам Callback про статус оплати і тоді ми фіналізуємо оплату вже на нашій стороні.

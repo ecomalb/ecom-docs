@@ -12,7 +12,7 @@
 
 Відкрийте _"Модулі" → "Менеджер модулів"_
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 _Натисність "Завантажити модуль"_ та виберіть архів
 
