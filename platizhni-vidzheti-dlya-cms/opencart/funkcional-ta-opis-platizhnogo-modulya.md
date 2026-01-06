@@ -14,9 +14,9 @@ description: Налаштування платіжного модля перед
 \
 В полі `Alliance API URL` потрібно вказати значення -  [https://api-ecom-prod.bankalliance.ua](https://api-ecom-prod.bankalliance.ua)
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 3. Провірити статус замовлення
 
@@ -25,8 +25,6 @@ description: Налаштування платіжного модля перед
 <figure><img src="../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
 
 ### 4. Транзації
-
-&#x20;
 
 <figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 
