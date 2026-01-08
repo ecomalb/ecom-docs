@@ -88,6 +88,8 @@
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/prestashop/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/prestashop/nalashtuvannya-ta-avtorizaciya.md)
     * [Функціонал](platizhni-vidzheti-dlya-cms/prestashop/funkcional.md)
+  * [Magento 2](platizhni-vidzheti-dlya-cms/magento-2/README.md)
+    * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/magento-2/instrukciya-po-vstanovlennyu.md)
 * [Довідники](dovidniki/README.md)
   * [Статус транзакції](dovidniki/status-tranzakciyi.md)
   * [Тест кейси](dovidniki/test-keisi.md)
