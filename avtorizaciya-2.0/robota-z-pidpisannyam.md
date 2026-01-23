@@ -15,7 +15,7 @@
 <pre class="language-json"><code class="lang-json"><strong>{
 </strong><strong>    "alg": "ES256",  // Алгоритм підписання 
 </strong><strong>    "kid": "uuid",  // Ідентифікатор публічного ключа (надається від співробітника банку)
-</strong><strong>    "ts" : "1763034308", // Дата та час у форматі timestamp
+</strong><strong>    "ts" : "1769174930000", // Дата та час у форматі timestamp в мілісекундах
 </strong><strong>    "targetUrl" : "/ecom/jws/payments/create/purchase_v3" // URL на який надсилається запит
 </strong>}
 </code></pre>
@@ -249,20 +249,21 @@ echo "JWS: " . $serializer->serialize($jws, 0);
 
 <table><thead><tr><th>Поле</th><th>Опис</th><th>Тип</th><th>Обов'язкове</th><th>Приклад</th></tr></thead><tbody><tr><td><code>alg</code></td><td>Алгоритм підпису, що відповідає типу ключа</td><td>string</td><td>так</td><td><pre><code><strong>ES256
 </strong></code></pre></td></tr><tr><td><code>kid</code></td><td>Ідентифікатор публічного ключа</td><td>string</td><td>так</td><td><pre><code>28da60c2-d60f-404e-b4da-6b089fb29555
-</code></pre></td></tr><tr><td><code>ts</code></td><td>Час генерації JWS</td><td>number (Unix timestamp, seconds)</td><td>так</td><td><pre><code><strong>1763034308
-</strong></code></pre></td></tr><tr><td><code>targetUrl</code></td><td>URL, для якого формується запит</td><td>string (URL)</td><td>так</td><td><pre><code><strong>/ecom/jws/payments/create/purchase_v3
+</code></pre></td></tr><tr><td><code>ts</code></td><td>Час генерації JWS по UTC(Kyiv)</td><td>number (Unix timestamp, milliseconds)</td><td>так</td><td><pre><code>1769174930000
+</code></pre></td></tr><tr><td><code>targetUrl</code></td><td>URL, для якого формується запит</td><td>string (URL)</td><td>так</td><td><pre><code><strong>/ecom/jws/payments/create/purchase_v3
 </strong></code></pre></td></tr></tbody></table>
 
 #### 2.1. **Перевірка терміну дії токена (`ts`)**
 
-* Поле `ts` повинно містити timestamp (у секундах).
+* Поле `ts` повинно містити timestamp (в мілісекундах).
 * JWS вважається дійсним протягом **60 секунд** з моменту формування.
 
 {% hint style="danger" %}
 #### Умови помилки:
 
 * Якщо `ts` > (поточний час + 60 секунд) або `ts` < (поточний час − 60 секунд).
-* Якщо значення `ts` не відповідає формату `1763938228` .
+* Якщо значення `ts` не відповідає формату `1769174930000`&#x20;
+* Якщо значення не відповідає UTC по Київу
 {% endhint %}
 
 #### 2.2. **Перевірка `targetUrl`**
