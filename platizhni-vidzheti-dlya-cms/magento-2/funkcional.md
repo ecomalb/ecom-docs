@@ -4,11 +4,11 @@
 
 Після того як клієнт обрав товари, та перейшов на сторінку оплати, потрібно обрати спосіб оплати через "Alliance Pay"
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після чого, покупця перенаправляє на платіжну сторінку з введення каркових даних&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Перегляд замовлень в адмін панелі
 

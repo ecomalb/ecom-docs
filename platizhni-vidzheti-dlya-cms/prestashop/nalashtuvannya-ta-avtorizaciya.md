@@ -30,7 +30,7 @@
   * `STATUS_PAGE` - редірект, на нашу статус сторіншку (завантажити квитанцію …)
 * Поле `API URL` потрібно вказати значення - [https://api-ecom-prod.bankalliance.ua](https://api-ecom-prod.bankalliance.ua/)&#x20;
 * Поля `Сервісний код (Service Code)` , `ID Мерчанта (Merchant Id)` будуть надані банком&#x20;
-* Поле `Ключ авторизації` , потрібно буде згенерувати самостійно
+* Поле `Ключ авторизації` , потрібно буде згенерувати самостійно відповідно до документації ([https://docs.merchant.alb.ua/autentifikaciya#proces-generaciyi-komunikaciinikh-jwk-klyuchiv-kliyenta](https://docs.merchant.alb.ua/autentifikaciya#proces-generaciyi-komunikaciinikh-jwk-klyuchiv-kliyenta)), де публічну частину потрібно буде передати співробітнику банку&#x20;
 * Поля `ID пристрою (Device Id)`, `Токен оновлення (Refresh token)`, `Токен авторизації (Auth token)` , з'являться після виконання авторизації
 * В полях `Статус успішного замовлення`, `Статус невдалого замовлення`, `Статус успішного повернення`, `Статус помилки повернення`  - потрібно обрати самостійно&#x20;
 

@@ -2,6 +2,8 @@
 
 Платіжний віджет Magento 2 :
 
+{% file src="../../.gitbook/assets/magento2_alliance_pay_v1.0.0.zip" %}
+
 
 
 {% stepper %}

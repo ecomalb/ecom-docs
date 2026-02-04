@@ -4,7 +4,7 @@
 
 {% tabs %}
 {% tab title="OpenCart 3.0" %}
-{% file src="../../.gitbook/assets/alliance.ocmod.zip" %}
+{% file src="../../.gitbook/assets/alliance-v1.1.0.ocmod.zip" %}
 {% endtab %}
 
 {% tab title="OpenCart 4.0" %}

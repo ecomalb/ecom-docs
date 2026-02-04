@@ -16,9 +16,9 @@ description: Налаштування платіжного модля перед
 \
 В полі `Alliance API URL` потрібно вказати значення -  [https://api-ecom-prod.bankalliance.ua](https://api-ecom-prod.bankalliance.ua)
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Провірити статус замовлення
 
@@ -52,17 +52,17 @@ description: Налаштування платіжного модля перед
 
 Де буде знаходитись клавіші "Повне повернення коштів" та "Часткове повернення"
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Повне повернення коштів&#x20;
 
 При натисканні з'явиться спливаюче вікно з повідомленням про успішне здійснення повного поверення коштів&#x20;
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 В деталях замовлення кожен з товарів буде відмічений іконкою, як повернутий та в історії замовлення з'явиться новий запис про повне повернення коштів
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Часткове поверення&#x20;
 
