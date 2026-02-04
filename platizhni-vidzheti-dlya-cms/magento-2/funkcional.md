@@ -4,21 +4,21 @@
 
 Після того як клієнт обрав товари, та перейшов на сторінку оплати, потрібно обрати спосіб оплати через "Alliance Pay"
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після чого, покупця перенаправляє на платіжну сторінку з введення каркових даних&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Перегляд замовлень в адмін панелі
 
 Для того, щоб переглянути всі замовлення, потрібно перейти за шляхом `Sales → Orders`
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 Перегляд деталей замовлення, виконується через клавішу "View"
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Перевірка статусу замовлення
 

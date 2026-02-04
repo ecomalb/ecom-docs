@@ -18,7 +18,7 @@
 
 Потрібно перейти в деталі замовлення та натиснути клавішу "Часткове повернення коштів"&#x20;
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після натискання відкривається вікно, де можна виконати **повне** або **часткове** **повернення**.&#x20;
 
@@ -26,7 +26,7 @@
 
 У відкритому вікні можна обрати кількість товарів, або суму за товари, що буде повернена
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 В результаті виконання часткового поверення у деталях замовлення буде відображатись додаткова інформація по виконаному поверенню&#x20;
 
@@ -48,7 +48,7 @@
 
 В результаті виконання повного повернення, інформація в деталях платежу буде виглядати так&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після вибору способу повернення, потрібно натиснути клавішу "Часткове повернення коштів"
 

@@ -6,7 +6,7 @@
 
 За шляхом "Компоненти" -> "Payment Methods"
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 
 {% step %}
@@ -14,11 +14,11 @@
 
 Натискаємо на клавішу "Створити"
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після у новому вікні, потрібно заповнити поля `Payment Name`, `Sef Alias` та обрати `Payment Method == VM - Alliance Pay`&#x20;
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після чого потрібно натиснути клавішу "Зберегти", щоб вікрилась можливість налаштовувати вкладку Configuration
 {% endstep %}
@@ -28,7 +28,7 @@
 
 У вкладенці Configuration потрібно буде додатково вказати значення, що будуть надані співробітником банку
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="warning" %}
 Обов'язково, всі поля повинні бути заповненні, щоб платіжний плагін працював правильно
@@ -48,6 +48,14 @@
 {% hint style="warning" %}
 Після налаштуванню усіх полів, обов'язково потрібно натиснути клавішу "Зберегти" і тільки після цього натиснути клавішу "Авторизуватись"
 {% endhint %}
+{% endstep %}
+
+{% step %}
+### Авторизація
+
+Як тільки була натиснута клавіша "Авторизуватись", під клавішою повинен з'явитись надпис "Success!"
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 
 {% endstep %}

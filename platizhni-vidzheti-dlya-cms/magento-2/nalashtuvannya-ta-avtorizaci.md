@@ -12,7 +12,7 @@
 * Перейти за шляхом \
   `Stores → Configuration → Sales → Payment Methods → Alliance Payment`
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 
 {% step %}
@@ -20,7 +20,7 @@
 
 Вікно з відображенням усіх налаштуваннь&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Опис та значення полів:
 
@@ -46,7 +46,7 @@
 
 Після того, як усі поля були заповненні, потрібно зберегти налаштування, та виконати авторизацію для того, щоб з'явились поля `Device Id`, `Refresh Token`&#x20;
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 {% endstepper %}
 
