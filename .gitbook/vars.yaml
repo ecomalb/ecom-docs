@@ -1,1 +1,4 @@
+senderIP_example: 123.12.12.12 або  2001:0db8:85a3:0000:0000:8a2e:0370:7334
+recipientIP_desctiption: IPv4 або IPv6 адреса отримувача
+recipientIP_example: 123.12.12.12 або  2001:0db8:85a3:0000:0000:8a2e:0370:7334
 senderIP_description: IPv4 або IPv6 адреса відправника
