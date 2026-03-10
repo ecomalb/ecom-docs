@@ -4,11 +4,11 @@
 
 {% tabs %}
 {% tab title="OpenCart 3.0" %}
-{% file src="../../.gitbook/assets/alliance-v1.1.0.ocmod.zip" %}
+{% embed url="https://github.com/alliancedigital-tech/alliancepay-opencart3/releases" %}
 {% endtab %}
 
 {% tab title="OpenCart 4.0" %}
-{% file src="../../.gitbook/assets/alliance.ocmod (1).zip" %}
+{% embed url="https://github.com/alliancedigital-tech/alliancepay-opencart4/releases" %}
 {% endtab %}
 {% endtabs %}
 

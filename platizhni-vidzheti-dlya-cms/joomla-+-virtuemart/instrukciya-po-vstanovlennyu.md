@@ -2,7 +2,7 @@
 
 {% tabs %}
 {% tab title="Joomla! v5.4.x VirtueMart v4.6.x" %}
-{% file src="../../.gitbook/assets/plg_vmpayment_alliancepay-v1.0.0.zip" %}
+{% embed url="https://github.com/alliancedigital-tech/alliancepay-joomla-virtuemart/releases" %}
 {% endtab %}
 {% endtabs %}
 

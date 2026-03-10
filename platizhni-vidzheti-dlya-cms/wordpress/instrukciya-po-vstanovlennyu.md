@@ -2,9 +2,7 @@
 
 Платіжний віджет WordPress:
 
-{% file src="../../.gitbook/assets/alb-hpp-alliancepay.zip" %}
-
-
+{% embed url="https://github.com/alliancedigital-tech/alliancepay-woocommerce/releases" %}
 
 1.  Завантажте архів плагіна й встановіть через _Плагіни → Додати новий → Завантажити плагін_.<br>
 

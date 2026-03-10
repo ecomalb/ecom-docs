@@ -2,9 +2,7 @@
 
 ### Платіжний віджет PrestaShop:
 
-{% file src="../../.gitbook/assets/prestashop-alliancepay-v.1.0.0.zip" %}
-
-
+{% embed url="https://github.com/alliancedigital-tech/alliancepay-prestashop-1-7/releases" %}
 
 {% stepper %}
 {% step %}
