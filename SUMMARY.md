@@ -99,6 +99,7 @@
   * [AlliancePay PHP SDK](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/README.md)
     * [Встановлення](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/vstanovlennya.md)
     * [Авторизація](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/avtorizaciya.md)
+    * [Створення замовлення](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/stvorennya-zamovlennya.md)
 * [Довідники](dovidniki/README.md)
   * [Статус транзакції](dovidniki/status-tranzakciyi.md)
   * [Тест кейси](dovidniki/test-keisi.md)
