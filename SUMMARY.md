@@ -96,6 +96,7 @@
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/nalashtuvannya-ta-avtorizaciya.md)
     * [Функціонал](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/funkcional.md)
+  * [AlliancePay PHP SDK](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk.md)
 * [Довідники](dovidniki/README.md)
   * [Статус транзакції](dovidniki/status-tranzakciyi.md)
   * [Тест кейси](dovidniki/test-keisi.md)
