@@ -7,7 +7,6 @@
 ```json
 curl --location --request POST 'https://api-ecom-release.develop.bankalliance.ua/cipher/encrypt_by_jwk?message={{cardNumber}}' \
 --header 'Content-Type: application/json' \
---header 'Cookie: visid_incap_2770403=fJEGXzciTnG2/y/pST3lzBM/JGMAAAAAQUIPAAAAAAAV+dwIpk/4YrgvV5ijeEu6' \
 --data-raw '
 {
     "kty": "EC",
@@ -31,8 +30,7 @@ eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJ4
 
 <pre class="language-json"><code class="lang-json">curl --location --request POST 'https://api-ecom-release.develop.bankalliance.ua/cipher/encrypt_by_jwk?message={{dateCvv}}' \
 <strong>--header 'Content-Type: application/json' \
-</strong>--header 'Cookie: visid_incap_2770403=fJEGXzciTnG2/y/pST3lzBM/JGMAAAAAQUIPAAAAAAAV+dwIpk/4YrgvV5ijeEu6' \
---data-raw '
+</strong>--data-raw '
 {
     "kty": "EC",
     "use": "enc",
