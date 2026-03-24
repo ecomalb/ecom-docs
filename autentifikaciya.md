@@ -152,7 +152,6 @@ eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJ4
 curl --location 'https://api-ecom-prod.bankalliance.ua/api-gateway/authorize_virtual_device' \
 --header 'x-api_version: 1' \
 --header 'Content-Type: application/json' \
---header 'Cookie: visid_incap_2770403=fJEGXzciTnG2/y/pST3lzBM/JGMAAAAAQUIPAAAAAAAV+dwIpk/4YrgvV5ijeEu6' \
 --data '
 {
     "serviceCode": "137d9304-0368-11ed-b939-0242ac120002"
@@ -175,7 +174,6 @@ curl --location 'https://api-ecom-prod.bankalliance.ua/api-gateway/authorize_vir
 ```json
 curl --location 'https://api-ecom-release.develop.bankalliance.ua/cipher/decrypt_by_jwk?message={{responseJwe}}' \
 --header 'Content-Type: application/json' \
---header 'Cookie: visid_incap_2770403=fJEGXzciTnG2/y/pST3lzBM/JGMAAAAAQUIPAAAAAAAV+dwIpk/4YrgvV5ijeEu6' \
 --data '
 {
     "kty": "EC",
