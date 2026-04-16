@@ -1,5 +1,9 @@
 # Інструкція по встановленню
 
+### Актуальна версія плагіну на GitHub <a href="#id-1.-vstanovlennya-modulya" id="id-1.-vstanovlennya-modulya"></a>
+
+{% embed url="https://github.com/alliancedigital-tech/whmcs-alliancepay/releases" %}
+
 ### Встановлення модуля <a href="#id-1.-vstanovlennya-modulya" id="id-1.-vstanovlennya-modulya"></a>
 
 Перед початком переконайтеся, що у вас є архів із файлами модуля.
