@@ -4,21 +4,21 @@
 
 Після того як клієнт обрав товари, та перейшов на сторінку оплати, потрібно обрати спосіб оплати через "Alliance Pay"
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після чого, покупця перенаправляє на платіжну сторінку з введення каркових даних&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Перегляд замовлень в адмін панелі
 
 Для того, щоб переглянути всі замовлення, потрібно перейти за шляхом `Sales → Orders`
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Перегляд деталей замовлення, виконується через клавішу "View"
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Перевірка статусу замовлення
 
@@ -28,7 +28,7 @@
 
 В деталях платежу знаходиться розділ "Payment & Shipping Method"
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 При натисканні на клавішу "Check Payment Status", буде виконуватись перевірка статусу замовлення
 
@@ -36,7 +36,7 @@
 
 Для виконання повернення потрібно перейти в деталі платежі та переходимо у "Invoices"&#x20;
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 І переходимо у деталі накладної через "View"
 

@@ -6,17 +6,17 @@
 
 В список ордерів додається нова колонка “AlliancePay payment status“. Якщо платіж був через AlliancePay то в цій колонці в списку до замовлення буде кнопка “Статус платежу“. Зверніть увагу, що якщо немає Callback по замовленню, то підсвідчується "Немає колбеку від AlliancePay". Провірьте "Статус платежу""
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Деталі ордеру**
 
 Callback отримано, тоді дані беруться з локальної БД, в яку ми зберегли колбек
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Callback не отримано, тоді дані беруться прямим запитом на еКом
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Сторінка оплати**
 

@@ -99,6 +99,7 @@
   * [WHMCS](platizhni-vidzheti-dlya-cms/whmcs/README.md)
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/whmcs/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/whmcs/nalashtuvannya-ta-avtorizaciya.md)
+    * [Функціонал](platizhni-vidzheti-dlya-cms/whmcs/funkcional.md)
   * [AlliancePay PHP SDK](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/README.md)
     * [Встановлення](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/vstanovlennya.md)
     * [Авторизація](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/avtorizaciya.md)
