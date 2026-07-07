@@ -2,6 +2,24 @@
 description: >-
   В розділі описано, яким чином відбувається шифрувння карткових даних, для
   забеспечення конфіденційності чутливих даних.
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 ---
 
 # Шифрування карткових даних
@@ -43,6 +61,6 @@ description: >-
 {% endhint %}
 
 {% openapi-operation spec="alliancepay-api" path="/cipher/encrypt_by_jwk" method="post" %}
-[OpenAPI alliancepay-api](https://4401d86825a13bf607936cc3a9f3897a.r2.cloudflarestorage.com/gitbook-x-prod-openapi/raw/fb8eff4373522da43ea4180090691d083ec3b1bbf8c6e450cc1ddb88be245e55.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=dce48141f43c0191a2ad043a6888781c%2F20260212%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260212T113213Z&X-Amz-Expires=172800&X-Amz-Signature=b2b9360498ffc404a1cac7061a5c4b336fdd850408f00d153890c3b719c2e6e0&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+[OpenAPI alliancepay-api](https://4401d86825a13bf607936cc3a9f3897a.r2.cloudflarestorage.com/gitbook-x-prod-openapi/raw/fb8eff4373522da43ea4180090691d083ec3b1bbf8c6e450cc1ddb88be245e55.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=dce48141f43c0191a2ad043a6888781c%2F20260707%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260707T114707Z&X-Amz-Expires=172800&X-Amz-Signature=970739527b236a46d63308dee07c0e8dd733cbf053343b6add9b025214be6548&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 {% endopenapi-operation %}
 
