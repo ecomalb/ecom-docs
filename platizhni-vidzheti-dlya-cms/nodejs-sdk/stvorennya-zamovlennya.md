@@ -4,11 +4,13 @@
 
 SDK автоматично додає ваш `merchantId` та генерує унікальний `merchantRequestId` для кожного запиту.
 
-
+{% hint style="info" %}
+Детальніше про опис параметрів масиву `orderData` можна ознайомитись тут :  [Створення замовлення HPP](https://docs.merchant.alb.ua/platizhni-metodi-hpp/stvorennya-zamovlennya/stvorennya-zamovlennya)
+{% endhint %}
 
 **Приклад коду:**
 
-```
+```javascript
 const orderData = {
     coinAmount: 10050, // Сума в копійках
     hppPayType: 'PURCHASE',
@@ -26,3 +28,11 @@ try {
     console.error('Order creation failed:', error);
 }
 ```
+
+>
+>
+> **A2A платіж:** Якщо `hppPayType` = `A2A`, необхідно змінити наступні параметри:
+>
+> * `'directType'` => `'BANK_LINK'` _(для hppPayType PURCHASE використовується `'REDIRECT'`)_
+> * `'priorityBankCode'` => `'ALL_BANKS'`
+> * `'merchantComment'` => `'Comment for merchant'` _(обов'язково для A2A)_

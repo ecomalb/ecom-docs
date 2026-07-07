@@ -43,3 +43,8 @@ try {
 }
 ```
 
+> **A2A платіж:** Якщо `hppPayType` = `A2A`, необхідно змінити наступні параметри:
+>
+> * `'directType'` => `'BANK_LINK'` _(для hppPayType PURCHASE використовується `'REDIRECT'`)_
+> * `'priorityBankCode'` => `'ALL_BANKS'`
+> * `'merchantComment'` => `'Comment for merchant'` _(обов'язково для A2A)_
