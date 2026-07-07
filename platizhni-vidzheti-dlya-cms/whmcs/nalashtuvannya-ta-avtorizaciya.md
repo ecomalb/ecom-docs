@@ -22,15 +22,27 @@
 
 Після активації вас автоматично перекине на вкладку **Manage Existing Gateway** де потрібно буде заповнити необхідні поля :&#x20;
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (89).png" alt=""><figcaption></figcaption></figure>
 
-| **Поле**               | **Опис**                                                                                                                                                                                                                                                                                                                               |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Display Name**       | <p>Назва платіжного методу, яку клієнт побачить на сторінці рахунку (наприклад: <em>Оплата карткою / Apple Pay / Google Pay</em>).<br>Дефолтне значення: AlliancePay Bank</p>                                                                                                                                                          |
-| **API Base URL**       | <p>Посилання на API банку.<br>Потрібно вказати : <a href="https://api-ecom-prod.bankalliance.ua">https://api-ecom-prod.bankalliance.ua</a></p>                                                                                                                                                                                         |
-| **Merchant ID**        | <p>Ваш унікальний ідентифікатор мерчанта в системі банку.<br>Буде надаватись банком</p>                                                                                                                                                                                                                                                |
-| **Service Code**       | <p>Код сервісу для ідентифікації типу послуг.<br>Буде надаватись банком</p>                                                                                                                                                                                                                                                            |
-| **Authentication Key** | <p>Приватна частина ключа, для авторизації. <br>Потрібно згенерувати відповідно до документації : <a href="https://docs.merchant.alb.ua/autentifikaciya#proces-generaciyi-komunikaciinikh-jwk-klyuchiv-kliyenta">Процес генерації ключів</a><br><i class="fa-square-info">:square-info:</i> Публічну частину потрібно надати банку</p> |
+Опис полів :&#x20;
+
+<table><thead><tr><th>Назва</th><th>Опис</th><th>Приклад</th></tr></thead><tbody><tr><td>Show on Order Form</td><td>Перемикач для відображення платіжного метода на сторінці</td><td>Можливі значення : <br>"Так" або "Ні"</td></tr><tr><td>Display Name</td><td>Назва платіжного метода на сторінці оплати</td><td>AlliancePay Bank</td></tr><tr><td>API Base URL</td><td>URL на який будуть надходити API запити </td><td>Потрібно вказати : <br><a href="https://api-ecom-prod.bankalliance.ua"><code>https://api-ecom-prod.bankalliance.ua</code></a></td></tr><tr><td>Payment Type</td><td>Тип платежу<br>При роботі зі звичайною платіжною сторінкою потрібно обирати "PURCHASE"<br>При роботі з переказом між рахунками потрібьно обирати "A2A"</td><td>Можливі значення : <br>- PURCHASE<br>- A2A</td></tr><tr><td>Status Page Type</td><td>Визначає як буде виглядати сторінка після виконання оплати</td><td><p></p><p>Можливі значення : <br></p><ul><li><code>STATUS_TIMER_PAGE</code> - сторінка за замовчуванням, якщо мерчант не обрав бажаний тип, таймер редірект автоматично 1 хвилина відображення статус сторінки з автоматичним редіректом юзера на сайт мерчанта (редірект урл)</li><li><code>STATUS_REDIRECT_MERCHANT_PAGE</code> - одразу редірект на урл мерчанта</li><li><code>STATUS_PAGE</code> - редірект, на нашу статус сторіншку (завантажити квитанцію …)</li></ul></td></tr><tr><td>Merchant ID</td><td>Унікальний ідентифікатор мерчанта</td><td>9a337b2b-4d97-4abe-9f95-cde229f9bd83</td></tr><tr><td>Service Code</td><td>Унікальний ідентифікатор для авторизації</td><td>d86a0f72-0dfe-4102-ace7-78997d042b7f</td></tr><tr><td>Authentication Key</td><td>Приватний ключ, потрібен для виконання авторизації</td><td><p>Його потрібно згенерувати самостійно за <a href="https://docs.merchant.alb.ua/autentifikaciya#proces-generaciyi-komunikaciinikh-jwk-klyuchiv-kliyenta">інструкцією</a> та надати співробітнику банку</p><p>Приклад : </p><pre class="language-json"><code class="lang-json">{
+    "kty": "EC",
+    "d": "nmxbG1KJ9zmekBZfJWPwG8ZJLmhKHJVsXfXIFrHkRM_Uy9z7E7ppvpvfDF62_mx8",
+    "use": "enc",
+    "crv": "P-384",
+    "x": "dTV0I2RU5DZHVfaIQPp3svUb-Vaxwfn1WDeNUY11L3ch4vZtbdbcBc7fvK76QsDn",
+    "y": "qL9X0zvaXtQx_KyBZHg16qiol9lahscW-k7FBwmAf-bpYdE7-fruH9wUQWpKw14X",
+    "alg": "ECDH-ES+A256KW"
+}
+</code></pre></td></tr></tbody></table>
+
+{% hint style="warning" %}
+Для кожного типу платежу реєструється унікальний термінал, що призначений для виконання конкретних операції \
+Тому для A2A будуть інші значення `Merchant ID` та `Service Code`
+{% endhint %}
+
+
 
 Після заповнення всіх полів, потрібно натиснути на кнопку "Save Changes"
 
