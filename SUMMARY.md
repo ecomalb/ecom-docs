@@ -77,6 +77,7 @@
 * [Платіжні віджети для CMS](platizhni-vidzheti-dlya-cms/README.md)
   * [OpenCart](platizhni-vidzheti-dlya-cms/opencart/README.md)
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/opencart/instrukciya-po-vstanovlennyu.md)
+    * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/opencart/nalashtuvannya-ta-avtorizaciya.md)
     * [Функціонал та опис платіжного модуля](platizhni-vidzheti-dlya-cms/opencart/funkcional-ta-opis-platizhnogo-modulya.md)
     * [Структура бази даних](platizhni-vidzheti-dlya-cms/opencart/struktura-bazi-danikh.md)
   * [WordPress](platizhni-vidzheti-dlya-cms/wordpress/README.md)

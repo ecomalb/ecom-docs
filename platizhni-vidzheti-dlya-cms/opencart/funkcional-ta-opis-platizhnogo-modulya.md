@@ -4,22 +4,6 @@ description: Налаштування платіжного модуля пере
 
 # Функціонал та опис платіжного модуля
 
-### Шлях до налаштуваннь модуля&#x20;
-
-В адмін панелі "Extensions"->"Extensions"->"Payments" -> "Alliance Payment"
-
-<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
-
-### Інтерфейс налаштування модуля
-
-&#x20;В параметрах вказуєте данні, що були отримані співробітником банку. \
-\
-В полі `Alliance API URL` потрібно вказати значення -  [https://api-ecom-prod.bankalliance.ua](https://api-ecom-prod.bankalliance.ua)
-
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
 ### Провірити статус замовлення
 
 <figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
