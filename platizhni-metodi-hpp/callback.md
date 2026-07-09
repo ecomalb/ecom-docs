@@ -14,28 +14,27 @@ description: >-
 
 ```json
 {
-   "ecomOrderId":" ",
-   "coinAmount":5000,
-   "merchantId":" ",
-   "statusUrl":"https://status-pay.alb.ua/?hpp_id=",
-   "hppOrderId":" ",
-   "redirectUrl":"https://pay.alb.ua/?hpp_id=",
-   "notificationUrl":" ",
+   "ecomOrderId":"b68a9f2f-ad0d-4f52-a19e-11ee9c68d2a3",
+   "coinAmount":10,
+   "merchantId":"467c8a10-c705-11ed-afa1-0242ac120002",
+   "statusUrl":"https://status-pay.alb.ua/?hpp_id=1783591442895jb5dQjA1bUl",
+   "hppOrderId":"1783591442895jb5dQjA1bUl",
+   "redirectUrl":"https://pay.alb.ua/?hpp_id=1783591442895jb5dQjA1bUl",
+   "notificationUrl":null,
    "notificationEncryption":false,
    "hppPayType":"PURCHASE",
-   "hppDirectType":"REDIRECT",
-   "merchantRequestId":" ",
-   "createDate":"2025-07-21 10:20:23.49+00:00",
+   "hppDirectType":"QR",
+   "merchantRequestId":"d7208e22-0fb1-466d-b9cc-41c027075fb6",
+   "createDate":"2026-07-09 13:04:02.91+03:00",
    "paymentMethods":[
-      "APPLE_PAY",
+      "CARD",
       "GOOGLE_PAY",
-      "CARD"
+      "APPLE_PAY"
    ],
    "orderStatus":"SUCCESS",
-   "expiredOrderDate":"2025-07-21 10:35:23.41+00:00",
-   "operation":{
-      
-   }
+   "expiredOrderDate":"2026-07-10 13:04:02.89+03:00",
+   "operation":{},
+   "tryMode":"ONE_TRY"
 }
 ```
 
