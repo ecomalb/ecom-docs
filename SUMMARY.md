@@ -69,6 +69,7 @@
   * [Callback](platizhni-metodi-h2h/callback.md)
   * [Recurring Payment](platizhni-metodi-h2h/recurring-payment/README.md)
     * [Створити план](platizhni-metodi-h2h/recurring-payment/stvoriti-plan.md)
+    * [Створити підписку для клієнта](platizhni-metodi-h2h/recurring-payment/stvoriti-pidpisku-dlya-kliyenta.md)
 * [Платіжні методи HPP](platizhni-metodi-hpp/README.md)
   * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/README.md)
     * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/stvorennya-zamovlennya.md)
