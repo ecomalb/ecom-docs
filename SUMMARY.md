@@ -68,7 +68,7 @@
   * [Отримання балансу](platizhni-metodi-h2h/otrimannya-balansu.md)
   * [Callback](platizhni-metodi-h2h/callback.md)
   * [Recurring Payment](platizhni-metodi-h2h/recurring-payment/README.md)
-    * [Створити план](platizhni-metodi-h2h/recurring-payment/stvoriti-plan.md)
+    * [Створити план та версію](platizhni-metodi-h2h/recurring-payment/stvoriti-plan-ta-versiyu.md)
     * [Створити підписку для клієнта](platizhni-metodi-h2h/recurring-payment/stvoriti-pidpisku-dlya-kliyenta.md)
     * [Iнітний (перший) платіж](platizhni-metodi-h2h/recurring-payment/initnii-pershii-platizh.md)
     * [Примусовий recurring платежу](platizhni-metodi-h2h/recurring-payment/primusovii-recurring-platezhu.md)
