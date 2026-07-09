@@ -67,6 +67,7 @@
     * [по merchantRequestId](platizhni-metodi-h2h/otrimannya-danikh/po-merchantrequestid.md)
   * [Отримання балансу](platizhni-metodi-h2h/otrimannya-balansu.md)
   * [Callback](platizhni-metodi-h2h/callback.md)
+  * [Recurring Payment](platizhni-metodi-h2h/recurring-payment.md)
 * [Платіжні методи HPP](platizhni-metodi-hpp/README.md)
   * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/README.md)
     * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/stvorennya-zamovlennya.md)
