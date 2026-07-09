@@ -66,7 +66,7 @@ description: POST {{url}}/ecom/jws/scheduled_payments/payments/initial_subscript
    "merchantId":"137d9304-0368-11ed-b939-0242ac120002",
    "merchantRequestId":"{{requestUUIDT}}",
    "resultRedirectUrl":"https://card.com/3ds-return?",
-   "desiredThreeDSMode":"MUST_NOT",
+   "desiredThreeDSMode":"MUST",
    "clientComment":"MERCHANT_NAME=TOV",
    "comment":"testing Nick",
    "purpose":"Payment for food",
@@ -115,7 +115,46 @@ description: POST {{url}}/ecom/jws/scheduled_payments/payments/initial_subscript
 {
    "merchantId":"137d9304-0368-11ed-b939-0242ac120002",
    "merchantRequestId":"{{requestUUIDT}}",
-   "notifi
+   "resultRedirectUrl":"https://card.com/3ds-return?",
+   "desiredThreeDSMode":"MUST",
+   "purpose":"purpose=TOV",
+   "comment":"comment",
+   "merchantComment":"merchantComment",
+   "date":"{{currentdateT}}.00+00:00",
+   "paymentMethodType":"TOKEN",
+   "token":"RrVmxPxfvZWEe_J5wMx6zHfZ",
+   "orderId":"{{hppOrderId}}",
+   "paymentCurrencyCode":"980",
+   "paymentAmount":"20000",
+   "browserInfo":{
+      "browserAcceptHeader":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "browserUserAgent":"Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/111.0.0.0+Safari/537.36",
+      "browserLanguage":"ru-RU",
+      "browserColorDepth":"24",
+      "browserScreenHeight":"864",
+      "browserScreenWidth":"1536",
+      "browserTZ":"-180"
+   },
+   "customerData":{
+      "senderCustomerId":"tesChokan102726t",
+      "senderFirstName":"Богдан",
+      "senderLastName":"Карпусь",
+      "senderMiddleName":"Олександрович",
+      "senderEmail":null,
+      "senderCountry":null,
+      "senderRegion":null,
+      "senderCity":null,
+      "senderStreet":null,
+      "senderAdditionalAddress":null,
+      "senderItn":"3667709657",
+      "senderPassport":null,
+      "senderIp":null,
+      "senderPhone":null,
+      "senderBirthday":null,
+      "senderGender":null,
+      "senderZipCode":null
+   }
+}
 ```
 
 #### Приклад запиту paymentMethodType APPLE\_PAY\_ENCRYPTED
@@ -234,7 +273,7 @@ description: POST {{url}}/ecom/jws/scheduled_payments/payments/initial_subscript
    "merchantId":"137d9304-0368-11ed-b939-0242ac120002",
    "merchantRequestId":"{{requestUUIDT}}",
    "resultRedirectUrl":"https://card.com/3ds-return?",
-   "desiredThreeDSMode":"MUST_NOT",
+   "desiredThreeDSMode":"MUST",
    "purpose":"purpose=TOV",
    "comment":"comment",
    "merchantComment":"merchantComment",
