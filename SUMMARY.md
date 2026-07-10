@@ -73,6 +73,7 @@
     * [Iнітний (перший) платіж](platizhni-metodi-h2h/recurring-payment/initnii-pershii-platizh.md)
     * [Примусовий recurring платежу](platizhni-metodi-h2h/recurring-payment/primusovii-recurring-platezhu.md)
     * [Зміна статусу плана](platizhni-metodi-h2h/recurring-payment/zmina-statusu-plana.md)
+    * [Редагування плану та додавання нової версіі](platizhni-metodi-h2h/recurring-payment/redaguvannya-planu-ta-dodavannya-novoyi-versii.md)
 * [Платіжні методи HPP](platizhni-metodi-hpp/README.md)
   * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/README.md)
     * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/stvorennya-zamovlennya.md)

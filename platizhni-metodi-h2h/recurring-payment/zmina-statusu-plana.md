@@ -12,7 +12,7 @@ description: POST /ecom/jws/scheduled_payments/plan/status_update_v1
 
 | **Параметр** | **Опис**           | **Формат даних** | **Обовʼязковість** | **Приклад**                          |
 | ------------ | ------------------ | ---------------- | ------------------ | ------------------------------------ |
-| planId       | Id плана           | string           | так                | f21fe53d-b315-4c5c-8ed6-7ed4529f655f |
+| planId       | Id плана           | uuid             | Так                | f21fe53d-b315-4c5c-8ed6-7ed4529f655f |
 | status       | Новий статус плана | string           | Так                | CANCELED                             |
 
 #### Вихідні параметри:  <a href="#vikhidni-parametri" id="vikhidni-parametri"></a>
