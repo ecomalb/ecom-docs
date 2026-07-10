@@ -79,6 +79,7 @@
     * [Видалення версіі](platizhni-metodi-h2h/recurring-payment/vidalennya-versii.md)
     * [Отримання даних плану](platizhni-metodi-h2h/recurring-payment/otrimannya-danikh-planu.md)
     * [Отримання всіх плані](platizhni-metodi-h2h/recurring-payment/otrimannya-vsikh-plani.md)
+    * [Отримання даних по платежам](platizhni-metodi-h2h/recurring-payment/otrimannya-danikh-po-platezham.md)
 * [Платіжні методи HPP](platizhni-metodi-hpp/README.md)
   * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/README.md)
     * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/stvorennya-zamovlennya.md)
