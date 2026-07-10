@@ -1,6 +1,6 @@
 # Table of contents
 
-* [E Commerce платформа AlliancePay v2.56.0](README.md)
+* [E Commerce платформа AlliancePay v2.57.0](README.md)
 * [Аутентифікація](autentifikaciya.md)
 * [Криптування даних](kriptuvannya-danikh.md)
 * [Авторизація](avtorizaciya.md)
@@ -76,10 +76,11 @@
     * [Отримання всіх плані](platizhni-metodi-h2h/recurring-payment/otrimannya-vsikh-plani.md)
     * [Отримання даних по платежам](platizhni-metodi-h2h/recurring-payment/otrimannya-danikh-po-platezham.md)
     * [CallBack](platizhni-metodi-h2h/recurring-payment/callback.md)
-    * [Статуси плану](platizhni-metodi-h2h/recurring-payment/statusi-planu.md)
-    * [Статуси підписки](platizhni-metodi-h2h/recurring-payment/statusi-pidpiski.md)
-    * [Статуси версіі](platizhni-metodi-h2h/recurring-payment/statusi-versii.md)
-    * [Статуси платежів](platizhni-metodi-h2h/recurring-payment/statusi-platezhiv.md)
+    * [Опис статусів](platizhni-metodi-h2h/recurring-payment/opis-statusiv/README.md)
+      * [Статуси плану](platizhni-metodi-h2h/recurring-payment/opis-statusiv/statusi-planu.md)
+      * [Статуси підписки](platizhni-metodi-h2h/recurring-payment/opis-statusiv/statusi-pidpiski.md)
+      * [Статуси версіі](platizhni-metodi-h2h/recurring-payment/opis-statusiv/statusi-versii.md)
+      * [Статуси платежів](platizhni-metodi-h2h/recurring-payment/opis-statusiv/statusi-platezhiv.md)
   * [Отримання даних](platizhni-metodi-h2h/otrimannya-danikh/README.md)
     * [по OPERATION\_ID](platizhni-metodi-h2h/otrimannya-danikh/po-operation_id.md)
     * [по merchantRequestId](platizhni-metodi-h2h/otrimannya-danikh/po-merchantrequestid.md)
