@@ -1,16 +1,34 @@
 ---
 description: POST {{url}}/ecom/jws/scheduled_payments/subscription-orders/create_v1
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 ---
 
 # Створити підписку для клієнта
 
-**Ордер** — це зв'язка між вашим планом та конкретним клієнтом (пейєром). Один план може мати багато ордерів — по одному на кожного підписника.
+**Підписка** — це зв'язка між вашим планом та конкретним клієнтом (пейєром). Один план може мати багато підписок — по одному на кожного підписника.
 
 **Як працює:**
 
-1. Ви викликаєте API створення ордера
+1. Ви викликаєте API створення підписки
 2. Система перевіряє, що план в статусі `ACTIVE`
-3. Ордер отримує статус **PENDING** і залишається в ньому до завершення всіх платежів або скасування
+3. Підписка отримує статус **PENDING** і залишається в ньому до завершення всіх платежів або скасування
 
 #### Вхідні параметри:  <a href="#vkhidni-parametri" id="vkhidni-parametri"></a>
 

@@ -1,5 +1,23 @@
 ---
 description: POST {{url}}/ecom/jws/scheduled_payments/plan/create_v1
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 ---
 
 # Створити план та версію
