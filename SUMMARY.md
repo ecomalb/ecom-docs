@@ -77,6 +77,7 @@
     * [Редагування версії](platizhni-metodi-h2h/recurring-payment/redaguvannya-versiyi/README.md)
       * [Схематичне зображення](platizhni-metodi-h2h/recurring-payment/redaguvannya-versiyi/skhematichne-zobrazhennya.md)
     * [Видалення версіі](platizhni-metodi-h2h/recurring-payment/vidalennya-versii.md)
+    * [Отримання даних плану](platizhni-metodi-h2h/recurring-payment/otrimannya-danikh-planu.md)
 * [Платіжні методи HPP](platizhni-metodi-hpp/README.md)
   * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/README.md)
     * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/stvorennya-zamovlennya.md)
