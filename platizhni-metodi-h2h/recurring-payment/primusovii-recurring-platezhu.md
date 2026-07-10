@@ -1,12 +1,30 @@
 ---
 description: POST /ecom/jws/scheduled_payments/payments/recurring_subscription_v1
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 ---
 
 # Примусовий recurring платежу
 
 Окрім автоматики, мерчант може **самостійно запустити** будь-який запланований платіж через API:
 
-* Вказується конкретний `scheduled_payment_id`
+* Вказується конкретний `scheduledPaymentId`
 * Система перевіряє статус платежу перед проведенням
 * Примусове проведення recurring платежу доступне, якщо платіж має статус  `SKIPPED_PAUSED` або `FAIL_WITHOUT_RETRY`
 

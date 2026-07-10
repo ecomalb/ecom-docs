@@ -1,5 +1,23 @@
 ---
 description: POST /ecom/jws/scheduled_payments/plan/update_v1
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 ---
 
 # Редагування плану та додавання нової версіі
@@ -164,6 +182,3 @@ description: POST /ecom/jws/scheduled_payments/plan/update_v1
 }
 ```
 
-
-
-####
