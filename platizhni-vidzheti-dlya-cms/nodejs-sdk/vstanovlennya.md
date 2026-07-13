@@ -14,6 +14,6 @@
 Встановіть пакет за допомогою вашого пакетного менеджера:
 
 ```
-npm install @alliancepay/sdk-nodejs
+npm install @alliance-bank/payment-sdk
 ```
 
