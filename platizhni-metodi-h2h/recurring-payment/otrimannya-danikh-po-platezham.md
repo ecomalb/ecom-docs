@@ -1,5 +1,23 @@
 ---
 description: POST /ecom/jws/scheduled_payments/payments/scheduled/search_v1
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 ---
 
 # Отримання даних по платежам
