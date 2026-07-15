@@ -23,7 +23,7 @@ layout:
 
 Система надсилає callback на URL, який був вказаний при створенні підписки, у трьох випадках:
 
-<table data-header-hidden><thead><tr><th width="248.2083740234375"></th><th></th></tr></thead><tbody><tr><td><strong>Подія</strong></td><td><strong>Коли надсилається</strong></td></tr><tr><td>Створення підписки</td><td>Одразу після створення підписки</td></tr><tr><td>Інітний платіж</td><td>Після завершення першого платежу (успіх/помилка)</td></tr><tr><td>Recurring списання</td><td>Після кожного автоматичного або ручного списання</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="248.2083740234375"></th><th></th></tr></thead><tbody><tr><td><strong>Подія</strong></td><td><strong>Коли надсилається</strong></td></tr><tr><td>Зміна статусу підписки</td><td>Після зміни статусу підписки на фінальний </td></tr><tr><td>Інітний платіж</td><td>Після завершення першого платежу (успіх/помилка)</td></tr><tr><td>Recurring списання</td><td>Після кожного автоматичного або ручного списання</td></tr></tbody></table>
 
 #### Вихідні параметри:
 
