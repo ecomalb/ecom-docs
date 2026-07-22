@@ -81,7 +81,7 @@ layout:
       "currency": "980",
       "executionAt": "2026-07-12 18:17:49.89+03:00",
       "recurringTransactionType": "M",
-      "categorySubcategoryIndicator": "M102",
+      "categorySubcategoryIndicator": "M103",
       "orderId": "1783610230256tRdmRqfsGJj"
     },
     {
@@ -96,7 +96,7 @@ layout:
       "currency": "980",
       "executionAt": "2026-07-11 18:17:49.89+03:00",
       "recurringTransactionType": "M",
-      "categorySubcategoryIndicator": "M102",
+      "categorySubcategoryIndicator": "M103",
       "orderId": "1783610230256tRdmRqfsGJj"
     },
     {
@@ -111,7 +111,7 @@ layout:
       "currency": "980",
       "executionAt": "2026-07-11 18:12:55.74+03:00",
       "recurringTransactionType": "M",
-      "categorySubcategoryIndicator": "M102",
+      "categorySubcategoryIndicator": "M103",
       "orderId": "1783609541721181tI5zJ3ad"
     },
     {
@@ -126,7 +126,7 @@ layout:
       "currency": "980",
       "executionAt": "2026-07-11 18:01:06.89+03:00",
       "recurringTransactionType": "M",
-      "categorySubcategoryIndicator": "M102",
+      "categorySubcategoryIndicator": "M103",
       "orderId": "1783608520205P81ch623POH"
     },
     {
@@ -141,7 +141,7 @@ layout:
       "currency": "980",
       "executionAt": "2026-07-10 18:17:49.89+03:00",
       "recurringTransactionType": "M",
-      "categorySubcategoryIndicator": "M102",
+      "categorySubcategoryIndicator": "M103",
       "orderId": "1783610230256tRdmRqfsGJj"
     }
   ]

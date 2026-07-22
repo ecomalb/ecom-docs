@@ -50,7 +50,7 @@ layout:
         "name": "",
         "description": "Installment plan123543521",
         "status": "ACTIVE",
-        "categorySubcategoryIndicator": "C102",
+        "categorySubcategoryIndicator": "C103",
         "createdAt": "2026-07-09 17:12:00.14+03:00",
         "updatedAt": "2026-07-10 13:36:25.01+03:00"
     },

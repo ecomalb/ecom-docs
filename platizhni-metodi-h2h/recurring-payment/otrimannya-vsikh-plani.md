@@ -62,7 +62,7 @@ layout:
             "name": "ке",
             "description": "Installment plan for electronics category",
             "status": "ACTIVE",
-            "categorySubcategoryIndicator": "C101",
+            "categorySubcategoryIndicator": "C103",
             "createdAt": "2026-03-20 12:58:11.75+02:00",
             "updatedAt": "2026-06-11 17:11:30.06+03:00"
         },
@@ -71,7 +71,7 @@ layout:
             "name": "AqaTest Updated recurring plan name 709664",
             "description": "AqaTest Updated recurring plan description 184735",
             "status": "ACTIVE",
-            "categorySubcategoryIndicator": "C101",
+            "categorySubcategoryIndicator": "C103",
             "createdAt": "2026-03-22 22:58:49.30+02:00",
             "updatedAt": "2026-07-07 17:38:47.77+03:00"
         }
