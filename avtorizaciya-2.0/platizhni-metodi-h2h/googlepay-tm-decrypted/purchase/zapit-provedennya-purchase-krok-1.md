@@ -1,5 +1,5 @@
 ---
-description: '{{url}}/ecom/execute_request/payments/v3/google_pay/purchase'
+description: '{{url}}/ecom/jws/payments/google_pay/purchase_v3'
 ---
 
 # Запит проведення purchase Крок 1
