@@ -72,6 +72,7 @@
     * [Редагування версії](platizhni-metodi-h2h/recurring-payment/redaguvannya-versiyi/README.md)
       * [Схематичне зображення](platizhni-metodi-h2h/recurring-payment/redaguvannya-versiyi/skhematichne-zobrazhennya.md)
     * [Видалення версіі](platizhni-metodi-h2h/recurring-payment/vidalennya-versii.md)
+    * [Скасування підписки](platizhni-metodi-h2h/recurring-payment/skasuvannya-pidpiski.md)
     * [Отримання даних плану](platizhni-metodi-h2h/recurring-payment/otrimannya-danikh-planu.md)
     * [Отримання всіх плані](platizhni-metodi-h2h/recurring-payment/otrimannya-vsikh-plani.md)
     * [Отримання даних по платежам](platizhni-metodi-h2h/recurring-payment/otrimannya-danikh-po-platezham.md)
