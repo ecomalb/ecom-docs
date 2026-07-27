@@ -86,6 +86,7 @@
     * [по OPERATION\_ID](platizhni-metodi-h2h/otrimannya-danikh/po-operation_id.md)
     * [по merchantRequestId](platizhni-metodi-h2h/otrimannya-danikh/po-merchantrequestid.md)
   * [Отримання балансу](platizhni-metodi-h2h/otrimannya-balansu.md)
+  * [Належність картки конкретному ІПН](platizhni-metodi-h2h/nalezhnist-kartki-konkretnomu-ipn.md)
   * [Callback](platizhni-metodi-h2h/callback.md)
 * [Платіжні методи HPP](platizhni-metodi-hpp/README.md)
   * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/README.md)
