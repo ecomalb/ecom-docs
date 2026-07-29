@@ -136,8 +136,12 @@ eyJ0eXBlIjoiQUNDT1VOVF8yX0NBUkQiLCJycm4iOiI1MzE3MTU5MzczMDUiLCJwdXJwb3NlIjoi0LfQ
 
 Для перевірки підпису, потрібно розкодувати частину `header`  де буде знаходитись параметр `kid` .&#x20;
 
+{% hint style="info" %}
+При роботі з Recurring Payment для отримання ключа потрібно використовувати ендпоінт `{{url}}/keys/get_public_key_v1`&#x20;
+{% endhint %}
+
 
 
 {% openapi-operation spec="GetPublicKeyJWS" path="/ecom/keys/public_key/get_v1" method="post" %}
-[OpenAPI GetPublicKeyJWS](https://4401d86825a13bf607936cc3a9f3897a.r2.cloudflarestorage.com/gitbook-x-prod-openapi/raw/52a92546b62fc6f18792744303c1d4a50893fffbe7eddee69a0b878a5a279a6c.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=dce48141f43c0191a2ad043a6888781c%2F20251211%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20251211T111827Z&X-Amz-Expires=172800&X-Amz-Signature=da34b48bf92658f69d849b45547f37cabccd3ea025a2aa8e38e2ed6ded8a139f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+[OpenAPI GetPublicKeyJWS](https://4401d86825a13bf607936cc3a9f3897a.r2.cloudflarestorage.com/gitbook-x-prod-openapi/raw/52a92546b62fc6f18792744303c1d4a50893fffbe7eddee69a0b878a5a279a6c.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=dce48141f43c0191a2ad043a6888781c%2F20260729%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260729T095443Z&X-Amz-Expires=172800&X-Amz-Signature=f1bcde76c62f0be3a2cbbd8bc75ccbaaab549ea41f269d0be2a843b81c6499da&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 {% endopenapi-operation %}
