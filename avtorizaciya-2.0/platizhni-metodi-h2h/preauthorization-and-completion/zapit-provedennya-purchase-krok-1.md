@@ -1,5 +1,5 @@
 ---
-description: '{{url}}/ecom/execute_request/payments/v1/create/preauth'
+description: '{{url}}/ecom/jws/payments/preauth/create_v1'
 layout:
   width: wide
   title:

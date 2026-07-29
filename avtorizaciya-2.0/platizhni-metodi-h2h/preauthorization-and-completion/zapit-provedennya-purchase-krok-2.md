@@ -1,5 +1,5 @@
 ---
-description: '{{url}}/ecom/execute_request/payments/v1/execute/preauth'
+description: '{{url}}/ecom/jws/payments/preauth/execute_v1'
 ---
 
 # Запит проведення Preauth Крок 2

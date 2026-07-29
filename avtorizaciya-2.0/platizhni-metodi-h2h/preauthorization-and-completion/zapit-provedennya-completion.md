@@ -1,5 +1,5 @@
 ---
-description: '{{url}}/ecom/execute_request/payments/v1/completion'
+description: '{{url}}/ecom/jws/payments/preauth/completion_v1'
 ---
 
 # Запит проведення Completion
