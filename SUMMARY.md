@@ -5,6 +5,7 @@
 * [Криптування даних](kriptuvannya-danikh.md)
 * [Авторизація](avtorizaciya.md)
 * [Авторизація 2.0](avtorizaciya-2.0/README.md)
+  * [Порядок переходу на JWS Authorization 2.0](avtorizaciya-2.0/poryadok-perekhodu-na-jws-authorization-2.0.md)
   * [Опис роботи з JWS](avtorizaciya-2.0/opis-roboti-z-jws.md)
   * [Генерація ключів](avtorizaciya-2.0/generaciya-klyuchiv.md)
   * [Робота з підписанням](avtorizaciya-2.0/robota-z-pidpisannyam.md)
