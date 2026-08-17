@@ -183,6 +183,7 @@
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/nalashtuvannya-ta-avtorizaciya.md)
     * [Функціонал](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/funkcional.md)
+    * [Валідація customerData](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/validaciya-customerdata.md)
   * [WHMCS](platizhni-vidzheti-dlya-cms/whmcs/README.md)
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/whmcs/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/whmcs/nalashtuvannya-ta-avtorizaciya.md)
