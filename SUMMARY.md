@@ -180,6 +180,7 @@
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/magento-2/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизаці](platizhni-vidzheti-dlya-cms/magento-2/nalashtuvannya-ta-avtorizaci.md)
     * [Функціонал](platizhni-vidzheti-dlya-cms/magento-2/funkcional.md)
+    * [Валідація customerData](platizhni-vidzheti-dlya-cms/magento-2/validaciya-customerdata.md)
   * [Joomla! + VirtueMart](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/README.md)
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/joomla-+-virtuemart/nalashtuvannya-ta-avtorizaciya.md)
