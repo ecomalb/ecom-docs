@@ -31,7 +31,7 @@ description: Використання даних з реєстрів для зв
 * Валідаційні правила: \[a-zA-Z0-9 ,.;:@#$%'-=+1,256$]&#x20;
 
 **Приклад:** \
-&#xNAN;**`"merchantComment": "1712822901491QtPAxAWOrrg,1258728c1,alb"`**\
+**`"merchantComment": "1712822901491QtPAxAWOrrg,1258728c1,alb"`**\
 де, \
 `1712822901491QtPAxAWOrrg` - operationId оригінальної операції, \
 `1258728c1` - senderCustomerId, \

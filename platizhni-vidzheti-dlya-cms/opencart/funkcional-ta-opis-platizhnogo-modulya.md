@@ -26,6 +26,18 @@ description: Налаштування платіжного модуля пере
 
 <figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
+### Робота з PreAuth and Complition
+
+#### Підтвердження списання коштів
+
+В деталях замовлення потрібно натиснути "Confirm payment"
+
+<figure><img src="../../.gitbook/assets/image (93).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
 ### Виконання повернення
 
 {% tabs %}
