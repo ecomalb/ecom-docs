@@ -176,6 +176,7 @@
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/prestashop/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/prestashop/nalashtuvannya-ta-avtorizaciya.md)
     * [Функціонал](platizhni-vidzheti-dlya-cms/prestashop/funkcional.md)
+    * [Валідація customerData](platizhni-vidzheti-dlya-cms/prestashop/validaciya-customerdata.md)
   * [Magento 2](platizhni-vidzheti-dlya-cms/magento-2/README.md)
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/magento-2/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизаці](platizhni-vidzheti-dlya-cms/magento-2/nalashtuvannya-ta-avtorizaci.md)
