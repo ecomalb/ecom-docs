@@ -197,6 +197,7 @@
     * [Робота з асинхронними відповідями Callback](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/robota-z-asinkhronnimi-vidpovidyami-callback.md)
     * [Виконання повернень](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/vikonannya-povernen.md)
     * [Перевірка стану замовлення](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/perevirka-stanu-zamovlennya.md)
+    * [PreAuth and Completion](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/preauth-and-completion.md)
   * [NodeJS SDK](platizhni-vidzheti-dlya-cms/nodejs-sdk/README.md)
     * [Встановлення](platizhni-vidzheti-dlya-cms/nodejs-sdk/vstanovlennya.md)
     * [Авторизація](platizhni-vidzheti-dlya-cms/nodejs-sdk/avtorizaciya.md)
