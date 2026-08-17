@@ -48,7 +48,7 @@
 
 В результаті виконання повного повернення, інформація в деталях платежу буде виглядати так&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після вибору способу повернення, потрібно натиснути клавішу "Часткове повернення коштів"
 

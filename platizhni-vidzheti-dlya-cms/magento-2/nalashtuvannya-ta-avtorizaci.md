@@ -32,7 +32,7 @@
 
 Після того, як усі поля були заповненні, потрібно зберегти налаштування, та виконати авторизацію для того, щоб з'явились поля `Device Id`, `Refresh Token`&#x20;
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 {% endstep %}

@@ -6,7 +6,7 @@
 
 За шляхом "Компоненти" -> "Payment Methods"
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 
 {% step %}
@@ -14,7 +14,7 @@
 
 Натискаємо на клавішу "Створити"
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після у новому вікні, потрібно заповнити поля `Payment Name`, `Sef Alias` та обрати `Payment Method == VM - Alliance Pay`&#x20;
 

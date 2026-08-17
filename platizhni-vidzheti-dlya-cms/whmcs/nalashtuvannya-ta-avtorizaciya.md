@@ -4,11 +4,11 @@
 
 Після встановлення модуля, у вкладенці "Addons", перейти на сторінку "Apps & Integrations"
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Перехід на вкладку "Browse" та вибираємо з категорій "Payments"
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 В розділі "Additional apps" знайти плагін AlliancePay Payment Gateway
 

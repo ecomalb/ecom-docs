@@ -4,10 +4,12 @@
 
 Перейдіть до _AlliancePay → Налаштування_ і заповніть всі поля. Зверніть уагу, що деякі поля надаються банком і **настисніть кнопку зберегти і тільки після цього виконуйте авторизацію.**
 
-<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
-**Обов'язково, всі поля повинні бути заповнені, щоб платіжний плагін працював правильно**
+**Обов'язково, всі поля повинні бути заповнені**
 {% endhint %}
 
 <table><thead><tr><th>Назва</th><th>Опис</th><th>Приклад</th></tr></thead><tbody><tr><td>Base URL API</td><td>URL на який будуть надходити API запити </td><td>Потрібно вказати : <br><a href="https://api-ecom-prod.bankalliance.ua"><code>https://api-ecom-prod.bankalliance.ua</code></a></td></tr><tr><td>Merchant ID</td><td>Унікальний ідентифікатор мерчанта</td><td>9a337b2b-4d97-4abe-9f95-cde229f9bd83</td></tr><tr><td>Service Code</td><td>Унікальний ідентифікатор для авторизації</td><td>d86a0f72-0dfe-4102-ace7-78997d042b7f</td></tr><tr><td>Private JWK</td><td>Приватний ключ, потрібен для виконання авторизації</td><td><p>Його потрібно згенерувати самостійно за <a href="https://docs.merchant.alb.ua/autentifikaciya#proces-generaciyi-komunikaciinikh-jwk-klyuchiv-kliyenta">інструкцією</a> та надати співробітнику банку</p><p>Приклад : </p><pre class="language-json"><code class="lang-json">{
@@ -19,7 +21,7 @@
     "y": "qL9X0zvaXtQx_KyBZHg16qiol9lahscW-k7FBwmAf-bpYdE7-fruH9wUQWpKw14X",
     "alg": "ECDH-ES+A256KW"
 }
-</code></pre></td></tr><tr><td>HPP Payment Type</td><td>Тип платежу<br>При роботі зі звичайною платіжною сторінкою потрібно обирати "PURCHASE"<br>При роботі з переказом між рахунками потрібьно обирати "A2A"</td><td>Можливі значення : <br>- PURCHASE<br>- A2A</td></tr><tr><td>Device ID</td><td>Унікальний ідентифікатор пристрою. <br>Значення отримується після виконання авторизації</td><td>6c5e747f-a6c9-4087-b611-a29cfe7e8d7c</td></tr><tr><td>Refresh Token</td><td>Унікальний ідентифікатор токену. <br>Значення отримується після виконання авторизації</td><td>c54a25cf-cdd0-42dc-8843-2801f3d3c2b9</td></tr><tr><td>Success URL</td><td>URL для редіректу клієнта при успішному виконанні операції  </td><td><a href="https://wp-tests.develop.bankalliance.ua/?page_id=6">https://wp-tests.develop.bankalliance.ua/?page_id=6</a></td></tr><tr><td>Fail URL</td><td>URL для редіректу клієнта при неуспішному виконанні операції  </td><td><a href="https://wp-tests.develop.bankalliance.ua/?page_id=6">https://wp-tests.develop.bankalliance.ua/?page_id=6</a></td></tr></tbody></table>
+</code></pre></td></tr><tr><td>HPP Payment Type</td><td>Тип платежу<br>При роботі зі звичайною платіжною сторінкою потрібно обирати "PURCHASE"<br>При роботі з переказом між рахунками потрібьно обирати "A2A"<br>При резервування коштів та фактичного списання зарезервованої суми "PREAUTH"</td><td>Можливі значення : <br>- PURCHASE<br>- A2A<br>- PREAUTH</td></tr><tr><td>PREAUTH: Pre-Auth Expiration</td><td>Період, протягом якого успішна PREAUTH-операція залишається активною та може бути завершена за допомогою Completion.</td><td>Період може становити від <strong>2 годин до 28 днів</strong>. Completion необхідно виконати до завершення встановленого періоду PREAUTH.</td></tr><tr><td>PREAUTH: On-Hold Status (after preauth creation)</td><td>Статус PreAuth операції перед виконання Completion</td><td></td></tr><tr><td>PREAUTH: Completion Trigger Status (admin confirms capture)</td><td>Статус для виконання списання коштів </td><td></td></tr><tr><td>Device ID</td><td>Унікальний ідентифікатор пристрою. <br>Значення отримується після виконання авторизації</td><td>6c5e747f-a6c9-4087-b611-a29cfe7e8d7c</td></tr><tr><td>Refresh Token</td><td>Унікальний ідентифікатор токену. <br>Значення отримується після виконання авторизації</td><td>c54a25cf-cdd0-42dc-8843-2801f3d3c2b9</td></tr><tr><td>Success URL</td><td>URL для редіректу клієнта при успішному виконанні операції  </td><td><a href="https://wp-tests.develop.bankalliance.ua/?page_id=6">https://wp-tests.develop.bankalliance.ua/?page_id=6</a></td></tr><tr><td>Fail URL</td><td>URL для редіректу клієнта при неуспішному виконанні операції  </td><td><a href="https://wp-tests.develop.bankalliance.ua/?page_id=6">https://wp-tests.develop.bankalliance.ua/?page_id=6</a></td></tr></tbody></table>
 
 {% hint style="warning" %}
 Для кожного типу платежу реєструється унікальний термінал, що призначений для виконання конкретних операції \

@@ -170,6 +170,7 @@
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/wordpress/instrukciya-po-vstanovlennyu.md)
     * [Налаштування та авторизація](platizhni-vidzheti-dlya-cms/wordpress/nalashtuvannya-ta-avtorizaciya.md)
     * [Функціонал](platizhni-vidzheti-dlya-cms/wordpress/funkcional.md)
+    * [Валідація customerData](platizhni-vidzheti-dlya-cms/wordpress/validaciya-customerdata.md)
     * [Усунення проблем (FAQ)](platizhni-vidzheti-dlya-cms/wordpress/usunennya-problem-faq.md)
   * [PrestaShop](platizhni-vidzheti-dlya-cms/prestashop/README.md)
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms/prestashop/instrukciya-po-vstanovlennyu.md)

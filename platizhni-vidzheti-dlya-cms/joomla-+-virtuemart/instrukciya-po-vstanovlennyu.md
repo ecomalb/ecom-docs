@@ -22,11 +22,11 @@
 
 У Відкритому вікні, потрібно обрати клавішу "Встановлення розширень"
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Після чого, обрати вкладку "Завантажити файл пакета"
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Для завантаження потрібно саме натиснути на клавішу "Оберіть файл на комп'ютері" та обрати завантажений файл раніше.&#x20;
 
