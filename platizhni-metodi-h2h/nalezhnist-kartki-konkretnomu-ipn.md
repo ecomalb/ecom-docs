@@ -14,8 +14,8 @@ description: POST  /ecom/jws/cardholder/verify_card_inn_v1
 | encryptedCardNumber | номер карти зашифрований в JWE за допомогою публічного платіжного ключа | string           | Так                | \{{encryptedPanT\}}                  |
 | inn                 | іпн відправника                                                         | string (10)      | Так                | 123456789                            |
 | requestId           | Id запиту мерчанта                                                      | uuid             | Так                | 337d9304-0368-11ed-b939-0242ac120003 |
-| requestType         | Тип запиту в AFHUB                                                      | string           | Так                | BETTING                              |
-| userApproval        | Згода клієнта на передачу даних третій стороні                          | boolean          | Так                | true                                 |
+| requestType         | тип запиту                                                              | string           | Так                | CREDIT, PAYMENT, BETTING.            |
+| userApproval        | згода клієнта на передачу даних третій стороні                          | boolean          | Так                | true                                 |
 
 #### Вихідні параметри: <a href="#vikhidni-parametri" id="vikhidni-parametri"></a>
 
