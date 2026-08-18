@@ -1,5 +1,5 @@
 ---
-description: POST /ecom/jws/cards/verify_card_inn_v1
+description: POST  /ecom/jws/cardholder/verify_card_inn_v1
 ---
 
 # Належність картки конкретному ІПН
@@ -13,6 +13,9 @@ description: POST /ecom/jws/cards/verify_card_inn_v1
 | merchantId          | Id мерчанту згенерований в Єкомі                                        | uuid(36)         | Так                | 137d9304-0368-11ed-b939-0242ac120002 |
 | encryptedCardNumber | номер карти зашифрований в JWE за допомогою публічного платіжного ключа | string           | Так                | \{{encryptedPanT\}}                  |
 | inn                 | іпн відправника                                                         | string (10)      | Так                | 123456789                            |
+| requestId           | Id запиту мерчанта                                                      | uuid             | Так                | 337d9304-0368-11ed-b939-0242ac120003 |
+| requestType         | Тип запиту в AFHUB                                                      | string           | Так                | BETTING                              |
+| userApproval        | Згода клієнта на передачу даних третій стороні                          | boolean          | Так                | true                                 |
 
 #### Вихідні параметри: <a href="#vikhidni-parametri" id="vikhidni-parametri"></a>
 
@@ -27,7 +30,10 @@ description: POST /ecom/jws/cards/verify_card_inn_v1
 {
   "merchantId": "467c8a10-c705-11ed-afa1-0242ac120002",
   "encryptedCardNumber": "{{encryptedPanT}}",
-  "inn": "3126509874"
+  "inn": "3126509874",
+  "requestId": "337d9304-0368-11ed-b939-0242ac120003",
+  "requestType": "BETTING",
+  "userApproval": true
 }
 ```
 
