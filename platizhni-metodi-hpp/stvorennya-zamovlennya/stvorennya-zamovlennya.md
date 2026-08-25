@@ -1,12 +1,10 @@
----
-description: >-
-  Авторизація 1.0 decrypt\encrypt |
-  {{url}}/ecom/execute_request/hpp/v1/create-order
----
-
 # Створення замовлення
 
-Авторизація 2.0 JWS | \{{url\}}/ecom/jws/payments/hpp/create\_order\_v1
+Авторизація 1.0 decrypt\encrypt | `{{url}}/ecom/execute_request/hpp/v1/create-order`
+
+Авторизація 2.0 JWS | `{{url}}/ecom/jws/payments/hpp/create_order_v1`
+
+
 
 **Вхідні параметри:**
 
