@@ -1,5 +1,6 @@
 ---
 description: POST  /ecom/jws/cardholder/verify_card_inn_v1
+hidden: true
 ---
 
 # Належність картки конкретному ІПН
