@@ -1,8 +1,8 @@
----
-description: '{{url}}/ecom/execute_request/hpp/v1/operations'
----
-
 # Отримання даних по замовленню
+
+Авторизація 1.0 decrypt\encrypt | `{{url}}/ecom/execute_request/hpp/v1/operations`
+
+Авторизація 2.0 JWS | `{{url}}/ecom/jws/payments/hpp/operations_v1`
 
 **Вхідні параметри:**&#x20;
 
