@@ -1,6 +1,6 @@
 # Table of contents
 
-* [E Commerce платформа AlliancePay v2.59.0](README.md)
+* [E Commerce платформа AlliancePay v2.60.0](README.md)
 * [Аутентифікація](autentifikaciya.md)
 * [Криптування даних](kriptuvannya-danikh.md)
 * [Авторизація](avtorizaciya.md)
@@ -152,6 +152,7 @@
     * [по merchantRequestId](platizhni-metodi-h2h/otrimannya-danikh/po-merchantrequestid.md)
   * [Отримання балансу](platizhni-metodi-h2h/otrimannya-balansu.md)
   * [Належність картки конкретному ІПН](platizhni-metodi-h2h/nalezhnist-kartki-konkretnomu-ipn.md)
+  * [Отримання даних картки та клієнта за номером токену (DPAN)](platizhni-metodi-h2h/otrimannya-danikh-kartki-ta-kliyenta-za-nomerom-tokenu-dpan.md)
   * [Callback](platizhni-metodi-h2h/callback.md)
 * [Платіжні методи HPP](platizhni-metodi-hpp/README.md)
   * [Створення замовлення](platizhni-metodi-hpp/stvorennya-zamovlennya/README.md)
