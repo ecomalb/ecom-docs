@@ -16,6 +16,7 @@
 </strong><strong>    "alg": "ES256",  // Алгоритм підписання 
 </strong><strong>    "kid": "uuid",  // Ідентифікатор публічного ключа (надається від співробітника банку)
 </strong><strong>    "ts" : "1769174930000", // Дата та час у форматі timestamp в мілісекундах
+</strong><strong>    "jti" : "80c85dd4-2dd8-4229-993b-291838a3ad85", // Унікальний ідентифікатор запиту у форматі uuid
 </strong><strong>    "targetUrl" : "/ecom/jws/payments/create/purchase_v3" // URL на який надсилається запит
 </strong>}
 </code></pre>
@@ -65,6 +66,7 @@ const header = {
   alg: "ES256",
   kid: "9a3f6e6d-4f56-4b8b-99d3-24db19f54d8a",
   ts: Math.floor(Date.now() / 1000),
+  jti = randomUUID();
   targetUrl: "/ecom/jws/payments/create/purchase_v3"
 };
 
@@ -99,6 +101,7 @@ console.log("JWS:", jws);
 ```python
 from jwcrypto import jwk, jws
 import json, time, base64
+import uuid
 
 # === Приватний ключ ===
 private_key_pem = """-----BEGIN EC PRIVATE KEY-----
@@ -113,6 +116,7 @@ header = {
     "alg": "ES256",
     "kid": "9a3f6e6d-4f56-4b8b-99d3-24db19f54d8a",
     "ts": int(time.time()),
+    "jti" = str(uuid.uuid4()),
     "targetUrl": "/ecom/jws/payments/create/purchase_v3"
 }
 
@@ -170,6 +174,7 @@ public class GenerateJWS {
         JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.ES256)
                 .customParam("kid", "9a3f6e6d-4f56-4b8b-99d3-24db19f54d8a")
                 .customParam("ts", System.currentTimeMillis() / 1000)
+                .customParam("jti", UUID.randomUUID().toString())
                 .customParam("targetUrl", "/ecom/jws/payments/create/purchase_v3")
                 .build();
 
@@ -209,6 +214,7 @@ $header = [
     'alg' => 'ES256',
     'kid' => '9a3f6e6d-4f56-4b8b-99d3-24db19f54d8a',
     'ts' => time(),
+    'jti' = Uuid::uuid4()->toString();
     'targetUrl' => '/ecom/jws/payments/create/purchase_v3'
 ];
 
@@ -250,7 +256,7 @@ echo "JWS: " . $serializer->serialize($jws, 0);
 <table><thead><tr><th>Поле</th><th>Опис</th><th>Тип</th><th>Обов'язкове</th><th>Приклад</th></tr></thead><tbody><tr><td><code>alg</code></td><td>Алгоритм підпису, що відповідає типу ключа</td><td>string</td><td>так</td><td><pre><code><strong>ES256
 </strong></code></pre></td></tr><tr><td><code>kid</code></td><td>Ідентифікатор публічного ключа</td><td>string</td><td>так</td><td><pre><code>28da60c2-d60f-404e-b4da-6b089fb29555
 </code></pre></td></tr><tr><td><code>ts</code></td><td>Час генерації JWS по UTC(Kyiv)</td><td>number (Unix timestamp, milliseconds)</td><td>так</td><td><pre><code>1769174930000
-</code></pre></td></tr><tr><td><code>targetUrl</code></td><td>URL, для якого формується запит</td><td>string (URL)</td><td>так</td><td><pre><code><strong>/ecom/jws/payments/create/purchase_v3
+</code></pre></td></tr><tr><td><code>jti</code></td><td>Унікальний ідентифікатор запиту </td><td>string(uuid)</td><td>так</td><td><code>80c85dd4-2dd8-4229-993b-291838a3ad85</code></td></tr><tr><td><code>targetUrl</code></td><td>URL, для якого формується запит</td><td>string (URL)</td><td>так</td><td><pre><code><strong>/ecom/jws/payments/create/purchase_v3
 </strong></code></pre></td></tr></tbody></table>
 
 #### 2.1. **Перевірка терміну дії токена (`ts`)**
@@ -302,6 +308,16 @@ echo "JWS: " . $serializer->serialize($jws, 0);
 #### Умова помилки:
 
 Якщо ключ із зазначеним `kid` не існує.
+{% endhint %}
+
+#### 2.5. Перевірка унікальності запиту (jti)
+
+* Ідентифікатор `jti` для кожного запиту повинен бути унікальний, та не повторюватись
+
+{% hint style="danger" %}
+#### Умова помилки:
+
+Якщо ключ із зазначеним `jti` вже існує.
 {% endhint %}
 
 

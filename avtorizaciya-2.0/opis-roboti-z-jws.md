@@ -71,7 +71,7 @@ sequenceDiagram
 
 1. Мерчант шифрує карткові дані.
 2. Формує `payload` для Create Purchase.
-3. Формує `header` з `alg`, `kid`, `ts` та `targetUrl`.
+3. Формує `header` з `alg`, `kid`, `ts`, `jit` та `targetUrl`.
 4. Підписує JWS своїм приватним ключем.
 5. Відправляє JWS на `/ecom/jws/payments/create/purchase_v3`.
 6. Отримує JWS-відповідь Банку.
