@@ -79,7 +79,7 @@ HEADER.PAYLOAD.SIGNATURE
   "kid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "ts": "1769174930000",
   "targetUrl": "/ecom/jws/payments/create/purchase_v3",
-  "jit" : "80c85dd4-2dd8-4229-993b-291838a3ad85"
+  "jti" : "80c85dd4-2dd8-4229-993b-291838a3ad85"
 }
 ```
 {% endstep %}
@@ -101,7 +101,7 @@ HEADER.PAYLOAD.SIGNATURE
 * `kid` — ідентифікатор зареєстрованого публічного ключа мерчанта;
 * `ts` — час формування JWS;
 * `targetUrl` — URL API-методу, для якого формується JWS.
-* `jit` — унікальний ідентифікатор, кожного запиту
+* `jti` — унікальний ідентифікатор, кожного запиту
 
 Детальніше: [https://docs.merchant.alb.ua/avtorizaciya-2.0/robota-z-pidpisannyam](https://docs.merchant.alb.ua/avtorizaciya-2.0/robota-z-pidpisannyam)
 {% endstep %}
