@@ -18,6 +18,8 @@ layout:
     visible: true
   actions:
     visible: true
+  anchors:
+    visible: true
 ---
 
 # Отримання даних по платежам
@@ -46,7 +48,7 @@ layout:
 
 #### Вихідні параметри: <a href="#vikhidni-parametri" id="vikhidni-parametri"></a>
 
-<table data-header-hidden data-search="false"><thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>Параметр</strong></td><td><strong>Опис</strong></td><td><strong>Формат даних</strong></td><td><strong>Приклад</strong></td></tr><tr><td>currentPage</td><td> </td><td> </td><td> </td></tr><tr><td>payments</td><td>обʼєкт операціі</td><td>object</td><td> </td></tr><tr><td>id</td><td>Id операціі </td><td>uuid</td><td>13c06c89-936c-4d7c-8164-0baabc35cb06</td></tr><tr><td>planId</td><td>Id плану</td><td>string</td><td>a9562240-10ca-42d7-8d90-bbd1ace3dc5a</td></tr><tr><td>planName</td><td>Назва підписки</td><td>string</td><td>Premium subscription</td></tr><tr><td>versionId</td><td>Id версіі</td><td>int</td><td> 4</td></tr><tr><td>versionStatus</td><td>статус версіі</td><td>string</td><td> <code>ACTIVE</code></td></tr><tr><td>paymentNumber</td><td>номер платежу по плану, номер платежу в рамках ордеру</td><td>int</td><td> 3</td></tr><tr><td>status</td><td>статус платежу</td><td>string</td><td><code>WAITING</code></td></tr><tr><td>orderId</td><td>Id підписки</td><td>string</td><td>1783610230256tRdmRqfsGJj</td></tr><tr><td>executionAt</td><td>дата виконання проведення</td><td>TIMESTAMPZ</td><td>2026-08-12 18:17:49.89+03:00</td></tr><tr><td>retryExecutionAt</td><td>наступна дата ретраю</td><td>TIMESTAMPZ</td><td>2026-08-12 18:17:49.89+03:00</td></tr><tr><td>retryNumber</td><td>кількість ретраїв</td><td>int</td><td> 2</td></tr><tr><td>coinAmount</td><td>сума платежу</td><td>long</td><td> 2000</td></tr><tr><td>currency</td><td>валюта платежу</td><td>string</td><td> 980</td></tr><tr><td>recurringTransactionType</td><td>Індикатор транзакції:</td><td>string</td><td><ul><li><strong>O</strong> – Перша транзакція</li><li><strong>C</strong> – Наступна CIT-транзакція</li><li><strong>M</strong> – Наступна MIT-транзакція</li></ul></td></tr><tr><td>categorySubcategoryIndicator</td><td>категорія підписки</td><td>string</td><td>M103</td></tr></tbody></table>
+<table data-header-hidden data-search="false"><thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>Параметр</strong></td><td><strong>Опис</strong></td><td><strong>Формат даних</strong></td><td><strong>Приклад</strong></td></tr><tr><td>currentPage</td><td> </td><td> </td><td> </td></tr><tr><td>payments</td><td>обʼєкт операціі</td><td>object</td><td> </td></tr><tr><td>id</td><td>Id операціі </td><td>uuid</td><td>13c06c89-936c-4d7c-8164-0baabc35cb06</td></tr><tr><td>planId</td><td>Id плану</td><td>string</td><td>a9562240-10ca-42d7-8d90-bbd1ace3dc5a</td></tr><tr><td>planName</td><td>Назва підписки</td><td>string</td><td>Premium subscription</td></tr><tr><td>versionId</td><td>Id версіі</td><td>int</td><td> 4</td></tr><tr><td>versionStatus</td><td>статус версіі</td><td>string</td><td> <code>ACTIVE</code></td></tr><tr><td>paymentNumber</td><td>номер платежу по плану, номер платежу в рамках ордеру</td><td>int</td><td> 3</td></tr><tr><td>status</td><td>статус платежу</td><td>string</td><td><code>WAITING</code></td></tr><tr><td>orderId</td><td>Id підписки</td><td>string</td><td>1783610230256tRdmRqfsGJj</td></tr><tr><td>executionAt</td><td>дата виконання проведення</td><td>TIMESTAMPZ</td><td>2026-08-12 18:17:49.89+03:00</td></tr><tr><td>retryExecutionAt</td><td>наступна дата ретраю</td><td>TIMESTAMPZ</td><td>2026-08-12 18:17:49.89+03:00</td></tr><tr><td>retryNumber</td><td>кількість ретраїв</td><td>int</td><td> 2</td></tr><tr><td>coinAmount</td><td>сума платежу</td><td>long</td><td> 2000</td></tr><tr><td>currency</td><td>валюта платежу</td><td>string</td><td> 980</td></tr><tr><td>recurringTransactionType</td><td>Індикатор транзакції:</td><td>string</td><td><ul><li><strong>O</strong> – Перша транзакція</li><li><strong>C</strong> – Наступна CIT-транзакція</li><li><strong>M</strong> – Наступна MIT-транзакція</li></ul></td></tr><tr><td>categorySubcategoryIndicator</td><td>категорія підписки</td><td>string</td><td>M103</td></tr><tr><td>executedAt</td><td>Дата та час проведення платежу</td><td>TIMESTAMPZ</td><td>2026-02-26 11:23:45.12+02:00</td></tr><tr><td>actionCode</td><td>код відповіді</td><td>string</td><td>0</td></tr><tr><td>responseCode</td><td>код відповіді</td><td>string</td><td>00</td></tr><tr><td>responseCodeDescription</td><td>опис кода відповіді</td><td>string</td><td>Операція успішна</td></tr></tbody></table>
 
 #### Приклад запиту&#x20;
 
@@ -82,6 +84,10 @@ layout:
       "executionAt": "2026-07-12 18:17:49.89+03:00",
       "recurringTransactionType": "M",
       "categorySubcategoryIndicator": "M103",
+      "executedAt": null,
+      "actionCode": null,
+      "responseCode": null,
+      "responseCodeDescription": null,
       "orderId": "1783610230256tRdmRqfsGJj"
     },
     {
@@ -97,6 +103,10 @@ layout:
       "executionAt": "2026-07-11 18:17:49.89+03:00",
       "recurringTransactionType": "M",
       "categorySubcategoryIndicator": "M103",
+      "executedAt": null,
+      "actionCode": null,
+      "responseCode": null,
+      "responseCodeDescription": null,
       "orderId": "1783610230256tRdmRqfsGJj"
     },
     {
@@ -112,6 +122,10 @@ layout:
       "executionAt": "2026-07-11 18:12:55.74+03:00",
       "recurringTransactionType": "M",
       "categorySubcategoryIndicator": "M103",
+      "executedAt": null,
+      "actionCode": null,
+      "responseCode": null,
+      "responseCodeDescription": null,
       "orderId": "1783609541721181tI5zJ3ad"
     },
     {
@@ -127,6 +141,10 @@ layout:
       "executionAt": "2026-07-11 18:01:06.89+03:00",
       "recurringTransactionType": "M",
       "categorySubcategoryIndicator": "M103",
+      "executedAt": null,
+      "actionCode": null,
+      "responseCode": null,
+      "responseCodeDescription": null,
       "orderId": "1783608520205P81ch623POH"
     },
     {
@@ -142,6 +160,10 @@ layout:
       "executionAt": "2026-07-10 18:17:49.89+03:00",
       "recurringTransactionType": "M",
       "categorySubcategoryIndicator": "M103",
+      "executedAt": null,
+      "actionCode": null,
+      "responseCode": null,
+      "responseCodeDescription": null,
       "orderId": "1783610230256tRdmRqfsGJj"
     }
   ]

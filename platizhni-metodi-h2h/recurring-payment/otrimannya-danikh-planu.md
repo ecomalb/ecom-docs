@@ -18,6 +18,8 @@ layout:
     visible: true
   actions:
     visible: true
+  anchors:
+    visible: true
 ---
 
 # Отримання даних плану
@@ -30,7 +32,34 @@ layout:
 
 #### Вихідні параметри:  <a href="#vikhidni-parametri" id="vikhidni-parametri"></a>
 
-<table data-header-hidden data-search="false"><thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>Параметр</strong></td><td><strong>Опис</strong></td><td><strong>Формат даних</strong></td><td><strong>Приклад</strong></td></tr><tr><td>merchantId</td><td>id мерчанта в ecom</td><td> uuid(36)</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>plan</td><td>обʼєкт з даними плану</td><td>object</td><td> </td></tr><tr><td>plan.name</td><td>Назва підписки, що відображається мерчанту та/або користувачу</td><td>string</td><td>Premium subscription</td></tr><tr><td>plan.description</td><td>Опис підписки</td><td>string</td><td>Monthly premium access</td></tr><tr><td>plan.status</td><td>Поточний статус підписки</td><td>string</td><td>ACTIVE</td></tr><tr><td>plan.categorySubcategoryIndicator</td><td>Категрія та саб ктегорія</td><td>enum</td><td>C103</td></tr><tr><td>plan.createdAt</td><td>Дата та час створення плану</td><td>TIMESTAMPZ</td><td>2026-02-26 11:23:45.12+02:00</td></tr><tr><td>plan.updatedAt</td><td>Дата та час останнього оновлення плану</td><td>TIMESTAMPZ</td><td>2026-02-26 11:23:45.12+02:00</td></tr><tr><td>plan.deletedAt</td><td>Дата та час видалення плану</td><td>TIMESTAMPZ</td><td>2026-02-26 11:23:45.12+02:00</td></tr><tr><td>versions</td><td>обʼєкт з версіями</td><td>object</td><td> </td></tr><tr><td>versions.versionId</td><td>Номер версії плану</td><td>int</td><td>1</td></tr><tr><td>versions.appliesDateTimeFrom</td><td>зміна застосовується з</td><td>TIMESTAMPZ</td><td>2026-02-26 11:23:45.12+02:00</td></tr><tr><td>versions.appliesDateTimeTo</td><td>застосовується до..</td><td>TIMESTAMPZ</td><td>2026-02-26 11:23:45.12+02:00</td></tr><tr><td>versions.rules</td><td>Набір правил білінгу для версії</td><td>object</td><td> </td></tr><tr><td>versions.rules.createdAt</td><td>Дата та час створення версіі</td><td>TIMESTAMPZ</td><td>2026-02-26 11:23:45.12+02:00</td></tr><tr><td>versions.rules.paymentNumberFrom</td><td>початковий номер платіжа з якого почина діяти дане правило</td><td>int</td><td>1</td></tr><tr><td>versions.rules.paymentNumberTo</td><td>останній номер платіжа для якого ще працює правило</td><td>int</td><td>1</td></tr><tr><td>versions.rules.intervalValue</td><td>значення через скільки буде наступний платіж</td><td>int</td><td>12</td></tr><tr><td>versions.rules.intervalUnit</td><td>значення через скільки буде наступний платіж</td><td>string</td><td>DAY, WEEK, MONTH</td></tr><tr><td>versions.rules.coinAmount</td><td>Сума списання за один білінг-інтервал</td><td>long</td><td>2000</td></tr><tr><td>versions.rules.currency</td><td>Валюта підписки</td><td>string</td><td>980</td></tr></tbody></table>
+| **Параметр**                      | **Опис**                                                                                                                              | **Формат даних** | **Приклад**                          |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------ |
+| merchantId                        | id мерчанта в ecom                                                                                                                    |  uuid(36)        | 137d9304-0368-11ed-b939-0242ac120002 |
+| plan                              | обʼєкт з даними плану                                                                                                                 | object           |                                      |
+| plan.name                         | назва підписки, що відображається мерчанту та/або користувачу                                                                         | string           | Premium subscription                 |
+| plan.description                  | опис підписки                                                                                                                         | string           | Monthly premium access               |
+| plan.status                       | <p>поточний статус підписки<br><a href="https://alliancedigital.atlassian.net/wiki/spaces/ECOMM1/pages/986939430">plan_status</a></p> | string           | ACTIVE                               |
+| plan.categorySubcategoryIndicator | категрія та саб ктегорія                                                                                                              | enum             | C103                                 |
+| plan.createdAt                    | дата та час створення плану                                                                                                           | TIMESTAMPZ       | 2026-02-26 11:23:45.12+02:00         |
+| plan.updatedAt                    | дата та час останнього оновлення плану                                                                                                | TIMESTAMPZ       | 2026-02-26 11:23:45.12+02:00         |
+| plan.deletedAt                    | дата та час видалення плану                                                                                                           | TIMESTAMPZ       | 2026-02-26 11:23:45.12+02:00         |
+| versions                          | обʼєкт з версіями                                                                                                                     | object           |                                      |
+| versions.versionId                | номер версії плану                                                                                                                    | int              | 1                                    |
+| versions.appliesDateTimeFrom      | зміна застосовується з                                                                                                                | TIMESTAMPZ       | 2026-02-26 11:23:45.12+02:00         |
+| versions.appliesDateTimeTo        | застосовується до..                                                                                                                   | TIMESTAMPZ       | 2026-02-26 11:23:45.12+02:00         |
+| versions.rules                    | набір правил білінгу для версії                                                                                                       | object           |                                      |
+| versions.rules.createdAt          | дата та час створення версіі                                                                                                          | TIMESTAMPZ       | 2026-02-26 11:23:45.12+02:00         |
+| versions.rules.paymentNumberFrom  | початковий номер платіжа з якого почина діяти дане правило                                                                            | int              | 1                                    |
+| versions.rules.paymentNumberTo    | останній номер платіжа для якого ще працює правило                                                                                    | int              | 1                                    |
+| versions.rules.intervalValue      | значення через скільки буде наступний платіж                                                                                          | int              | 12                                   |
+| versions.rules.intervalUnit       | значення через скільки буде наступний платіж                                                                                          | string           | DAY, WEEK, MONTH                     |
+| versions.rules.coinAmount         | сума списання за один білінг-інтервал                                                                                                 | long             | 2000                                 |
+| versions.rules.currency           | валюта підписки                                                                                                                       | string           | 980                                  |
+| subscriptionStatistics            | обʼєкт                                                                                                                                | object           |                                      |
+| subscriptionStatistics.pending    | кількість зі статусом pending                                                                                                         | int              |  4                                   |
+| subscriptionStatistics.success    | кількість зі статусом success                                                                                                         | int              | 36                                   |
+| subscriptionStatistics.fail       | кількість зі статусом fail                                                                                                            | int              | 5                                    |
+| subscriptionStatistics.canceled   | кількість зі статусом canceled                                                                                                        | int              | 7                                    |
 
 #### Приклад запиту <a href="#priklad-zapitu" id="priklad-zapitu"></a>
 
@@ -147,6 +176,12 @@ layout:
                 }
             }
         }
-    }
+    },
+  "subscriptionStatistics": {
+    "pending": 1,
+    "success": 0,
+    "fail": 0,
+    "canceled": 0
+  }
 }
 ```

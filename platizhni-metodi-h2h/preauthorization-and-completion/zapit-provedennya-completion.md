@@ -18,6 +18,8 @@ layout:
     visible: true
   actions:
     visible: true
+  anchors:
+    visible: true
 ---
 
 # Запит проведення Completion
@@ -57,39 +59,57 @@ layout:
 
 #### **Вихідні параметри**
 
-| Параметр               | Опис                                                        | Формат даних | Приклад                                                                                                      |
-| ---------------------- | ----------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
-| type                   | тип транзакції                                              | string       | COMPLETION                                                                                                   |
-| rrn                    | rrn номер транзакції в МПС                                  | string       | 2554256963                                                                                                   |
-| purpose                | призначення платежу                                         | string       | За товар                                                                                                     |
-| comment                | коментар                                                    | string       | тест                                                                                                         |
-| coinAmount             | сума платежу                                                | int          | 2000                                                                                                         |
-| merchantId             | Id мерчанту                                                 | string       | 137d9304-0368-11ed-b939-0242ac120002                                                                         |
-| operationId            | Id транзакціі                                               | string       | 1712844596346b9F-WwrWZpq                                                                                     |
-| ecomOperationId        | Id транзакціі в системі Ecom                                | string       | 8c3303e9-7396-43b8-af4e-31d9facdde9b                                                                         |
-| merchantName           | найменування торговця                                       | string       | KB test terminal                                                                                             |
-| approvalCode           | код авторизаціі                                             | string       | 39203                                                                                                        |
-| status                 | статус транзакціі                                           | string       | <p>SUСCESS<br>FAIL<br>PENDING</p>                                                                            |
-| transactionType        | тип транзакції у цифровому значенні                         | string       | 196                                                                                                          |
-| merchantRequestId      | Id запиту мерчанта                                          | string       | 72837906-f526-4aef-8d11-58d80b44cb75                                                                         |
-| transactionCurrency    | валюта платежу                                              | string       | 980                                                                                                          |
-| createDateTime         | дата створення платежу                                      | string       | 2024.09.19 15:29:25.675                                                                                      |
-| modificationDateTime   | дата модифікаціі платежу                                    | string       | 2024.09.19 15:29:25.675                                                                                      |
-| actionCode             | код відповіді                                               | string       | 0                                                                                                            |
-| responseCode           | деталі відповіді                                            | string       | 0                                                                                                            |
-| description            | опис відповіді                                              | string       | approved                                                                                                     |
-| processingMerchantId   | Id мерчанту в ПЦ                                            | string       | AE100000                                                                                                     |
-| processingTerminalId   | Id терміналу в ПЦ                                           | string       | AE100000                                                                                                     |
-| bankCode               | назва банку емітента                                        | string       | BANK\_ALLIANCE                                                                                               |
-| paymentSystem          | назва мпс емітента                                          | string       | MasterCard                                                                                                   |
-| productType            | тип продукту термінала                                      | string       | PURCHASE                                                                                                     |
-| notificationUrl        | url, на який відправлено CallBack                           | string       | [https://merchant.notification\_url/](https://merchant.notification_url/)                                    |
-| paymentServiceType     | тип оплати                                                  | string       | CARD/APPLE\_PAY/GOOGLE\_PAY                                                                                  |
-| notificationEncryption | ознака криптування данних CallBack                          | string       | <p>true/false<br>Якщо параметр не передано або передано false, то дані в CallBack будуть не закриптовані</p> |
-| preauthOperationId     | id преавторизаціі                                           | string       | 1712843529623cHAHkmt-G5u                                                                                     |
-| preauthCoinAmount      | Сума преавторизаціі                                         | int          | 100                                                                                                          |
-| preauthEcomOperationId | id в системі Еком під яким створено операцію преавторизацію | string       | c25ee1cb-a052-439b-b075-bcb632615b11                                                                         |
-| rrnPreauth             | rrn номер преавторизаціі в МПС                              | string       | 123456789                                                                                                    |
+| type                                 | тип транзакції                                           | string | complition                                                                                         |
+| ------------------------------------ | -------------------------------------------------------- | ------ | -------------------------------------------------------------------------------------------------- |
+| rrn                                  | rrn номер транзакції в МПС                               | string | 2554256963                                                                                         |
+| purpose                              | призначення платежу                                      | string | За товар                                                                                           |
+| comment                              | коментар                                                 | string | тест                                                                                               |
+| coinAmount                           | сума платежу                                             | int    | 2000                                                                                               |
+| merchantId                           | Id мерчанту                                              | string | 137d9304-0368-11ed-b939-0242ac120002                                                               |
+| operationId                          | Id транзакціі                                            | string | 1712844596346b9F-WwrWZpq                                                                           |
+| ecomOperationId                      | Id транзакціі в системі Ecom                             | string | 8c3303e9-7396-43b8-af4e-31d9facdde9b                                                               |
+| merchantName                         | найменування торговця                                    | string | KB test terminal                                                                                   |
+| approvalCode                         | код авторизаціі                                          | string | 39203                                                                                              |
+| status                               | статус транзакціі                                        | string | SUСCESS FAIL PENDING REQUIRED\_3DS DESIRED\_THREEDS\_MODE\_ERROR                                   |
+| transactionType                      | тип транзакції у цифровому значенні                      | string | 76                                                                                                 |
+| merchantRequestId                    | Id запиту мерчанта                                       | string | 72837906-f526-4aef-8d11-58d80b44cb75                                                               |
+| transactionCurrency                  | валюта платежу                                           | string | 980                                                                                                |
+| merchantCommission                   | сума комісії                                             | string | 2                                                                                                  |
+| createDateTime                       | дата створення платежу                                   | string | 2024.04.11 17:09                                                                                   |
+| modificationDateTime                 | дата модифікаціі платежу                                 | string | 2024.04.11 17:09                                                                                   |
+| processingMerchantId                 | Id мерчанту в ПЦ                                         | string | AE100000                                                                                           |
+| processingTerminalId                 | Id терміналу в ПЦ                                        | string | AE100000                                                                                           |
+| transactionResponseInfo              |                                                          | object |                                                                                                    |
+| transactionResponseInfo.actionCode   | код відповіді                                            | string | 0                                                                                                  |
+| transactionResponseInfo.responseCode | деталі відповіді                                         | string | 0                                                                                                  |
+| transactionResponseInfo.description  | опис відповіді                                           | string | approved                                                                                           |
+| bankCode                             | назва банку емітента                                     | string | BANK\_ALLIANCE                                                                                     |
+| paymentSystem                        | назва мпс емітента                                       | string | MasterCard                                                                                         |
+| productType                          | тип продукту термінала                                   | string | PURCHASE                                                                                           |
+| notificationUrl                      | url, на який відправлено CallBack                        | string | [https://merchant.notification\_url/](https://merchant.notification_url/)                          |
+| paymentServiceType                   | тип оплати                                               | string | CARD/APPLE\_PAY/GOOGLE\_PAY                                                                        |
+| notificationEncryption               | ознака криптування данних CallBack                       | string | true/false Якщо параметр не передано або передано false, то дані в CallBack будуть не закриптовані |
+| originalOperationId                  | id під яким створено оригінальну операцію                | string | 1712843529623cHAHkmt-G5u                                                                           |
+| originalCoinAmount                   | Сума оригінального платежу                               | int    | 100                                                                                                |
+| originalEcomOperationId              | id в системі Еком під яким створено оригінальну операцію | string | c25ee1cb-a052-439b-b075-bcb632615b11                                                               |
+| rrnOriginal                          | rrn номер оригінальної транзакції в МПС                  | string | 123456789                                                                                          |
+| senderCustomerId                     | ID клієнта відправника                                   | string | 1258728c1                                                                                          |
+| senderFirstName                      | Ім'я відправника                                         | string | Іваненко                                                                                           |
+| senderLastName                       | Прізвище відправника                                     | string | Іван                                                                                               |
+| senderMiddleName                     | По-батькові відправника                                  | string | Іванович                                                                                           |
+| senderEmail                          | Пошта відправника                                        | string | mail@gmail.com                                                                                     |
+| senderCountry                        | Країна відправника                                       | string | 804                                                                                                |
+| senderRegion                         | Область відправника                                      | string | Київська                                                                                           |
+| senderCity                           | Місто відправника                                        | string | Київ                                                                                               |
+| senderStreet                         | Вулиця відправника                                       | string | Січових стрільців                                                                                  |
+| senderAdditionalAddress              | Додаткові дані адреси                                    | string | 23                                                                                                 |
+| senderItn                            | ІПН відправника                                          | string | 123456789                                                                                          |
+| senderPassport                       | Паспорт відправника                                      | string | АН123456                                                                                           |
+| senderIp                             | IP-адреса відправника                                    | string | 123.12.12.12                                                                                       |
+| senderPhone                          | Телефон відправника                                      | string | 380630000000                                                                                       |
+| senderBirthday                       | День народження відправника                              | string | 31.12.2000                                                                                         |
+| senderGender                         | Стать відправника                                        | string | Male/Female                                                                                        |
+| senderZipCode                        | Поштовий індекс відправника                              | string | 49000                                                                                              |
 
 #### Приклад тіла запиту
 
