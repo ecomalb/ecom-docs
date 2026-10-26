@@ -117,10 +117,10 @@ description: >-
 | `originalCoinAmount`                   | Сума оригінального платежу в копійках                                       | int              | `10000`                                 |
 | `originalEcomOperationId`              | Ідентифікатор оригінальної операції в системі Ecom                          | string (UUID)    | `d4444444-4444-4444-8444-444444444444`  |
 | `rrnOriginal`                          | RRN оригінальної транзакції в МПС                                           | string           | `000000000003`                          |
-| `sepSenderFirstName`                   | ПІБ відправника в контексті SEP-переказу                                    | string           | `Тестовий Іван Іванович`                |
-| `sepSenderItn`                         | ІПН відправника в контексті SEP-переказу                                    | string           | `0000000000`                            |
-| `sepSenderAccount`                     | Рахунок відправника в контексті SEP-переказу                                | string           | `UA000000000000000000000000003`         |
-| `sepSenderBankCode`                    | Код банку відправника в контексті SEP-переказу                              | string           | `BANK_ALLIANCE`                         |
+| `sepSenderFirstName`                   | <p>ПІБ відправника в контексті SEP-переказу<br>*Для платежів A2A</p>        | string           | `Тестовий Іван Іванович`                |
+| `sepSenderItn`                         | <p>ІПН відправника в контексті SEP-переказу </p><p>*Для платежів A2A</p>    | string           | `0000000000`                            |
+| `sepSenderAccount`                     | <p>Рахунок відправника в контексті SEP-переказу<br>*Для платежів A2A</p>    | string           | `UA000000000000000000000000003`         |
+| `sepSenderBankCode`                    | <p>Код банку відправника в контексті SEP-переказу<br>*Для платежів A2A</p>  | string           | `BANK_ALLIANCE`                         |
 
 #### Приклад тіла запиту PURCHASE&#x20;
 
