@@ -7,150 +7,321 @@ description: >-
 
 # Callback
 
+* Для платежів типу **A2A** (переказ з рахунку на рахунок) додатково передаються параметри з інформацією про відправника платежу в межах **SEP**. Ці параметри стосуються тільки платежів A2A.
 * Якщо статус отримання Callback не 200 ОК, відбувається перевідправка Callback через 5 сек, потім через 30 сек, потім через 5 хв, потім через 30 хв, через 1 годину
 * Якщо статус отримання Callback не 200 ОК для 1-го разу, а для 2-го разу 200 ОК, то перевідправка Callback більше не виконується&#x20;
 
-**Вхідні параметри**
+#### **Вхідні параметри**
 
-<table><thead><tr><th>Параметр</th><th>Опис</th><th width="141">Формат даних</th><th width="186.1102294921875">Приклад</th></tr></thead><tbody><tr><td>type</td><td>тип транзакції</td><td>string</td><td>Purchase, CARD_2_ACCOUNT, ACCOUNT_2_CARD,REFUND</td></tr><tr><td>rrn</td><td>rrn номер транзакції в МПС</td><td>string</td><td>2554256963</td></tr><tr><td>purpose</td><td>призначення платежу</td><td>string</td><td>За товар</td></tr><tr><td>comment</td><td>коментар</td><td>string</td><td>тест</td></tr><tr><td>coinAmount</td><td>сума платежу в копійках</td><td>int</td><td>2000</td></tr><tr><td>merchantId</td><td>Id мерчанту</td><td>string</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>operationId</td><td>Id транзакціі</td><td>string</td><td>1712844596346b9F-WwrWZpq</td></tr><tr><td>ecomOperationId</td><td>Id транзакціі в системі Ecom</td><td>string</td><td>8c3303e9-7396-43b8-af4e-31d9facdde9b</td></tr><tr><td>merchantName</td><td>найменування торговця</td><td>string</td><td>KB test terminal</td></tr><tr><td>approvalCode</td><td>код авторизаціі</td><td>string</td><td>39203</td></tr><tr><td>status</td><td>статус транзакціі</td><td>string</td><td>SUСCESS<br>FAIL<br>PENDING<br>REQUIRED_3DS<br>DESIRED_THREEDS_MODE_ERROR</td></tr><tr><td>transactionType</td><td>тип транзакції у цифровому значенні</td><td>string</td><td>35</td></tr><tr><td>merchantRequestId</td><td>Id запиту мерчанта</td><td>string</td><td>72837906-f526-4aef-8d11-58d80b44cb75</td></tr><tr><td>transactionCurrency</td><td>валюта платежу</td><td>string</td><td>980</td></tr><tr><td>merchantCommission</td><td>сума комісії</td><td>int</td><td>2</td></tr><tr><td>creationDateTime</td><td>дата створення платежу</td><td>string</td><td>2024.09.19 15:29:25.675</td></tr><tr><td>modificationDateTime</td><td>дата модифікаціі платежу</td><td>string</td><td>2024.09.19 15:29:25.675</td></tr><tr><td>transactionResponseInfo</td><td>обʼєкт з даними </td><td>object</td><td></td></tr><tr><td>transactionResponseInfo.actionCode</td><td>код відповіді</td><td>string</td><td>0</td></tr><tr><td>transactionResponseInfo.responseCode</td><td>деталі відповіді</td><td>string</td><td>0</td></tr><tr><td>transactionResponseInfo.description</td><td>опис відповіді</td><td>string</td><td>approved</td></tr><tr><td>bankCode</td><td>назва банку емітента</td><td>string</td><td>BANK_ALLIANCE</td></tr><tr><td>paymentSystem</td><td>назва мпс емітента</td><td>string</td><td>MasterCard</td></tr><tr><td>productType</td><td>тип продукту термінала</td><td>string</td><td>PURCHASE</td></tr><tr><td>notificationUrl</td><td>url, на який відправлено CallBack</td><td>string</td><td><a href="https://merchant.notification_url/">https://merchant.notification_url/</a></td></tr><tr><td>paymentServiceType</td><td>тип оплати</td><td>string</td><td>CARD/APPLE_PAY/GOOGLE_PAY</td></tr><tr><td>notificationEncryption</td><td>ознака криптування данних CallBack</td><td>string</td><td>true/false<br>Якщо параметр не передано або передано false, то дані в CallBack будуть не закриптовані</td></tr><tr><td>cardNumberMask</td><td>маскований номер карти</td><td>string</td><td>5573********0304</td></tr><tr><td>desiredThreeDSMode</td><td>ознака яка вказує, чи бажає мерчант використати 3DS в покупці чи ні.</td><td>string</td><td>MUST/SHOULD/MUST_NOT</td></tr><tr><td>threeDSMode</td><td>параметр який вказує, використовувася 3DS у покупці чи ні</td><td>string</td><td>MUST- проводимо оплату з 3DS<br>MUST_NOT- проводимо оплату без 3DS</td></tr><tr><td>statusThreeDs</td><td>статус проведення 3DS</td><td>string</td><td>Y - успіший 3ds<br>N - не успішний 3ds</td></tr><tr><td>threeDSServerTransId</td><td>Id транзакціі в системі 3ds</td><td>string</td><td>b6c35fdb-28c1-454d-a2f3-51098c26bda4</td></tr><tr><td>acsTransId</td><td>Id транзакціі в системі ACS</td><td>string</td><td>3e17fabb-71e6-498e-8794-ef8c95c5ba6f</td></tr><tr><td>dsTransId</td><td>Id транзакціі згенерований Directory Server</td><td>string</td><td>12ebc556-82d3-4e35-9fb8-77ac18b050ea</td></tr><tr><td>eci</td><td>Electronic Commerce Indicator Код, який вказує рівень безпеки транзакції</td><td>string</td><td>02</td></tr><tr><td>hppOrderId</td><td>Id hpp ордеру, в якому було свторено платіж</td><td>string</td><td>1812844596346b9F-WwrWZpq</td></tr><tr><td>processingMerchantId</td><td>Id мерчанту в ПЦ</td><td>string</td><td>AE100000</td></tr><tr><td>processingTerminalId</td><td>Id терміналу в ПЦ</td><td>string</td><td>AE100000</td></tr><tr><td>creatorSystem</td><td>система в якійстворено платіж</td><td>string</td><td>H2H, HPP</td></tr><tr><td>redirect3dsUrl</td><td>url для редиректа клієнта на сторінку емітента для проходження 3DS</td><td>string</td><td><a href="https://api-ecom-release.develop.bankalliance.ua/threeDS/getRedirectHtml/1702047427621BHu5X99yDbA">https://api-ecom-release.develop.bankalliance.ua/threeDS/getRedirectHtml/1702047427621BHu5X99yDbA</a></td></tr><tr><td>txnType</td><td>під тип транзакціі</td><td>enum</td><td>Можливі значення:<br>NONCVV/noncvv- при отриманні даного значення введення cvv та його перевірка не відбувається</td></tr><tr><td>balanceAmountAfter</td><td>значення балансу після списання</td><td>string</td><td>23400</td></tr><tr><td>senderCustomerId</td><td>Id клієнта відправника</td><td>string</td><td>1258728c1</td></tr><tr><td>senderFirstName</td><td>прізвище відправника</td><td>string</td><td>Іваненко</td></tr><tr><td>senderLastName</td><td>ім'я відправника</td><td>string</td><td>Іван</td></tr><tr><td>senderMiddleName</td><td>по-батькові відправника</td><td>string</td><td>Іванович</td></tr><tr><td>senderEmail</td><td>пошта відправника</td><td>string</td><td>mail@gmail.com</td></tr><tr><td>senderCountry</td><td>країна відправника</td><td>string</td><td>Україна</td></tr><tr><td>senderRegion</td><td>область відправника</td><td>string</td><td>Київська</td></tr><tr><td>senderCity</td><td>місто відправника</td><td>string</td><td>Київ</td></tr><tr><td>senderStreet</td><td>вулиця відправника</td><td>string</td><td>Січових стрільців</td></tr><tr><td>senderAdditionalAddress</td><td>додаткові дані адреси відправника (поверх, номер дому, квартира)</td><td>string</td><td>23</td></tr><tr><td>senderItn</td><td>іпн відправника</td><td>string</td><td>123456789</td></tr><tr><td>senderPassport</td><td>паспорт відправника</td><td>string</td><td>АН123456</td></tr><tr><td>senderIp</td><td><code class="expression">space.vars.senderIP_description</code></td><td>string</td><td><code class="expression">space.vars.senderIP_example</code></td></tr><tr><td>senderPhone</td><td>номер телефону відправника</td><td>string</td><td>380630000000</td></tr><tr><td>senderBirthday</td><td>день народження відправника</td><td>string</td><td>31.12.2000</td></tr><tr><td>senderGender</td><td>гендер відправника</td><td>string</td><td>M</td></tr><tr><td>senderZipCode</td><td>індекс відправника</td><td>string</td><td>12000</td></tr><tr><td>senderBankCode</td><td>назва банку емітента відправника</td><td>string</td><td>BANK_ALLIANCE</td></tr><tr><td>senderPaymentSystem</td><td>назва мпс емітента відправника</td><td>string</td><td>MasterCard</td></tr><tr><td>senderCardNumberMask</td><td>маскований номер карти відправника</td><td>string</td><td>5573********0304</td></tr><tr><td>senderAccount</td><td>рахунок відправника</td><td>string</td><td>2600000000</td></tr><tr><td>recipientCustomerId</td><td>Id клієнта відправника</td><td>string</td><td>1258728c1</td></tr><tr><td>recipientFirstName</td><td>прізвище отримувача</td><td>string</td><td>Іваненко</td></tr><tr><td>recipientLastName</td><td>ім'я отримувача</td><td>string</td><td>Іван</td></tr><tr><td>recipientMiddleName</td><td>по-батькові отримувача</td><td>string</td><td>Іванович</td></tr><tr><td>recipientEmail</td><td>пошта отримувача</td><td>string</td><td>mail@gmail.com</td></tr><tr><td>recipientCountry</td><td>країна отримувача</td><td>string</td><td>Україна</td></tr><tr><td>recipientRegion</td><td>область отримувача</td><td>string</td><td>Київська</td></tr><tr><td>recipientCity</td><td>місто отримувача</td><td>string</td><td>Київ</td></tr><tr><td>recipientStreet</td><td>вулиця отримувача</td><td>string</td><td>Січових стрільців</td></tr><tr><td>recipientAdditionalAddress</td><td>додаткові дані адреси отримувача (поверх, номер дому, квартира)</td><td>string</td><td>23</td></tr><tr><td>recipientItn</td><td>іпн отримувача</td><td>string</td><td>123456789</td></tr><tr><td>recipientPassport</td><td>паспорт отримувача</td><td>string</td><td>АН123456</td></tr><tr><td>recipientIp</td><td><code class="expression">space.vars.recipientIP_desctiption</code></td><td>string</td><td><code class="expression">space.vars.recipientIP_example</code></td></tr><tr><td>recipientPhone</td><td>номер телефону отримувача</td><td>string</td><td>380630000000</td></tr><tr><td>recipientBirthday</td><td>день народження отримувача</td><td>string</td><td>31.12.2000</td></tr><tr><td>recipientGender</td><td>гендер отримувача</td><td>string</td><td>M</td></tr><tr><td>recipientZipCode</td><td>індекс отримувача</td><td>string</td><td>12000</td></tr><tr><td>recipientBankCode</td><td>назва банку емітента отримувача</td><td>string</td><td>BANK_ALLIANCE</td></tr><tr><td>recipientPaymentSystem</td><td>назва мпс емітента отримувача</td><td>string</td><td>MasterCard</td></tr><tr><td>recipientCardNumberMask</td><td>маскований номер карти отримувача</td><td>string</td><td>5573********0304</td></tr><tr><td>originalOperationId</td><td>id під яким створено оригінальну операцію</td><td>string</td><td>1712843529623cHAHkmt-G5u</td></tr><tr><td>originalCoinAmount</td><td>Сума оригінального платежу</td><td>int</td><td>100</td></tr><tr><td>originalEcomOperationId</td><td>id в системі Еком під яким створено оригінальну операцію</td><td>string</td><td>c25ee1cb-a052-439b-b075-bcb632615b11</td></tr><tr><td>rrnOriginal</td><td>rrn номер оригінальної транзакції в МПС</td><td>string</td><td>123456789</td></tr><tr><td>externalCardToken</td><td>id токену </td><td>string</td><td>1234567YTDHJI</td></tr><tr><td>repeatedPayment</td><td>ознака повторного A2A платежу </td><td>boolean</td><td>true</td></tr></tbody></table>
+| **Параметр**                           | **Опис**                                                                    | **Формат даних** | **Приклад**                             |
+| -------------------------------------- | --------------------------------------------------------------------------- | ---------------- | --------------------------------------- |
+| `type`                                 | Тип транзакції                                                              | string / enum    | `PURCHASE`                              |
+| `rrn`                                  | RRN — номер транзакції в МПС                                                | string           | `000000000001`                          |
+| `purpose`                              | Призначення платежу                                                         | string           | `Тестове призначення платежу`           |
+| `comment`                              | Коментар до транзакції                                                      | string           | `Тестовий коментар`                     |
+| `coinAmount`                           | Сума платежу в копійках                                                     | int              | `50000`                                 |
+| `merchantId`                           | Ідентифікатор мерчанта                                                      | string (UUID)    | `a1111111-1111-4111-8111-111111111111`  |
+| `operationId`                          | Ідентифікатор транзакції в системі                                          | string           | `TEST_OPERATION_001`                    |
+| `ecomOperationId`                      | Ідентифікатор транзакції в системі Ecom                                     | string (UUID)    | `b2222222-2222-4222-8222-222222222222`  |
+| `merchantName`                         | Найменування торговця                                                       | string           | `TEST_MERCHANT`                         |
+| `approvalCode`                         | Код авторизації транзакції                                                  | string           | `000000`                                |
+| `status`                               | Статус транзакції                                                           | string / enum    | `SUCCESS`                               |
+| `transactionType`                      | Числовий код типу транзакції                                                | number           | `35`                                    |
+| `merchantRequestId`                    | Ідентифікатор запиту мерчанта                                               | string           | `c3333333-3333-4333-8333-333333333333`  |
+| `transactionCurrency`                  | Код валюти за ISO 4217                                                      | string           | `980`                                   |
+| `merchantCommission`                   | Комісія мерчанта                                                            | int              | `600`                                   |
+| `commissionAmount`                     | Сума комісії за операцією                                                   | number           | `0`                                     |
+| `creationDateTime`                     | Дата й час створення транзакції                                             | string           | `2026.10.26 12:15:40.478`               |
+| `modificationDateTime`                 | Дата й час останньої зміни транзакції                                       | string           | `2026.10.26 12:16:43.132`               |
+| `processingDateTime`                   | Дата й час обробки транзакції                                               | string           | `2026.10.26 12:15:40.000`               |
+| `transactionResponseInfo`              | Об’єкт із результатом обробки транзакції                                    | object           | `{}`                                    |
+| `transactionResponseInfo.actionCode`   | Код результату обробки від процесингу                                       | string           | `"0"`                                   |
+| `transactionResponseInfo.responseCode` | Код відповіді процесингу                                                    | string           | `"00"`                                  |
+| `transactionResponseInfo.description`  | Опис результату обробки                                                     | string           | `approved`                              |
+| `bankCode`                             | Код банку, пов’язаного з транзакцією                                        | string           | `BANK_ALLIANCE`                         |
+| `paymentSystem`                        | Назва платіжної системи                                                     | string           | `MasterCard`                            |
+| `productType`                          | Тип продукту термінала                                                      | string           | `PURCHASE`                              |
+| `notificationUrl`                      | URL, на який надсилається callback                                          | string (URL)     | `https://example.com/test-callback`     |
+| `paymentServiceType`                   | Тип платіжного сервісу                                                      | string / enum    | `CARD`                                  |
+| `notificationEncryption`               | Ознака шифрування даних callback                                            | boolean          | `false`                                 |
+| `notificationSignature`                | Ознака підпису callback                                                     | boolean          | `true`                                  |
+| `receiptUrl`                           | URL для отримання або перегляду чека                                        | string (URL)     | `https://example.com/test-receipt`      |
+| `cardNumberMask`                       | Маскований номер картки                                                     | string           | `00000000••••0000`                      |
+| `externalCardToken`                    | Ідентифікатор токена картки                                                 | string           | `TEST_TOKEN_001`                        |
+| `desiredThreeDSMode`                   | Бажаний мерчантом режим застосування 3DS                                    | string / enum    | `MUST`                                  |
+| `threeDSMode`                          | Режим застосування 3DS для транзакції                                       | string / enum    | `MUST_NOT`                              |
+| `statusThreeDs`                        | Результат проходження 3DS: `Y` — успішно, `N` — неуспішно                   | string           | `Y`                                     |
+| `threeDSServerTransId`                 | Ідентифікатор транзакції на стороні 3DS Server                              | string (UUID)    | `f6666666-6666-4666-8666-666666666666`  |
+| `acsTransId`                           | Ідентифікатор транзакції в ACS                                              | string (UUID)    | `d4444444-4444-4444-8444-444444444444`  |
+| `dsTransId`                            | Ідентифікатор транзакції Directory Server                                   | string (UUID)    | `e5555555-5555-4555-8555-555555555555`  |
+| `eci`                                  | Electronic Commerce Indicator — індикатор рівня безпеки транзакції          | string           | `02`                                    |
+| `hppOrderId`                           | Ідентифікатор HPP-ордера, у межах якого створено платіж                     | string           | `TEST_ORDER_001`                        |
+| `processingMerchantId`                 | Ідентифікатор мерчанта в процесинговому центрі                              | string           | `TEST000001`                            |
+| `processingTerminalId`                 | Ідентифікатор термінала в процесинговому центрі                             | string           | `TEST0001`                              |
+| `creatorSystem`                        | Система, у якій створено платіж                                             | string / enum    | `H2H`                                   |
+| `redirect3dsUrl`                       | URL перенаправлення клієнта на сторінку емітента для проходження 3DS        | string (URL)     | `https://example.com/test-3ds-redirect` |
+| `txnType`                              | Підтип транзакції                                                           | string / enum    | `NONCVV`                                |
+| `tnxType`                              | Підтип транзакції; альтернативне поле, яке також зустрічається у відповідях | string / enum    | `NONCVV`                                |
+| `balanceAmountAfter`                   | Значення балансу після операції                                             | number           | `1000000`                               |
+| `merchantComment`                      | Коментар мерчанта до транзакції                                             | string           | `TEST_REQUEST_001`                      |
+| `merchantBusinessCode`                 | Код категорії діяльності мерчанта (MCC)                                     | string           | `7995`                                  |
+| `statusUrl`                            | URL для отримання статусу ордера, якщо передбачений контрактом              | string / null    | `null`                                  |
+| `expiredOrderDate`                     | Дата й час закінчення строку дії ордера                                     | string           | `2026-10-27 10:59:43.100+02:00`         |
+| `hppPayType`                           | Тип платежу HPP                                                             | string / enum    | `A2A`                                   |
+| `hppDirectType`                        | Тип переходу або відкриття платіжної сторінки HPP                           | string / enum    | `BANK_LINK`                             |
+| `tryMode`                              | Режим виконання спроб оплати                                                | string / enum    | `ONE_TRY`                               |
+| `repeatedPayment`                      | Ознака повторного A2A-платежу                                               | boolean          | `false`                                 |
+| `senderCustomerId`                     | Ідентифікатор клієнта-відправника                                           | string           | `TEST_CUSTOMER_001`                     |
+| `senderFirstName`                      | Ім’я відправника                                                            | string           | `Іван`                                  |
+| `senderLastName`                       | Прізвище відправника                                                        | string           | `Іванов`                                |
+| `senderMiddleName`                     | По батькові відправника                                                     | string           | `Іванович`                              |
+| `senderEmail`                          | Електронна пошта відправника                                                | string           | `test.sender@example.com`               |
+| `senderCountry`                        | Країна відправника                                                          | string           | `Україна`                               |
+| `senderRegion`                         | Область або регіон відправника                                              | string           | `Тестова область`                       |
+| `senderCity`                           | Місто відправника                                                           | string           | `Тестове місто`                         |
+| `senderStreet`                         | Вулиця відправника                                                          | string           | `Тестова вулиця`                        |
+| `senderAdditionalAddress`              | Додаткова адресна інформація відправника                                    | string           | `Будинок 1, кв. 2`                      |
+| `senderItn`                            | ІПН відправника                                                             | string           | `0000000000`                            |
+| `senderPassport`                       | Номер паспорта або іншого документа відправника                             | string           | `ТЕ000001`                              |
+| `senderIp`                             | IPv4- або IPv6-адреса відправника                                           | string           | `192.0.2.10`                            |
+| `senderPhone`                          | Номер телефону відправника                                                  | string           | `380000000000`                          |
+| `senderBirthday`                       | Дата народження відправника                                                 | string           | `01.01.1990`                            |
+| `senderGender`                         | Гендер відправника                                                          | string           | `M`                                     |
+| `senderZipCode`                        | Поштовий індекс відправника                                                 | string           | `00000`                                 |
+| `senderBankCode`                       | Код банку відправника                                                       | string           | `BANK_ALLIANCE`                         |
+| `senderPaymentSystem`                  | Платіжна система картки відправника                                         | string           | `MasterCard`                            |
+| `senderCardNumberMask`                 | Маскований номер картки відправника                                         | string           | `00000000••••0000`                      |
+| `senderAccount`                        | Рахунок відправника                                                         | string           | `UA000000000000000000000000001`         |
+| `recipientCustomerId`                  | Ідентифікатор клієнта-отримувача                                            | string           | `TEST_CUSTOMER_002`                     |
+| `recipientFirstName`                   | Ім’я отримувача                                                             | string           | `Олена`                                 |
+| `recipientLastName`                    | Прізвище отримувача                                                         | string           | `Петренко`                              |
+| `recipientMiddleName`                  | По батькові отримувача                                                      | string           | `Іванівна`                              |
+| `recipientEmail`                       | Електронна пошта отримувача                                                 | string           | `test.recipient@example.com`            |
+| `recipientCountry`                     | Країна отримувача                                                           | string           | `Україна`                               |
+| `recipientRegion`                      | Область або регіон отримувача                                               | string           | `Тестова область`                       |
+| `recipientCity`                        | Місто отримувача                                                            | string           | `Тестове місто`                         |
+| `recipientStreet`                      | Вулиця отримувача                                                           | string           | `Тестова вулиця`                        |
+| `recipientAdditionalAddress`           | Додаткова адресна інформація отримувача                                     | string           | `Будинок 2, кв. 3`                      |
+| `recipientItn`                         | ІПН отримувача                                                              | string           | `0000000000`                            |
+| `recipientPassport`                    | Номер паспорта або іншого документа отримувача                              | string           | `ТЕ000002`                              |
+| `recipientIp`                          | IPv4- або IPv6-адреса отримувача                                            | string           | `192.0.2.20`                            |
+| `recipientPhone`                       | Номер телефону отримувача                                                   | string           | `380000000001`                          |
+| `recipientBirthday`                    | Дата народження отримувача                                                  | string           | `02.02.1990`                            |
+| `recipientGender`                      | Гендер отримувача                                                           | string           | `F`                                     |
+| `recipientZipCode`                     | Поштовий індекс отримувача                                                  | string           | `00000`                                 |
+| `recipientBankCode`                    | Код банку отримувача                                                        | string           | `BANK_ALLIANCE`                         |
+| `recipientPaymentSystem`               | Платіжна система картки отримувача                                          | string           | `MasterCard`                            |
+| `recipientCardNumberMask`              | Маскований номер картки отримувача                                          | string           | `00000000••••0000`                      |
+| `recipientAccount`                     | Рахунок отримувача                                                          | string           | `UA000000000000000000000000002`         |
+| `originalOperationId`                  | Ідентифікатор оригінальної операції                                         | string           | `TEST_ORIGINAL_OPERATION_001`           |
+| `originalCoinAmount`                   | Сума оригінального платежу в копійках                                       | int              | `10000`                                 |
+| `originalEcomOperationId`              | Ідентифікатор оригінальної операції в системі Ecom                          | string (UUID)    | `d4444444-4444-4444-8444-444444444444`  |
+| `rrnOriginal`                          | RRN оригінальної транзакції в МПС                                           | string           | `000000000003`                          |
+| `sepSenderFirstName`                   | ПІБ відправника в контексті SEP-переказу                                    | string           | `Тестовий Іван Іванович`                |
+| `sepSenderItn`                         | ІПН відправника в контексті SEP-переказу                                    | string           | `0000000000`                            |
+| `sepSenderAccount`                     | Рахунок відправника в контексті SEP-переказу                                | string           | `UA000000000000000000000000003`         |
+| `sepSenderBankCode`                    | Код банку відправника в контексті SEP-переказу                              | string           | `BANK_ALLIANCE`                         |
+
+#### Приклад тіла запиту PURCHASE&#x20;
+
+```json
+{
+  "type": "PURCHASE",
+  "rrn": "000000000002",
+  "purpose": "TEST_PAYMENT_002",
+  "coinAmount": 10000,
+  "merchantId": "a1111111-1111-4111-8111-111111111111",
+  "operationId": "TEST_OPERATION_002",
+  "ecomOperationId": "b2222222-2222-4222-8222-222222222222",
+  "merchantName": "test-merchant.example",
+  "approvalCode": "000000",
+  "status": "SUCCESS",
+  "transactionType": 35,
+  "merchantRequestId": "c3333333-3333-4333-8333-333333333333",
+  "transactionCurrency": "980",
+  "creationDateTime": "2026.10.26 12:15:40.478",
+  "modificationDateTime": "2026.10.26 12:16:43.132",
+  "processingDateTime": "2026.10.26 12:15:40.000",
+  "transactionResponseInfo": {
+    "actionCode": "0",
+    "responseCode": "00",
+    "description": "approved"
+  },
+  "bankCode": "BANK_ALLIANCE",
+  "paymentSystem": "MasterCard",
+  "productType": "PURCHASE",
+  "notificationUrl": "https://example.com/test-callback",
+  "paymentServiceType": "CARD",
+  "notificationEncryption": false,
+  "notificationSignature": true,
+  "processingTerminalId": "TEST0001",
+  "processingMerchantId": "TEST000001",
+  "creatorSystem": "H2H",
+  "cardNumberMask": "00000000••••0000",
+  "desiredThreeDSMode": "MUST_NOT",
+  "threeDSMode": "MUST_NOT",
+  "tnxType": "NONCVV",
+  "txnType": "NONCVV",
+  "senderCustomerId": "TEST_CUSTOMER_002",
+  "senderItn": "0000000000",
+  "senderPaymentSystem": "MasterCard",
+  "senderCardNumberMask": "00000000••••0000",
+  "senderBankCode": "BANK_ALLIANCE",
+  "receiptUrl": "https://example.com/test-receipt"
+}
+```
+
+#### Приклад тіла запиту REFUND&#x20;
+
+```json
+{
+  "type": "REFUND",
+  "rrn": "000000000003",
+  "coinAmount": 10000,
+  "merchantId": "a1111111-1111-4111-8111-111111111111",
+  "operationId": "TEST_REFUND_001",
+  "ecomOperationId": "b2222222-2222-4222-8222-222222222222",
+  "merchantName": "TEST_MERCHANT",
+  "approvalCode": "000000",
+  "status": "SUCCESS",
+  "transactionType": 76,
+  "merchantRequestId": "c3333333-3333-4333-8333-333333333333",
+  "transactionCurrency": "980",
+  "creationDateTime": "2026.10.26 11:57:12.867",
+  "modificationDateTime": "2026.10.26 11:58:15.896",
+  "processingDateTime": "2026.10.26 11:57:12.000",
+  "transactionResponseInfo": {
+    "actionCode": "0",
+    "responseCode": "00"
+  },
+  "bankCode": "AT_KB_PrivatBank",
+  "paymentSystem": "MasterCard",
+  "productType": "PURCHASE",
+  "notificationUrl": "https://example.com/test-refund-callback",
+  "notificationEncryption": false,
+  "notificationSignature": true,
+  "processingTerminalId": "TEST0001",
+  "processingMerchantId": "TEST000001",
+  "creatorSystem": "H2H",
+  "merchantComment": "TEST_COMMENT_001",
+  "rrnOriginal": "000000000003",
+  "originalOperationId": "TEST_ORIGINAL_OPERATION_001",
+  "cardNumberMask": "00000000••••0000",
+  "originalEcomOperationId": "d4444444-4444-4444-8444-444444444444"
+}
+```
+
+#### Приклад тіла запиту ACCOUNT\_2\_ACCOUNT
+
+```json
+{
+  "type": "ACCOUNT_2_ACCOUNT",
+  "purpose": "Тест",
+  "coinAmount": 100,
+  "merchantId": "b2222222-2222-4222-8222-222222222222",
+  "operationId": "TEST_OPERATION_001",
+  "ecomOperationId": "d4444444-4444-4444-8444-444444444444",
+  "merchantName": "Тестовий Мерчант",
+  "status": "SUCCESS",
+  "transactionType": 54,
+  "transactionCurrency": "980",
+  "creationDateTime": "2026.10.26 11:01:01.324",
+  "modificationDateTime": "2026.10.26 11:01:01.324",
+  "transactionResponseInfo": {},
+  "bankCode": "AT_UNIVERSAL_BANK",
+  "paymentServiceType": "ACCOUNT",
+  "notificationEncryption": false,
+  "notificationSignature": false,
+  "hppOrderId": "TEST_ORDER_001",
+  "creatorSystem": "HPP",
+  "merchantComment": "Тестова оплата рахунку №TEST-001 за послугою на https://example.com, акаунт ID TEST_ACCOUNT, ІПН 0000000000, Тестовий Іван Іванович",
+  "commissionAmount": 0,
+  "senderCountry": "804",
+  "senderCity": "Тестове місто",
+  "senderStreet": "Тестова вулиця, 1",
+  "senderAccount": "UA000000000000000000000000001",
+  "senderFirstName": "Іван",
+  "senderLastName": "Іванов",
+  "senderGender": "Male",
+  "senderCustomerId": "TEST_CUSTOMER_001",
+  "senderMiddleName": "Іванович",
+  "senderEmail": "test.sender@example.com",
+  "senderRegion": "Тестова область",
+  "senderAdditionalAddress": "Тестова адреса",
+  "senderItn": "0000000000",
+  "senderPassport": "ТЕ000001",
+  "senderPhone": "380000000000",
+  "senderBirthday": "01.01.1990",
+  "senderZipCode": "00000",
+  "senderBankCode": "AT_UNIVERSAL_BANK",
+  "recipientAccount": "UA000000000000000000000000002",
+  "recipientFirstName": "Петренко Олена",
+  "recipientItn": "0000000000",
+  "recipientBankCode": "BANK_ALLIANCE",
+  "repeatedPayment": false,
+  "sepSenderFirstName": "Тестовий Петро Петрович",
+  "sepSenderItn": "0000000000",
+  "sepSenderAccount": "UA000000000000000000000000003",
+  "sepSenderBankCode": "AT_UNIVERSAL_BANK"
+}
+```
 
 #### Приклад тіла запиту ACCOUNT\_2\_CARD
 
 ```json
 {
-   "type":"ACCOUNT_2_CARD",
-   "rrn":" ",
-   "purpose":"",
-   "comment":" ",
-   "coinAmount":3000,
-   "merchantId":" ",
-   "operationId":" ",
-   "ecomOperationId":" ",
-   "merchantName":" ",
-   "approvalCode":" ",
-   "status":"SUCCESS",
-   "transactionType":46,
-   "merchantRequestId":" ",
-   "transactionCurrency":"980",
-   "merchantCommission":450,
-   "creationDateTime":"2025.07.21 13:19:15.620",
-   "modificationDateTime":"2025.07.21 13:19:16.424",
-   "processingDateTime":"2025.07.21 13:19:14.000",
-   "transactionResponseInfo":{
-      "actionCode":"0",
-      "responseCode":"00",
-      "description":"approved"
-   },
-   "bankCode":" ",
-   "paymentSystem":" ",
-   "productType":" ",
-   "notificationUrl":"",
-   "paymentServiceType":"CARD",
-   "notificationEncryption":false,
-   "processingTerminalId":" ",
-   "processingMerchantId":" ",
-   "creatorSystem":"H2H",
-   "balanceAmountAfter":48924,
-   "senderAccount":"2600000000000",
-   "recipientCardNumberMask":" ",
-   "cardNumberMask":"  ",
-   "senderCustomerId":" ",
-   "recipientCustomerId":" ",
-   "recipientFirstName":" ",
-   "recipientLastName":" ",
-   "recipientItn":" ",
-   "recipientBankCode":" ",
-   "recipientPaymentSystem":" "
+  "type": "ACCOUNT_2_CARD",
+  "rrn": "000000000001",
+  "purpose": "Тестове повернення коштів",
+  "coinAmount": 150000,
+  "merchantId": "a1111111-1111-4111-8111-111111111111",
+  "operationId": "TEST_OPERATION_001",
+  "ecomOperationId": "b2222222-2222-4222-8222-222222222222",
+  "merchantName": "TEST_MERCHANT",
+  "approvalCode": "000000",
+  "status": "SUCCESS",
+  "transactionType": 46,
+  "merchantRequestId": "TEST_REQUEST_001",
+  "transactionCurrency": "980",
+  "merchantCommission": 600,
+  "creationDateTime": "2026.10.26 12:09:38.821",
+  "modificationDateTime": "2026.10.26 12:10:39.385",
+  "processingDateTime": "2026.10.26 12:09:37.000",
+  "transactionResponseInfo": {
+    "actionCode": "0",
+    "responseCode": "00",
+    "description": "approved"
+  },
+  "bankCode": "AT_OSHADBANK",
+  "paymentSystem": "MasterCard",
+  "productType": "A2C",
+  "notificationUrl": "https://example.com/test-callback",
+  "paymentServiceType": "CARD",
+  "notificationEncryption": false,
+  "notificationSignature": false,
+  "processingTerminalId": "TEST0001",
+  "processingMerchantId": "TEST000001",
+  "creatorSystem": "H2H",
+  "balanceAmountAfter": 1000000,
+  "merchantComment": "TEST_REQUEST_001",
+  "merchantBusinessCode": "7995",
+  "recipientBankCode": "AT_OSHADBANK",
+  "senderAccount": "0000000000000000",
+  "recipientCardNumberMask": "00000000••••0000",
+  "cardNumberMask": "00000000••••0000",
+  "recipientCustomerId": "TEST_CUSTOMER_001",
+  "recipientFirstName": "Тест",
+  "recipientLastName": "Тестов",
+  "recipientMiddleName": "Тестович",
+  "recipientItn": "0000000000",
+  "recipientPassport": "ТЕ000001",
+  "recipientPhone": "380000000000",
+  "recipientBirthday": "01.01.1990",
+  "recipientPaymentSystem": "MasterCard"
 }
 ```
 
-Приклад тіла запиту PURCHASE&#x20;
-
-```json
-{
-   "type":"PURCHASE",
-   "rrn":"619010916205",
-   "coinAmount":444,
-   "merchantId":"467c8a10-c705-11ed-afa1-0242ac120002",
-   "operationId":"17835914714462QE9Apfu2G_",
-   "ecomOperationId":"6bfcb0f6-fe5e-4997-b157-2c88da2b3996",
-   "merchantName":"KB sales terminal",
-   "approvalCode":"581701",
-   "status":"SUCCESS",
-   "transactionType":35,
-   "transactionCurrency":"980",
-   "creationDateTime":"2026.07.09 13:04:31.495",
-   "modificationDateTime":"2026.07.09 13:29:36.464",
-   "processingDateTime":"2026.07.09 13:04:46.000",
-   "transactionResponseInfo":{
-      "actionCode":"0",
-      "responseCode":"00",
-      "description":"approved"
-   },
-   "bankCode":"Monobank",
-   "paymentSystem":"Visa",
-   "paymentServiceType":"GOOGLE_PAY",
-   "notificationEncryption":false,
-   "notificationSignature":false,
-   "hppOrderId":"1783591442895jb5dQjA1bUl",
-   "processingTerminalId":"AE010002",
-   "processingMerchantId":"AE100003",
-   "creatorSystem":"HPP",
-   "sourceAmount":10,
-   "sourceCurrencyCode":"840",
-   "conversionRate":"44.3500",
-   "cardNumberMask":"44411111••••0095",
-   "desiredThreeDSMode":"SHOULD",
-   "threeDSMode":"MUST",
-   "acsTransId":"a2259754-e871-4c82-82d9-98b372daefd6",
-   "dsTransId":"4ce1a4b1-2a4a-42bc-88c7-96f85bd730bf",
-   "eci":"05",
-   "statusThreeDs":"Y",
-   "threeDSServerTransId":"854d227d-8f40-4b27-b227-87cc6b194958",
-   "senderCustomerId":"QR_V1",
-   "senderPaymentSystem":"Visa",
-   "senderCardNumberMask":"44411111••••0095",
-   "senderBankCode":"Monobank",
-   "receiptUrl":"https://api-ecom-prod.bankalliance.ua/generate_receipt/6bfcb0f6-fe5e-4997-b157-2c88da2b3996/17835914714462QE9Apfu2G_"
-}
-```
-
-```json
-   "type":"REFUND",
-   "rrn":" ",
-   "coinAmount":10000,
-   "merchantId":" ",
-   "operationId":" ",
-   "ecomOperationId":" ",
-   "merchantName":" ",
-   "approvalCode":" ",
-   "status":"SUCCESS",
-   "transactionType":76,
-   "merchantRequestId":" ",
-   "transactionCurrency":"980",
-   "creationDateTime":"2025.07.21 13:19:31.745",
-   "modificationDateTime":"2025.07.21 13:19:32.794",
-   "processingDateTime":"2025.07.21 13:19:31.000",
-   "transactionResponseInfo":{
-      "actionCode":"0",
-      "responseCode":"00"
-   },
-   "bankCode":" ",
-   "paymentSystem":" ",
-   "productType":"PURCHASE",
-   "notificationUrl":" ",
-   "notificationEncryption":false,
-   "processingTerminalId":" ",
-   "processingMerchantId":" ",
-   "creatorSystem":"",
-   "rrnOriginal":" ",
-   "originalOperationId":" ",
-   "cardNumberMask":" ",
-   "originalEcomOperationId":" "
-}
-```
-
-Приклад відповіді&#x20;
+#### Приклад відповіді&#x20;
 
 ```http
 HTTP 200 OK
