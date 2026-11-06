@@ -102,3 +102,53 @@ description: '{{url}}/ecom/execute_request/payments/v3/refund'
     "originalEcomOperationId": "c25ee1cb-a052-439b-b075-bcb632615b11"
 }
 ```
+
+#### **Приклад тіла відповіді по A2A**
+
+```json
+{
+    "ecomOrderId": "07f36110-2d1f-451a-b704-ef88dce588cc",
+    "coinAmount": 10000,
+    "merchantId": "af6a8c86-e482-4af2-99ba-e1b03c83f93b",
+    "statusUrl": null,
+    "hppOrderId": "1793926155372Q-123456789",
+    "redirectUrl": "https://qr2a2.alb.ua//?type=allbanks&amount=10000&orderid=1793926155372Q-T15VbQJH3&qr=QkNECjAwMwoxCklDVAoK0KLQntCSINCd0JXQmdCg0J7Qm9CG0J3QmgpVQTY0MzAwMTE5MDAwMDI2MDA1MDI2NzY1NTAwMgpVQUgxMDAuMDAKNDUzNTY1MDQKTVAyQi9PVEhSCjE3OTM5MjYxNTUzNzJRLVQxNVZiUUpIMwojMTc5MzkyNjE1NTM3MlEtVDE1VmJRSkgzO9Ch0L_Qu9Cw0YLQsCDRgNCw0YXRg9C90LrRgyDihJYyMTE4MjcyOTgg0LLRltC0IDA2LjExLjIwMjYsINC30LAg0L_QvtGB0LvRg9Cz0L7RjiDQvdCwIGh0dHBzOi8vY29zbW9iZXQudWEvLCDQsNC60LDRg9C90YIgOTE5MTcwOTk1NDAxLCDQhtCf0J0gLCBEb25lbmtvIEFuYXN0YXNpeWEKCkZGRkYKMjYxMTA2MDM0OTE1CjI2MTEwNjAyNDkxNQo=",
+    "notificationUrl": "https://cashier-webhook-cb.7inf.net/v1/api/callback/result/329?id=211827517",
+    "notificationEncryption": false,
+    "notificationSignature": false,
+    "hppPayType": "A2A",
+    "hppDirectType": "BANK_LINK",
+    "merchantRequestId": "211827298",
+    "createDate": "2026-11-06 02:49:15.40+02:00",
+    "paymentMethods": [
+        "CARD"
+    ],
+    "orderStatus": "SUCCESS",
+    "expiredOrderDate": "2026-11-06 03:49:15.37+02:00",
+    "operation": {
+        "type": "REFUND",
+        "coinAmount": 10000,
+        "merchantId": "af6a1234-4321-4321-9999-123456789012",
+        "operationId": "1793951234567890JTz5otJr",
+        "ecomOperationId": "12345678-37d6-1234-1234-c401b1234567",
+        "status": "SUCCESS",
+        "transactionType": 68,
+        "merchantRequestId": "1234567890",
+        "transactionCurrency": "980",
+        "creationDateTime": "2026.11.06 09:46:52.959",
+        "modificationDateTime": "2026.11.06 09:46:52.959",
+        "transactionResponseInfo": {},
+        "bankCode": "BANK_ALLIANCE",
+        "productType": "A2A",
+        "notificationUrl": "https://webhook-cb.net/v1/api/callback/?id=1234567890",
+        "notificationEncryption": false,
+        "notificationSignature": false,
+        "hppOrderId": "1793926155372Q-123456789",
+        "creatorSystem": "HPP",
+        "merchantComment": "#1793926155372Q-123456789; Повернення коштів за рахунком від 06.11.2026 за послугою на сайті https://example.ua/, акаунт 1234567890",
+        "originalOperationId": "1793951202293do123456789",
+        "originalEcomOperationId": "12345678-1234-1234-1234-38a080e9a1c9"
+    },
+    "tryMode": "ONE_TRY"
+}
+```
