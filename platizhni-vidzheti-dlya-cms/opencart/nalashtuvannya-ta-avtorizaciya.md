@@ -76,8 +76,8 @@
 
 OpenCart 3 — параметри JWS.
 
-<figure><img src="../../.gitbook/assets/opencart3-jws.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image(8).png" alt=""><figcaption></figcaption></figure>
 
 OpenCart 4 — параметри JWS.
 
-<figure><img src="../../.gitbook/assets/opencart4-jws.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image(9).png" alt=""><figcaption></figcaption></figure>

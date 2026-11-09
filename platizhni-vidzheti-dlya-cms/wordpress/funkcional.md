@@ -20,7 +20,11 @@ description: >-
 
 Після отримання callback сторінка відображає збережені дані. Якщо callback відсутній, модуль запитує інформацію в API банку. Зіставляйте статус замовлення WooCommerce, результат платіжної операції та примітки замовлення. Перехід покупця на Success URL сам по собі не підтверджує оплату.
 
+<figure><img src="../../.gitbook/assets/image(3).png" alt=""><figcaption><p>PURCHASE: приклад отриманого callback та успішної операції зі статусом SUCCESS.</p></figcaption></figure>
+
 ### PREAUTH і підтвердження списання
+
+<figure><img src="../../.gitbook/assets/image(2).png" alt=""><figcaption><p>PREAUTH: тип платежу, строк резервування та статус запуску COMPLETION.</p></figcaption></figure>
 
 1. У налаштуваннях AlliancePay виберіть **HPP Payment Type → PREAUTH**, строк резервування та статуси замовлення.
 2. Після успішного резервування коштів перевірте callback і дані операції. Замовлення переходить у налаштований **On-Hold Status**.
@@ -73,6 +77,8 @@ description: >-
 
 #### 4. Перегляд підписки та платежів
 
+<figure><img src="../../.gitbook/assets/image(7).png" alt=""><figcaption><p>Рекурентні платежі: деталі підписки та історія успішних операцій. Платежі на цьому екрані мають тип PURCHASE.</p></figcaption></figure>
+
 У замовленні відкрийте **Статус платежу**. Для підписки відображаються дані плану, HPP-замовлення, статус підписки, заплановані платежі й операції. Події повторних списань також додаються до приміток замовлення.
 
 **Локальний статус підписки PENDING не тотожний статусу платежу.** У v1.8.0 він може зберігатися й після успішної першої оплати, коли замовлення вже має статус Active Subscription. Підтверджуйте оплату за результатом конкретної операції та callback.
@@ -114,4 +120,16 @@ description: >-
 
 Ілюстрації з інструкції WordPress: блок підписки в товарі, форма створення плану та сценарії зміни ціни.
 
-<div><figure><img src="../../.gitbook/assets/11-product-subscription-block.png" alt=""><figcaption></figcaption></figure> <figure><img src="../../.gitbook/assets/12-create-subscription-plan-form.png" alt=""><figcaption></figcaption></figure> <figure><img src="../../.gitbook/assets/13-replace-and-reprice-plan.png" alt=""><figcaption></figcaption></figure></div>
+**Налаштування підписки в товарі**
+
+<figure><img src="../../.gitbook/assets/image(10).png" alt="Блок AlliancePay Subscription у товарі WooCommerce"><figcaption></figcaption></figure>
+
+Увімкнення підписки та вибір планів для товару.
+
+<figure><img src="../../.gitbook/assets/image(20261109-225424).png" alt="Форма створення платіжного плану підписки"><figcaption></figcaption></figure>
+
+Створення плану: періодичність, сума та валюта платежів.
+
+<figure><img src="../../.gitbook/assets/image(4).png" alt="Заміна плану та зміна ціни підписки"><figcaption></figcaption></figure>
+
+Окремі дії для нових покупців і чинних підписників.
