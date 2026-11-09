@@ -1,17 +1,102 @@
+---
+description: >-
+  Таблиці платежів, повернень і підписок, відмінності OpenCart 3 та 4 і
+  зберігання параметрів Авторизації 2.0.
+---
+
 # Структура бази даних
 
-## Цей модуль додає 2 таблиці в БД:&#x20;
+Модулі AlliancePay зберігають дані платежів, повернень і підписок у таблицях OpenCart. У назвах нижче не вказано префікс: до кожної таблиці додається значення `DB_PREFIX` вашого магазину, наприклад `oc_alliance_checkout_integration_order`.
 
-* [**`alliance_checkout_integration_order`**](https://docs.merchant.alb.ua/platizhni-vidzheti-dlya-cms/opencart/struktura-bazi-danikh#struktra-tablici-alliance_checkout_integration_order)&#x20;
-* [**`alliance_checkout_integration_order_callback`**](https://docs.merchant.alb.ua/platizhni-vidzheti-dlya-cms/opencart/struktura-bazi-danikh#struktra-tablici-alliance_checkout_integration_order_callback)&#x20;
+### Таблиці платіжного модуля
 
-### Структра таблиці **`alliance_checkout_integration_order`**
+| Таблиця                                        | Призначення                                                                | OpenCart   |
+| ---------------------------------------------- | -------------------------------------------------------------------------- | ---------- |
+| `alliance_checkout_integration_order`          | Платіжні дані замовлення, статус, ідентифікатори операцій і дані callback. | 3.0 та 4.0 |
+| `alliance_integration_order_refund`            | Історія операцій повернення коштів.                                        | 3.0 та 4.0 |
+| `alliance_checkout_integration_order_callback` | Службова таблиця, яку створює ініціалізація БД модуля OpenCart 4.          | 4.0        |
 
-<figure><img src="../../.gitbook/assets/image (12) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+Для звичайних платежів OpenCart 3 створює дві таблиці — замовлень і повернень; OpenCart 4 — три таблиці, наведені вище. Таблиці підписок описано окремо нижче.
 
-### Структра таблиці **`alliance_checkout_integration_order_callback`**
+В обох версіях обробник callback оновлює `alliance_checkout_integration_order` і зберігає отримані дані в полі `callback_data`. Для діагностики платежу використовуйте цей запис. Наявність окремої таблиці `alliance_checkout_integration_order_callback` в OpenCart 4 не означає, що вона є журналом усіх отриманих callback.
 
-<figure><img src="../../.gitbook/assets/image (14) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+### Дані замовлення
+
+Таблиця `alliance_checkout_integration_order`. Первинний ключ — `order_id`, ідентифікатор замовлення OpenCart.
+
+| Поле                                              | Тип                                      | Опис                                                                      |
+| ------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------- |
+| `order_id`                                        | INT(11)                                  | Ідентифікатор замовлення OpenCart; PRIMARY KEY.                           |
+| `merchant_request_id`, `merchant_id`              | VARCHAR(255)                             | Ідентифікатори запиту мерчанта та мерчанта.                               |
+| `hpp_order_id`, `ecom_order_id`, `operation_id`   | VARCHAR(255)                             | Ідентифікатори HPP-замовлення, замовлення платформи та операції.          |
+| `coin_amount`                                     | INT(11)                                  | Сума платежу в найменших одиницях валюти.                                 |
+| `original_authorized_amount`                      | INT(11), NULL                            | Початкова сума авторизації.                                               |
+| `currency_code`                                   | INT(3), NULL                             | Числовий код валюти.                                                      |
+| `conversion_rate`                                 | DECIMAL(18,6) у 3.0; DECIMAL(20,6) у 4.0 | Курс конвертації, якщо його отримано у відповіді; допускає NULL.          |
+| `hpp_pay_type`                                    | VARCHAR(50)                              | Тип платежу: PURCHASE, A2A або PREAUTH.                                   |
+| `order_status`                                    | VARCHAR(50)                              | Статус замовлення на платіжній платформі.                                 |
+| `payment_methods`                                 | TEXT                                     | Способи оплати для HPP-замовлення.                                        |
+| `is_callback_returned`                            | BOOLEAN, DEFAULT FALSE                   | Ознака отримання callback.                                                |
+| `callback_data`                                   | LONGTEXT                                 | Дані callback у форматі JSON, зокрема дані операцій.                      |
+| `create_date`, `updated_at`, `expired_order_date` | DATETIME                                 | Дата створення, останнього оновлення та завершення строку дії замовлення. |
+
+Додаткові індекси передбачено для `merchant_request_id`, `hpp_order_id` та `merchant_id`.
+
+### Дані повернення коштів
+
+Таблиця `alliance_integration_order_refund`. Кожне повернення має власний `refund_id` — первинний ключ з AUTO\_INCREMENT. Поле `order_id` пов’язує повернення із замовленням OpenCart; для одного замовлення може бути кілька записів повернення.
+
+| Основні поля                                                               | Опис                                                                                               |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `refund_id`, `order_id`                                                    | Ідентифікатори запису повернення та замовлення.                                                    |
+| `operation_id`, `ecom_operation_id`, `merchant_request_id`                 | Ідентифікатори операції повернення та запиту мерчанта.                                             |
+| `original_operation_id`, `original_ecom_operation_id`, `rrn_original`      | Посилання на початкову платіжну операцію.                                                          |
+| `coin_amount`, `original_coin_amount`, `transaction_currency`              | Сума повернення, початкова сума та валюта операції. Суми зберігаються в найменших одиницях валюти. |
+| `status`, `type`, `transaction_type`                                       | Статус і тип операції.                                                                             |
+| `action_code`, `response_code`, `description`, `transaction_response_info` | Результат обробки та діагностична інформація.                                                      |
+| `purpose`, `comment`                                                       | Призначення та коментар до повернення.                                                             |
+| `create_date_time`, `modification_date_time`                               | Дата створення й останньої зміни операції.                                                         |
+
+### Таблиці підписок
+
+В OpenCart 3 ці таблиці створюються під час встановлення окремого модуля **Alliance Підписки**. В OpenCart 4 їх створює платіжний модуль методом `initSubscriptionTables()`.
+
+| Таблиця                                      | Призначення                                                                                                                                                                 |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alliance_subscription_plan_template`        | Шаблони планів: код, назва, категорія та правила `rules_template`.                                                                                                          |
+| `alliance_subscription_plan`                 | Плани для товарів: `product_id`, `template_id`, `provider_plan_id`, унікальний `plan_key`, правила `rules`, версія, активність і стан синхронізації.                        |
+| `alliance_subscription`                      | Оформлені підписки: замовлення, покупець, план, `provider_order_id`, знімок правил `rules_snapshot`, статус і `callback_data`.                                              |
+| `alliance_scheduled_payment`                 | Платежі за розкладом: підписка, ідентифікатор платежу провайдера, статус, запланована й фактична дати виконання, `operation_id` та кількість повторних спроб `retry_count`. |
+| `alliance_subscription_plan_version_history` | Історія зміни планів: попередня й нова версії та правила, дата набуття чинності, причина й автор зміни.                                                                     |
+| `alliance_subscription_audit_log`            | Журнал дій із планами: тип події `action`, пов’язані ідентифікатори та подробиці `details`.                                                                                 |
+
+#### Відмінності полів OpenCart 3 і 4
+
+| Призначення                                    | OpenCart 3.0               | OpenCart 4.0                    |
+| ---------------------------------------------- | -------------------------- | ------------------------------- |
+| Ідентифікатор плану та посилання на план       | `plan_id`                  | `subscription_plan_id`          |
+| Первинний ключ запланованого платежу           | `scheduled_payment_row_id` | `scheduled_payment_id`          |
+| Ідентифікатор запланованого платежу провайдера | `scheduled_payment_id`     | `provider_scheduled_payment_id` |
+| Первинний ключ історії версій                  | `history_id`               | `version_history_id`            |
+| Первинний ключ журналу аудиту                  | `audit_id`                 | `audit_log_id`                  |
+| Дати створення й оновлення в таблицях підписок | `created_at`, `updated_at` | `date_added`, `date_modified`   |
+
+В OpenCart 3 для контролю сум також використовуються `amount_review_flag` у підписці та `expected_coin_amount`, `actual_coin_amount`, `amount_mismatch_flag` у запланованому платежі. Ці поля не входять до наведеної схеми OpenCart 4.
+
+### Налаштування Авторизації 2.0
+
+Параметри модуля зберігаються у стандартній таблиці налаштувань OpenCart `setting` з префіксом магазину, у групі `payment_alliance`. Окрема таблиця для JWS-авторизації не створюється.
+
+| Ключ налаштування                  | Призначення                                         |
+| ---------------------------------- | --------------------------------------------------- |
+| `payment_alliance_jws_private_key` | Приватний RSA-ключ для підпису JWS.                 |
+| `payment_alliance_jws_key_id`      | Ідентифікатор ключа `kid`, зареєстрованого в банку. |
+
+Заповнення цих параметрів описано в розділі [Налаштування та авторизація](https://docs.merchant.alb.ua/platizhni-vidzheti-dlya-cms/opencart/nalashtuvannya-ta-avtorizaciya).
+
+### Вихідний код структури таблиць
+
+Назви полів і відмінності наведено за кодом [OpenCart 3, тег v1.7.0](https://github.com/alliancedigital-tech/alliancepay-opencart3/tree/v1.7.0) (`admin/model/extension/payment/db.php` та `subscription_db.php`) і [OpenCart 4, тег v1.5.0](https://github.com/alliancedigital-tech/alliancepay-opencart4/tree/v1.5.0) (`admin/model/payment/db.php`). Повний перелік полів, типів, значень за замовчуванням та індексів міститься у відповідних методах створення таблиць.
 
 ### Валідація customerData
 
