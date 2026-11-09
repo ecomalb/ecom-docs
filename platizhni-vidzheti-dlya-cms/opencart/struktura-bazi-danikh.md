@@ -94,10 +94,6 @@ description: >-
 
 Заповнення цих параметрів описано в розділі [Налаштування та авторизація](https://docs.merchant.alb.ua/platizhni-vidzheti-dlya-cms/opencart/nalashtuvannya-ta-avtorizaciya).
 
-### Вихідний код структури таблиць
-
-Назви полів і відмінності наведено за кодом [OpenCart 3, тег v1.7.0](https://github.com/alliancedigital-tech/alliancepay-opencart3/tree/v1.7.0) (`admin/model/extension/payment/db.php` та `subscription_db.php`) і [OpenCart 4, тег v1.5.0](https://github.com/alliancedigital-tech/alliancepay-opencart4/tree/v1.5.0) (`admin/model/payment/db.php`). Повний перелік полів, типів, значень за замовчуванням та індексів міститься у відповідних методах створення таблиць.
-
 ### Валідація customerData
 
 ### Загальний опис логіки валідації <a href="#zagalnii-opis-logiki-validaciyi" id="zagalnii-opis-logiki-validaciyi"></a>
