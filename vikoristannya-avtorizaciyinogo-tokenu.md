@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 # Використання авторизаціїного токену
 
 Після розшифрування JWE відповіді (Детальніше: [Приклад розшифрування](https://docs.merchant.alb.ua/autentifikaciya#proces-rozshifruvannya-jwe-danikh)) на запит авторизації `"/api-gateway/authorize_virtual_device"`, отримуємо сесійний токен, а також його термін життя у параметрах:
