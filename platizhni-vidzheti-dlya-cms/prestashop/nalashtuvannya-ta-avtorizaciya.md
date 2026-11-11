@@ -1,53 +1,55 @@
+---
+description: >-
+  Підключення AlliancePay до PrestaShop через Авторизацію 2.0 (JWS),
+  налаштування платежів і приймання callback.
+---
+
 # Налаштування та авторизація
 
-{% stepper %}
-{% step %}
-### Переходимо в налаштування модулю&#x20;
+Після встановлення модуля відкрийте **Модулі → Менеджер модулів**, знайдіть **AlliancePay** у категорії **Оплата** та натисніть **Налаштувати**. Підготуйте адресу API, ідентифікатор мерчанта та пару реквізитів для підпису запитів у вибраному середовищі.
 
-Потрібно натиснути "Налаштувати"&#x20;
+### Підключення через Авторизацію 2.0
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-{% endstep %}
+| Поле в PrestaShop             | Що вказати                                                                                                                                                             |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **API URL**                   | Базову адресу API, яку банк надав для вашого середовища. Модуль сам додає шлях потрібної операції.                                                                     |
+| **ID Мерчанта (Merchant Id)** | Ідентифікатор мерчанта для відповідного термінала.                                                                                                                     |
+| **Приватний ключ JWS**        | Приватний RSA-ключ у форматі PEM (PKCS#8). Вставте весь ключ разом із рядками `-----BEGIN PRIVATE KEY-----` і `-----END PRIVATE KEY-----`, зберігаючи переноси рядків. |
+| **ID ключа JWS (kid)**        | Ідентифікатор, під яким у банку зареєстровано публічний ключ, що відповідає вашому приватному ключу.                                                                   |
 
-{% step %}
-### Початкові налаштування&#x20;
+<figure><img src="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2F9SXUGBtdypM6aLMBcJKc%2Fmerchant-id.png?alt=media&#x26;token=5700c951-a092-4e2a-87a8-56a2303ed8df" alt="Поле ID Мерчанта"><figcaption></figcaption></figure>
 
-Більшість полів до заповнення буде надано банком.&#x20;
+<figure><img src="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FSoXQda0gOAg1MAkIsgyn%2Fjws.png?alt=media&#x26;token=8dadb3c0-1fc9-471e-aa7c-c02e210f5a18" alt="Поля Приватний ключ JWS та ID ключа JWS"><figcaption></figcaption></figure>
 
-#### Сторінка налаштувань :&#x20;
+Модуль підписує платіжний запит алгоритмом `RS256` і передає JWS у тілі запиту. За `kid` банк знаходить публічний ключ мерчанта та перевіряє підпис. Приватний ключ зберігайте в налаштуваннях магазину з обмеженим доступом. [Опис роботи з JWS](https://docs.merchant.alb.ua/avtorizaciya-2.0/opis-roboti-z-jws)
 
-<figure><img src="../../.gitbook/assets/image (114).png" alt=""><figcaption></figcaption></figure>
+### Налаштування оплати
 
-<figure><img src="../../.gitbook/assets/image (115).png" alt=""><figcaption></figcaption></figure>
+1. У полі **Включити модуль** виберіть **Так**.
+2. Укажіть **Назву платіжного метода на сторінці оплати**. Цю назву побачить покупець під час оформлення замовлення.
+3. Виберіть **Тип сторінки статусу**. `STATUS_PAGE` показує результат на сторінці банку, `STATUS_TIMER_PAGE` повертає покупця до магазину після таймера, а `STATUS_REDIRECT_MERCHANT_PAGE` одразу перенаправляє його до магазину.
+4. Виберіть **Тип платежу HPP** для разових оплат. `PURCHASE` приймає оплату, `A2A` проводить переказ з рахунку на рахунок, а `PREAUTH` резервує кошти для подальшого списання. Використовуйте режим, підключений банком для вашого термінала.
 
-#### Опис полів:&#x20;
+<figure><img src="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2Fso1Zo5RyxBKFAjmy8MNL%2Fparametry-oplaty.png?alt=media&#x26;token=ecbba3aa-6e6d-4fcc-9f9b-ada6b39ecae6" alt="Загальні параметри модуля та вибір PURCHASE у полі Тип платежу HPP"><figcaption></figcaption></figure>
 
-{% hint style="info" %}
-**Обов'язково, всі поля повинні бути заповнені, щоб платіжний плагін працював правильно**
-{% endhint %}
+#### Параметри PREAUTH
 
-<table><thead><tr><th>Назва</th><th>Опис</th><th>Приклад</th></tr></thead><tbody><tr><td>Включити модуль</td><td>Потрібен для роботи плагіну</td><td>Потрібно виставити значення "Так"</td></tr><tr><td>Назва платіжного метода на сторінці оплати</td><td>Назва, яка буде відображатись клієнту при виборі способу оплати</td><td>AlliancePay</td></tr><tr><td>Тип сторінки статусу</td><td>Визначає як буде виглядати сторінка після виконання оплати</td><td><p>Можливі значення : <br></p><ul><li><code>STATUS_TIMER_PAGE</code> - сторінка за замовчуванням, якщо мерчант не обрав бажаний тип, таймер редірект автоматично 1 хвилина відображення статус сторінки з автоматичним редіректом юзера на сайт мерчанта (редірект урл)</li><li><code>STATUS_REDIRECT_MERCHANT_PAGE</code> - одразу редірект на урл мерчанта</li><li><code>STATUS_PAGE</code> - редірект, на нашу статус сторіншку (завантажити квитанцію …)</li></ul></td></tr><tr><td>Тип платежу HPP</td><td><p><code>PURCHASE</code> — звичайний платіж із перенаправленням покупця на HPP (Hosted Payment Page). Кошти списуються після успішного підтвердження платежу.</p><p><code>A2A</code> — платіж account-to-account. Доступність залежить від того, чи підтримує мерчант цей тип платежу в налаштуваннях банку.</p><p><code>PREAUTH</code> — платіж із попередньою авторизацією: кошти тимчасово блокуються на рахунку клієнта. Подальше списання виконується окремою операцією <code>Completion</code> після підтвердження або створення рахунка.</p></td><td>Можливі значення : <br>- PURCHASE<br>- A2A<br>- PREAUTH</td></tr><tr><td>PreAuth expiration period</td><td>Період, протягом якого авторизація залишається дійсною.</td><td>2 hours<br>4 hours<br>6 hours<br>12 hours<br>1 day<br>2 days<br>7 days<br>14 days<br>28 days</td></tr><tr><td>PreAuth order state</td><td>Статус замовлення після успішної операції PREAUTH.</td><td>Очікується оплата банківським переказом</td></tr><tr><td>Completion trigger order state</td><td>Статус, за якого модуль може виконати операцію Completion і списати кошти.</td><td>Оплату прийнято</td></tr><tr><td>API URL</td><td>URL на який будуть надходити API запити </td><td>Потрібно вказати : <br><a href="https://api-ecom-prod.bankalliance.ua"><code>https://api-ecom-prod.bankalliance.ua</code></a></td></tr><tr><td>Сервісний код (Service Code)</td><td>Унікальний ідентифікатор для авторизації</td><td>d86a0f72-0dfe-4102-ace7-78997d042b7f</td></tr><tr><td>ID Мерчанта (Merchant Id)</td><td>Унікальний ідентифікатор мерчанта</td><td>9a337b2b-4d97-4abe-9f95-cde229f9bd83</td></tr><tr><td>Ключ авторизації (Private JWK)</td><td>Приватний ключ, потрібен для виконання авторизації</td><td><p>Його потрібно згенерувати самостійно за <a href="https://docs.merchant.alb.ua/autentifikaciya#proces-generaciyi-komunikaciinikh-jwk-klyuchiv-kliyenta">інструкцією</a> та надати співробітнику банку</p><p>Приклад : </p><pre class="language-json"><code class="lang-json">{
-    "kty": "EC",
-    "d": "nmxbG1KJ9zmekBZfJWPwG8ZJLmhKHJVsXfXIFrHkRM_Uy9z7E7ppvpvfDF62_mx8",
-    "use": "enc",
-    "crv": "P-384",
-    "x": "dTV0I2RU5DZHVfaIQPp3svUb-Vaxwfn1WDeNUY11L3ch4vZtbdbcBc7fvK76QsDn",
-    "y": "qL9X0zvaXtQx_KyBZHg16qiol9lahscW-k7FBwmAf-bpYdE7-fruH9wUQWpKw14X",
-    "alg": "ECDH-ES+A256KW"
-}
-</code></pre></td></tr><tr><td>ID пристрою (Device Id)</td><td>Унікальний ідентифікатор пристрою. <br>Значення отримується після виконання авторизації</td><td>6c5e747f-a6c9-4087-b611-a29cfe7e8d7c</td></tr><tr><td>Токен оновлення (Refresh token)</td><td>Унікальний ідентифікатор токену. <br>Значення отримується після виконання авторизації</td><td>c54a25cf-cdd0-42dc-8843-2801f3d3c2b9</td></tr><tr><td>Токен авторизації (Auth token)</td><td>Унікальий ідентифікатор токену авторизації.<br>Значення отримується після виконання авторизації</td><td>8c469b31-6b51-4776-b222-19d57cbde444</td></tr></tbody></table>
+| Поле в PrestaShop                  | Що вибрати                                                                                                        |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **PreAuth expiration period**      | Строк резервування коштів. Доступні 2, 4, 6 або 12 годин, а також 1, 2, 7, 14 або 28 днів.                        |
+| **PreAuth order state**            | Статус, який модуль призначає замовленню під час створення платежу з резервуванням коштів.                        |
+| **Completion trigger order state** | Статус, перехід до якого запускає запит на списання зарезервованої суми. Виберіть окремий статус для цього етапу. |
 
-{% hint style="warning" %}
-Для кожного типу платежу реєструється унікальний термінал, що призначений для виконання конкретних операції \
-Тому для A2A будуть інші значення `Merchant ID` та `Service Code`
-{% endhint %}
+<figure><img src="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FWlAU1aMpFQakruV74o4J%2Fpreauth-completion.png?alt=media&#x26;token=aa10e668-638c-4586-b91f-e0d737da0397" alt="Строк резервування та два статуси замовлення для PREAUTH і Completion"><figcaption></figcaption></figure>
 
-{% hint style="warning" %}
-Після налаштуванню усіх полів, обов'язково потрібно натиснути клавішу "Зберегти" і тільки після цього натиснути клавішу "Авторизуватись"
-{% endhint %}
+#### Статуси замовлень і підписки
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+Виберіть статуси PrestaShop для успішного та невдалого платежу, а також для успішного повернення й помилки повернення. Щоб покупці могли оформлювати підписки, встановіть **Підписки увімкнені → Так**. Натисніть **Зберегти**.
 
-<figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
-{% endstep %}
-{% endstepper %}
+<figure><img src="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2Fma3tw0JeX4AKa18dGmtS%2Fstatusy-ta-pidpysky.png?alt=media&#x26;token=847b66de-ee27-4d04-9997-20993e77881f" alt="Налаштування статусів, увімкнення підписок і кнопка Зберегти"><figcaption></figcaption></figure>
+
+### Callback і перевірка підключення
+
+Модуль формує HTTPS-адресу обробника `alliancepay/callback` засобами PrestaShop і передає її банку як `notificationUrl`. Магазин має бути доступним за цією адресою з боку банку. Для вхідного callback модуль перевіряє підпис банку його публічним ключем і визначає, якого замовлення або підписки стосується повідомлення.
+
+У тестовому середовищі оформте замовлення з оплатою через AlliancePay. Після оплати відкрийте **Замовлення → Замовлення**, виберіть замовлення та звірте банківську операцію і статус магазину. Якщо API повертає `401`, звірте адресу середовища, приватний ключ і `kid`. Якщо операція в банку успішна, а статус магазину не оновився, перевірте доступність callback і запис про перевірку його підпису в журналі PrestaShop.
