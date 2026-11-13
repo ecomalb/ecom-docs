@@ -1,44 +1,60 @@
-# Налаштування та авторизаці
+---
+description: >-
+  Як підключити AlliancePay через JWS, вибрати тип оплати та налаштувати статуси
+  замовлень і підписки в Magento 2.
+---
 
-{% stepper %}
-{% step %}
-### Перехід у налаштуванню модулю
+# Налаштування та авторизація
 
-Для того, щоб налаштувати платіжний модуль "Alliance Payment"
+У панелі Magento відкрийте **Stores → Configuration → Sales → Payment Methods → Alliance Payment**. Підготуйте адресу API для вашого середовища, Merchant Id і реквізити для підпису запитів.
 
-Для цього потрібно :&#x20;
+### Підключення через Авторизацію 2.0 (JWS)
 
-* Перейти в панель адмістрування Magento 2
-* Перейти за шляхом \
-  `Stores → Configuration → Sales → Payment Methods → Alliance Payment`&#x20;
+Починаючи з версії 1.6.0 модуль підписує запити до AlliancePay алгоритмом `RS256`. Підготуйте пару RSA-ключів. Передайте банку публічний ключ і отримайте його ідентифікатор `kid`. Приватний ключ залишається у мерчанта.
 
-<figure><img src="../../.gitbook/assets/image (96).png" alt=""><figcaption></figcaption></figure>
-{% endstep %}
+| Поле в Magento  | Що вказати                                                                                                                                       |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| API URL         | Базову адресу API, яку банк надав для вибраного середовища.                                                                                      |
+| Merchant Id     | Ідентифікатор мерчанта у цьому середовищі.                                                                                                       |
+| JWS Private Key | Повний приватний RSA-ключ у форматі PEM (PKCS#8). Збережіть переноси рядків і межі `-----BEGIN PRIVATE KEY-----` та `-----END PRIVATE KEY-----`. |
+| JWS Key ID      | Значення `kid`, під яким банк зареєстрував відповідний публічний ключ.                                                                           |
 
-{% step %}
-### Початкові налаштування&#x20;
+![Поля API URL, Merchant Id, JWS Private Key і JWS Key ID у Magento](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2Fuigl46W8JeEmea5NoxVm%2Fmagento2-jws.png?alt=media\&token=1a0f56b4-c641-4b1f-a5fe-12480f846c43)
 
-Вікно з відображенням усіх налаштуваннь&#x20;
+### Налаштування способу оплати
 
-<figure><img src="../../.gitbook/assets/image (97).png" alt=""><figcaption></figcaption></figure>
+У **Enabled** виберіть **Yes**. У **Title** введіть назву, яку побачить покупець під час оформлення замовлення, наприклад **Alliance Pay**.
 
-<figure><img src="../../.gitbook/assets/image (98).png" alt=""><figcaption></figcaption></figure>
+Поле **Status Payment Page Type** визначає, куди потрапить покупець після оплати. `STATUS_PAGE` показує результат на сторінці банку, `STATUS_TIMER_PAGE` повертає до магазину за таймером, а `STATUS_REDIRECT_MERCHANT_PAGE` одразу відкриває сторінку магазину.
 
-Опис та значення полів:
+У **Payment Type** виберіть режим, доступний для вашого термінала. `PURCHASE` — разова оплата, `A2A` — переказ з рахунку на рахунок, `PREAUTH` — резервування з подальшим списанням. Для A2A банк має підключити цей режим, а базовою валютою магазину має бути **UAH**.
 
-<table data-header-hidden><thead><tr><th width="135">Нзва</th><th>Опис</th><th width="221">Можливі опції для вибору</th></tr></thead><tbody><tr><td>Enabled</td><td>Включення та відключення модуля.</td><td>Yes<br>No</td></tr><tr><td>Title</td><td>Назва платіжного метода яка буде відображатись на сторінці оплати (checkout payment step)</td><td>текстове поле</td></tr><tr><td>Status Payment Page Type</td><td><ul><li><code>STATUS_TIMER_PAGE</code> - сторінка за замовчуванням, якщо мерчант не обрав бажаний тип, таймер редірект автоматично 1 хвилина відображення статус сторінки з автоматичним редіректом юзера на сайт мерчанта (редірект урл)</li><li><code>STATUS_REDIRECT_MERCHANT_PAGE</code> - одразу редірект на урл мерчанта</li><li><code>STATUS_PAGE</code> - редірект, на нашу статус сторінку</li></ul></td><td>Можливі значення : <br>- STATUS_TIMER_PAGE<br>-STATUS_REDIRECT_MERCHANT_PAGE<br>- STATUS_PAGE</td></tr><tr><td>Payment Type</td><td><code>PURCHASE</code> - звичайні платежі з редіректом на HPP (Hosted Payment Page).<br><code>A2A</code> - платежі account_2_account , обліковий запис мерчанта має підтримувати це в налаштуваннях.<br><code>PREAUTH</code> - платежі з преавторизацією (холдуванням коштів на рахунку клієнта) та подальшим списанням через створення рахунку в Magento</td><td>Можливі значення : <br>- PURCHASE<br>- A2A<br>- PreAuth</td></tr><tr><td>API URL</td><td>URL API Alliance банка який надається банком.<br><a href="https://api-ecom-prod.bankalliance.ua/">https://api-ecom-prod.bankalliance.ua/</a></td><td>текстове поле</td></tr><tr><td>Service Code</td><td>Сервісний код який надається Alliance банком.</td><td>текстове поле</td></tr><tr><td>Marchant Id</td><td>ID мерчанта який надається Alliance банком.</td><td> </td></tr><tr><td>Authorization key</td><td>Генерується на стороні мерчанта по інструкції<br><a href="https://docs.merchant.alb.ua/autentifikaciya#proces-generaciyi-komunikaciinikh-jwk-klyuchiv-kliyenta">Аутентифікація | AlliancePay</a></td><td>текстове поле</td></tr><tr><td>Device Id</td><td>Заповнюється автоматично після авторизації</td><td>текстове поле(не активне)</td></tr><tr><td>Refresh Token</td><td>Заповнюється автоматично після авторизації</td><td>текстове поле(не активне)</td></tr><tr><td>PreAuth Expiration Period</td><td>Значення на який час будуть заморожені кошти на рахунку клієнта</td><td>2 hours<br>4 hours<br>6 hours<br>12 hours<br>1 day<br>2 days<br>7 days<br>14 days<br>28 days</td></tr><tr><td>PreAuth Created Order Status</td><td>Статус замовлення в Magento 2 після успішної операції PREAUTH.</td><td>Дропдаун з можливістю вибору статусу ордера</td></tr><tr><td>PreAuth Capture Success Order Status</td><td>Статус на який змінеться замовлення в Magento 2 після виклику списання коштів (операція COMPLETION після створення рахунку).</td><td>Дропдаун з можливістю вибору статусу ордера</td></tr><tr><td>Successful Payment Order Status</td><td>Статус в який ордер переходить автоматично після <strong>оплати</strong></td><td>Дропдаун з можливістю вибору відображення успішного статусу ордера</td></tr><tr><td>Failed Payment Order Status</td><td>Статус в який ордер переходить автоматично після <strong>помилки оплати</strong></td><td>Дропдаун з можливістю вибору відображення неуспішного статусу ордера</td></tr><tr><td>Successful Refund Order Status</td><td>Статус в який ордер переходить автоматично після <strong>повернення коштів</strong></td><td>Дропдаун з можливістю вибору відображення успішного статусу повернення</td></tr><tr><td>Failed Refund Order Status</td><td>Статус в який ордер переходить автоматично після після <strong>помилки повернення коштів</strong></td><td>Дропдаун з можливістю вибору відображення неуспішного статусу повернення</td></tr><tr><td>Enable Payment Logs</td><td>Включення та відключення додаткового логування помилок та даних в<br>&#x3C;MAGENTO_ROOT>/var/log/alliance_payment.log</td><td>Yes<br>No</td></tr></tbody></table>
-{% endstep %}
+![Увімкнення Alliance Pay, тип сторінки результату та вибір PREAUTH](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FF9ArBLvGWa51HqT12MyG%2Fmagento2-payment.png?alt=media\&token=241011a8-935e-42c3-9526-1f21f4ba88f5)
 
-{% step %}
-### Авторизація
+#### Параметри PREAUTH
 
-Після того, як усі поля були заповненні, потрібно зберегти налаштування, та виконати авторизацію для того, щоб з'явились поля `Device Id`, `Refresh Token`&#x20;
+| Поле                                 | Коли застосовується                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------- |
+| PreAuth Expiration Period            | Строк резервування. Доступні 2, 4, 6 або 12 годин та 1, 2, 7, 14 або 28 днів.           |
+| PreAuth Created Order Status         | Статус замовлення після успішного резервування, наприклад Pending.                      |
+| PreAuth Capture Success Order Status | Статус замовлення після успішного списання через рахунок Magento, наприклад Processing. |
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+#### Статуси оплати й повернення
 
+У **Successful Payment Order Status** та **Failed Payment Order Status** задайте статуси замовлення для успішної та невдалої оплати. У **Successful Refund Order Status** та **Failed Refund Order Status** окремо задайте статуси для результатів повернення. На ілюстрації показано приклад налаштувань магазину.
 
-{% endstep %}
-{% endstepper %}
+![Строк резервування, статуси замовлень і журнал платежів](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FVtXJ4It6BBGxeTjJUYNv%2Fmagento2-states.png?alt=media\&token=5f555471-39f7-46e7-ab30-04c299eb28c8)
 
+### Налаштування підписок
 
+Починаючи з версії 1.7.0 відкрийте секцію **Alliance Subscriptions** у налаштуваннях платіжних методів. **Reprice Lead Time (days)** задає мінімальний строк між масовою зміною ціни та набуттям чинності новими правилами. Типове значення — 30 днів.
 
+**Recurring Payment Amount Field Path** задає шлях до суми в об’єкті операції з callback рекурентного платежу. Модуль використовує її для звірки з планом. Типовий шлях у модулі — `coinAmount`. Перед зміною звірте шлях із фактичним форматом повідомлення провайдера.
+
+![Налаштування строку зміни ціни та звірки суми підписки](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FUSLLAJlhgJ3Z56cUXAh2%2Fmagento2-subconfig.png?alt=media\&token=75abca73-ba46-4da6-8c2a-120eda877907)
+
+### Збереження та перевірка
+
+Натисніть **Save Config** та очистіть кеш конфігурації Magento. Створіть тестове замовлення у відповідному середовищі й перевірте операцію в **Sales → Orders → View → Alliance Payment Status**.
+
+Модуль перевіряє підпис JWS у повідомленнях банку за його публічним ключем. Якщо перевірка підпису callback завершується помилкою, модуль відхиляє оновлення. Для діагностики використовуйте **Enable Payment Logs** і журнал `var/log/alliance_payment.log`.

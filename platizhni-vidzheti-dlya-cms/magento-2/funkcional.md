@@ -1,78 +1,89 @@
+---
+description: >-
+  Як покупець оплачує замовлення та оформлює підписку і як мерчант перевіряє
+  операції, списує зарезервовані кошти й виконує повернення.
+---
+
 # Функціонал
 
-## Процес створення замовлення клієнтом на сайті  <a href="#proces-stvorennya-zamovlennya-kliyentom-na-saiti" id="proces-stvorennya-zamovlennya-kliyentom-na-saiti"></a>
+### Разова оплата та A2A
 
-1.  Додаємо товари в кошик та переходимо на сторінку оплати та натискаємо оформити замовлення (Place Order)
+Покупець додає товари в кошик і на кроці **Review & Payments** вибирає спосіб оплати, назву якого задано в полі **Title**. Після натискання **Place Order** Magento відкриває платіжну сторінку банку (HPP).
 
-    <figure><img src="../../.gitbook/assets/image (99).png" alt=""><figcaption></figcaption></figure>
-2.  Далі сайт перенаправляє покупця на HPP сторінку де клієнт проходить процес оплати<br>
+![Вибір Alliance Pay та кнопка Place Order під час оформлення](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2Fk0UulY64jaIkLjh8JLxi%2Fmagento2-checkout.png?alt=media\&token=375dc095-a184-4f56-afa3-f509d3433231)
 
-    <figure><img src="../../.gitbook/assets/image (100).png" alt=""><figcaption></figcaption></figure>
-3.  Після оплати Alliance банк повертає клієнта на сторінку зі статусом замовлення на сайті<br>
+Для `PURCHASE` покупець завершує разову оплату на HPP. Для `A2A` він проходить доступний на HPP сценарій переказу з рахунку на рахунок. A2A потребує підтримки з боку термінала та базової валюти магазину UAH.
 
-    <figure><img src="../../.gitbook/assets/image (101).png" alt=""><figcaption></figcaption></figure>
+Подальший перехід залежить від **Status Payment Page Type**. Після повернення до магазину покупець може побачити підтвердження замовлення.
 
+![Підтвердження успішної оплати після повернення до магазину](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FQz1doIEgYw5MqR60fmWa%2Fmagento2-success.png?alt=media\&token=6c9dd82e-8ab6-4861-bea2-4f158acd73e7)
 
+### Перевірка замовлення
 
-## Процес роботи з замовленням в адмін панелі <a href="#proces-roboti-z-zamovlennyam-v-admin-paneli" id="proces-roboti-z-zamovlennyam-v-admin-paneli"></a>
+Відкрийте **Sales → Orders**, знайдіть замовлення й натисніть **View**. Колонка **Status** показує статус замовлення в Magento. Після callback модуль застосовує статус, налаштований для відповідного результату операції.
 
-Переходимо в адмін панель на сторіку з замовленнями\
-`Sales → Orders`
+![Статус замовлення й дія View у Sales → Orders](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FPMcNk6qMLGbykokuohhy%2Fmagento2-orders.png?alt=media\&token=81f2dd3b-89d6-4414-83e4-8c6d853b2036)
 
-<figure><img src="../../.gitbook/assets/image (103).png" alt=""><figcaption></figcaption></figure>
+У картці замовлення перейдіть до **Payment & Shipping Method → Alliance Payment Status**. Якщо callback ще не надійшов, натисніть **Check Payment Status**. У **Payment Operations** перевірте дату, статус, ідентифікатор і тип операції.
 
-Після отримання callback замовлення переходе в статус який обрано в налаштуваннях в разі успішної оплати\
-`Stores → Configuration → Sales → Payment Methods → Alliance Payment → Successful Payment Order Status`\
-Переходимо до деталей замовлення → View
+![Check Payment Status і таблиця Payment Operations](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FeSuML6MVhERjTt1yaGHY%2Fmagento2-operations.png?alt=media\&token=a884d8d8-0c9c-4440-b157-260435ce41b2)
 
-<figure><img src="../../.gitbook/assets/image (104).png" alt=""><figcaption></figcaption></figure>
+### PREAUTH — резервування та списання
 
-{% hint style="warning" %}
-Якщо замовлення створене за допомогою hppPayType PREAUTH , в такому разі потрібно створити Invoice (Рахунок).
-{% endhint %}
+У режимі `PREAUTH` після успішної авторизації банк резервує кошти на строк, заданий у полі **PreAuth Expiration Period**. Щоб списати кошти, створіть рахунок у Magento до завершення цього строку.
 
-Перейти в деталі замовлення та натиснути Invoice
+У **Sales → Orders** відкрийте замовлення з успішною операцією PREAUTH. Натисніть **Invoice**.
 
-<figure><img src="../../.gitbook/assets/image (105).png" alt=""><figcaption></figcaption></figure>
+![Дія Invoice у картці замовлення](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2Fg6Xrv13JYDY66M9uHi4A%2Fmagento2-orderdetail.png?alt=media\&token=cff9f14e-67df-4202-87b7-6e21ff2bd7f7)
 
-Прокрутити до низу і натиснути Submit Invoice\
-Важливо при створенні рахунка має бути обовʼязково обрана опція Capture Online
+На сторінці **New Invoice** перевірте позиції та **Grand Total**. У полі **Amount** виберіть **Capture Online** і натисніть **Submit Invoice**. Magento надішле банку запит на списання (`COMPLETION`).
 
-<figure><img src="../../.gitbook/assets/image (106).png" alt=""><figcaption></figcaption></figure>
+![Capture Online і Submit Invoice на сторінці рахунку](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FbrodPG0KvaOrx454BN8P%2Fmagento2-capture.png?alt=media\&token=aac7971c-22f2-4b57-a0d6-2e480cdfe11c)
 
-В деталях замовлення знаходиться інформація по операціям.
+Перевірте операцію в картці замовлення. Після успішного списання Magento застосовує **PreAuth Capture Success Order Status**.
 
-{% hint style="warning" %}
-В разі якщо callback не надійшов можна оновити інформацію вручну за допомогою кнопки Check Payment Status.
-{% endhint %}
+### Повернення коштів
 
-Якщо callback надійшов тоді вручну оновлювати не потрібно.
+Відкрийте **Sales → Orders → View → Invoices**. Знайдіть рахунок зі статусом **Paid** і натисніть **View**. Для повернення через банк почніть оформлення **Credit Memo** із цього рахунку.
 
-<figure><img src="../../.gitbook/assets/image (107).png" alt=""><figcaption></figcaption></figure>
+![Дата рахунку та поле Transaction ID](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2F4I4pcd66xhLE0W7oKWIZ%2Fmagento2-invoice.png?alt=media\&token=398e3c00-a752-487b-a9e8-b449b5756e9a)
 
-### Виконання повернень
+Перевірте товари, кількість і суму повернення. Натисніть **Refund**, щоб надіслати запит в AlliancePay. Кнопка **Refund Offline** лише реєструє повернення в Magento. Кошти покупцеві в такому разі потрібно повернути окремо.
 
-В разі необхідності повернення коштів в деталях замовлення переходимо в Invoices\
-Обираємо Invoce і натискаємо → View
+Відкрийте документ у **Credit Memos** і звірте результат з операцією `REFUND` у **Payment Operations**.
 
-{% hint style="info" %}
-&#x20;Виконати повернення можливо, коли операція успішна та Invoce буде в статусі Paid
-{% endhint %}
+![Документ Credit Memo зі статусом Refunded](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FsIbwOX4MyoL7HfokPBU9%2Fmagento2-refund.png?alt=media\&token=dd68564e-3487-47a8-88a3-c779aaaa4a6a)
 
-<figure><img src="../../.gitbook/assets/image (108).png" alt=""><figcaption></figcaption></figure>
+### Підписки та рекурентні платежі
 
-Далі створюємо документ з поверненням Credit Memo
+Починаючи з версії 1.7.0 для підписки доступний окремий платіжний метод **AlliancePay Subscriptions**. Покупець оформлює підписку на HPP, а банк виконує наступні списання за правилами плану.
 
-<figure><img src="../../.gitbook/assets/image (109).png" alt=""><figcaption></figcaption></figure>
+#### Створення шаблону та плану
 
-Обираємо продукти для повернення та натискаємо **Rfund**
+Відкрийте **Subscriptions → Plan Templates → Add New Template**. Вкажіть унікальний **Code**, назву **Name** і **Category Indicator**. Додайте щонайменше одне правило для розкладу.
 
-{% hint style="info" %}
-Refund Offline не створить запит в API Alliance банк для повернення коштів, це стандартний процесс для Online\Offline платіжних методів.
-{% endhint %}
+![Шаблони планів і кнопка Add New Template](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FIJ0nn3jHJ4iidHRk0L3w%2Fmagento2-templates.png?alt=media\&token=599aab29-6959-4c78-9956-1060fe133e08)
 
-<figure><img src="../../.gitbook/assets/image (110).png" alt=""><figcaption></figcaption></figure>
+Для кожного правила задайте діапазон **Payment # From / Payment # To**, інтервал (**Interval Value** і **Day**, **Week** або **Month**), суму в мінімальних одиницях валюти та валюту. Для гривні суму вказують у копійках.
 
-Після створення повернення додається інформація по транзакції REFUND
+У **Subscriptions → Subscription Plans → Create Plan** знайдіть товар за назвою чи SKU. Виберіть шаблон або заповніть правила вручну. Перевірте індикатор категорії, назву, опис і натисніть **Create Plan**. Після синхронізації перевірте статус плану та **Sync Status**. Якщо бачите `ERROR`, перевірте причину помилки синхронізації.
 
-<figure><img src="../../.gitbook/assets/image (111).png" alt=""><figcaption></figcaption></figure>
+#### Оформлення покупцем
+
+Покупець входить до облікового запису, на сторінці товару вибирає **Subscribe & Save** і план у **Choose a plan**. Для разової покупки доступний **Buy once**. Підписку оформлюють окремим кошиком.
+
+На кроці оплати покупець вибирає **AlliancePay Subscriptions** і натискає **Place Order**. На HPP він прив’язує картку та проходить перший платіж. Після успішного callback підписка переходить із `PENDING` в `ACTIVE`. В особистому кабінеті покупець може переглянути й скасувати власну підписку.
+
+#### Зміна ціни та керування планом
+
+| Дія                            | Коли використовувати                                                                                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Reprice                        | Для зміни правил чинного плану. Заповніть New Rules, Applies From і Reason, підтвердьте повідомлення клієнтів. Дата має враховувати Reprice Lead Time. |
+| Replace Plan For New Customers | Для нових покупців. Вкажіть New Plan Name та нові правила. Чинні підписки продовжують діяти на попередньому плані.                                     |
+| Archive                        | Для архівації плану. У банку план отримує статус ARCHIVED, у Magento — CANCELED.                                                                       |
+
+#### Підписки та заплановані платежі
+
+У **Subscriptions → Subscriptions** відкрийте підписку. Дія **Diagnostics** отримує актуальні операції з банку. **Cancel** скасовує підписку. У **Subscriptions → Scheduled Payments** доступні заплановані платежі та дія **Run Now** для ручного запуску списання.
+
+Результат звірки суми має окремий статус. `OK` означає збіг із правилами плану, `MISMATCH` — розбіжність, `SKIPPED` — звірку виконати не вдалося. Права на перегляд, зміну ціни, скасування та ручний запуск налаштовують у **System → Permissions → User Roles → Role Resources → Alliance Pay → Subscriptions**.
