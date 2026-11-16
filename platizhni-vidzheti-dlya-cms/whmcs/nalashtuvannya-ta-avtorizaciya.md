@@ -1,72 +1,61 @@
 # Налаштування та авторизація
 
-### Активація модуля в адмін-панелі <a href="#id-2.-aktivaciya-modulya-v-admin-paneli" id="id-2.-aktivaciya-modulya-v-admin-paneli"></a>
+### Валюта платежів <a href="#section-1" id="section-1"></a>
 
-Після встановлення модуля, у вкладенці "Addons", перейти на сторінку "Apps & Integrations"
+Відкрийте **Configuration → System Settings → Currencies** і перевірте, що в таблиці є валюта з кодом `UAH`. Якщо магазин виставляє рахунки в іншій валюті, перевірте курс гривні та виберіть **UAH** у полі шлюзу **Convert To For Processing**. Для планів підписки ціни продукту також задаються у гривнях.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+![Валюта UAH у списку валют WHMCS](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2Fwe07uydlfjbUWSo11ghN%2Fwhmcs-ua-01-currencies.png?alt=media\&token=d9fd8dfd-8ef1-446c-9dc4-33852978ea8b)
 
-Перехід на вкладку "Browse" та вибираємо з категорій "Payments"
+### Реєстрація ключа JWS <a href="#jws" id="jws"></a>
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+Шлюз підписує запити приватним RSA-ключем мерчанта за алгоритмом `RS256`. Для підключення потрібні **Merchant ID**, приватний ключ і **JWS Key ID** (`kid`), який банк присвоїв відповідному публічному ключу.
 
-В розділі "Additional apps" знайти плагін AlliancePay Payment Gateway
+**1.** Згенеруйте пару ключів RSA. Мінімальна довжина ключа — 2048 біт.
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+```sh
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out merchant_private.pem
+openssl rsa -in merchant_private.pem -pubout -out merchant_public.pem
+```
 
-Активувати плагін&#x20;
+**2.** Передайте банку файл **merchant\_public.pem** для реєстрації. Приватний файл **merchant\_private.pem** зберігайте у себе. Для шлюзу потрібен PEM у форматі PKCS#8 без парольної фрази, з першим рядком `-----BEGIN PRIVATE KEY-----`. Якщо наявний RSA-ключ починається з `-----BEGIN RSA PRIVATE KEY-----`, перетворіть його у PKCS#8.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+```sh
+openssl pkcs8 -topk8 -nocrypt -in old_key.pem -out merchant_private.pem
+```
 
-### Налаштування параметрів <a href="#id-3.-nalashtuvannya-parametriv" id="id-3.-nalashtuvannya-parametriv"></a>
+**3.** Перевірте вихідний HTTPS-доступ сервера до API банку, синхронізацію часу та наявність PHP-розширень `openssl`, `sodium`, `gmp` і `hash`.
 
-Після активації вас автоматично перекине на вкладку **Manage Existing Gateway** де потрібно буде заповнити необхідні поля : \\
+### Параметри шлюзу <a href="#section-2" id="section-2"></a>
 
-<figure><img src="../../.gitbook/assets/image (112).png" alt=""><figcaption></figcaption></figure>
+Відкрийте **Configuration → System Settings → Payment Gateways → Manage Existing Gateways → AlliancePay Bank**.
 
-Опис полів :&#x20;
+| Поле у WHMCS                   | Що вказати                                                                                                                                                                        |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Show on Order Form**         | Увімкніть, щоб покупець міг вибрати AlliancePay під час оформлення замовлення.                                                                                                    |
+| **Display Name**               | Назва способу оплати для покупця, наприклад **AlliancePay Bank**.                                                                                                                 |
+| **API Base URL**               | Адреса API, яку банк надав для вашого тестового або робочого середовища.                                                                                                          |
+| **Merchant ID**                | Ідентифікатор мерчанта для відповідного термінала.                                                                                                                                |
+| **JWS Private Key**            | Увесь вміст `merchant_private.pem`, включно з початковим і кінцевим рядками та переносами.                                                                                        |
+| **JWS Key ID**                 | Ідентифікатор `kid` зареєстрованого ключа у форматі UUID.                                                                                                                         |
+| **Authentication Key**         | Застаріле поле. Для підпису JWS достатньо двох полів вище. Заповнюйте **Authentication Key** лише за окремою вказівкою банку.                                                     |
+| **Payment Type**               | `PURCHASE` — разова оплата на платіжній сторінці, `A2A` — переказ з рахунку на рахунок за наявності відповідного термінала, `PREAUTH` — резервування з подальшим списанням.       |
+| **Pre-Auth Expiration Period** | Для `PREAUTH` виберіть строк резервування коштів: `2h`, `4h`, `6h`, `12h`, `1d`, `2d`, `7d`, `14d` або `28d`.                                                                     |
+| **Status Page Type**           | `STATUS_TIMER_PAGE` — сторінка результату з поверненням до магазину за таймером, `STATUS_REDIRECT_MERCHANT_PAGE` — одразу до магазину, `STATUS_PAGE` — сторінка результату банку. |
+| **Enable Subscriptions**       | Увімкніть для продажу підписок. Їхній розклад визначає план продукту.                                                                                                             |
+| **Convert To For Processing**  | Для обробки платежу в гривнях із рахунку в іншій валюті виберіть **UAH**.                                                                                                         |
 
-<table><thead><tr><th>Назва</th><th>Опис</th><th>Приклад</th></tr></thead><tbody><tr><td>Show on Order Form</td><td>Перемикач для відображення платіжного метода на сторінці</td><td>Можливі значення : <br>"Так" або "Ні"</td></tr><tr><td>Display Name</td><td>Назва платіжного метода на сторінці оплати</td><td>AlliancePay Bank</td></tr><tr><td>API Base URL</td><td>URL на який будуть надходити API запити </td><td>Потрібно вказати : <br><a href="https://api-ecom-prod.bankalliance.ua"><code>https://api-ecom-prod.bankalliance.ua</code></a></td></tr><tr><td>Payment Type</td><td><p><code>PURCHASE</code> - звичайні платежі з редіректом на HPP (Hosted Payment Page). </p><p><code>A2A</code> - платежі account_2_account , обліковий запис мерчанта має підтримувати це в налаштуваннях. </p><p><code>PREAUTH</code> - платежі з преавторизацією (холдуванням коштів на рахунку клієнта) та подальшим списанням через операцію Completion </p></td><td>Можливі значення : <br>- PURCHASE<br>- A2A<br>- PREAUTH</td></tr><tr><td>Pre-Auth Expiration Period</td><td>Значення на який час будуть заморожені кошти на рахунку клієнта</td><td>2 hours<br>4 hours<br>6 hours<br>12 hours<br>1 day<br>2 days<br>7 days<br>14 days<br>28 days</td></tr><tr><td>Status Page Type</td><td>Визначає як буде виглядати сторінка після виконання оплати</td><td><p></p><p>Можливі значення : <br></p><ul><li><code>STATUS_TIMER_PAGE</code> - сторінка за замовчуванням, якщо мерчант не обрав бажаний тип, таймер редірект автоматично 1 хвилина відображення статус сторінки з автоматичним редіректом юзера на сайт мерчанта (редірект урл)</li><li><code>STATUS_REDIRECT_MERCHANT_PAGE</code> - одразу редірект на урл мерчанта</li><li><code>STATUS_PAGE</code> - редірект, на нашу статус сторіншку (завантажити квитанцію …)</li></ul></td></tr><tr><td>Merchant ID</td><td>Унікальний ідентифікатор мерчанта</td><td>9a337b2b-4d97-4abe-9f95-cde229f9bd83</td></tr><tr><td>Service Code</td><td>Унікальний ідентифікатор для авторизації</td><td>d86a0f72-0dfe-4102-ace7-78997d042b7f</td></tr><tr><td>Authentication Key</td><td>Приватний ключ, потрібен для виконання авторизації</td><td><p>Його потрібно згенерувати самостійно за <a href="https://docs.merchant.alb.ua/autentifikaciya#proces-generaciyi-komunikaciinikh-jwk-klyuchiv-kliyenta">інструкцією</a> та надати співробітнику банку</p><p>Приклад : </p><pre class="language-json"><code class="lang-json">{
-    "kty": "EC",
-    "d": "nmxbG1KJ9zmekBZfJWPwG8ZJLmhKHJVsXfXIFrHkRM_Uy9z7E7ppvpvfDF62_mx8",
-    "use": "enc",
-    "crv": "P-384",
-    "x": "dTV0I2RU5DZHVfaIQPp3svUb-Vaxwfn1WDeNUY11L3ch4vZtbdbcBc7fvK76QsDn",
-    "y": "qL9X0zvaXtQx_KyBZHg16qiol9lahscW-k7FBwmAf-bpYdE7-fruH9wUQWpKw14X",
-    "alg": "ECDH-ES+A256KW"
-}
-</code></pre></td></tr></tbody></table>
+![Поля шлюзу AlliancePay Bank для підпису JWS, вибору типу платежу та ввімкнення підписок](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FdjW26z83WQoOq0ZjunWw%2Fuploads%2FPWC4i3tpf9OsrBBFgjE1%2Fwhmcs-ua-02-gateway-settings.png?alt=media\&token=fe6a15c6-4b28-4d12-984f-5fd7bb208dcd)
 
-{% hint style="warning" %}
-Для кожного типу платежу реєструється унікальний термінал, що призначений для виконання конкретних операції \
-Тому для A2A будуть інші значення `Merchant ID` та `Service Code`
-{% endhint %}
+Натисніть **Save Changes**. Щоб перевірити підключення, оформте тестовий рахунок, проведіть оплату в тестовому середовищі та звірте результат у **Billing → Transaction List**.
 
+### Якщо підпис або перевірка відповіді не проходить <a href="#section-3" id="section-3"></a>
 
+Підпис запиту створює мерчант. Для перевірки відповіді або повідомлення банку модуль використовує публічний ключ банку та алгоритм `ES256`. Він знаходить ключ за `kid` у заголовку JWS через `/ecom/keys/public_key/get_v1` і кешує його на одну годину.
 
-Після заповнення всіх полів, потрібно натиснути на кнопку "Save Changes"
-
-### Налаштування конвертації <a href="#id-4.-nalashtuvannya-konvertaciyi" id="id-4.-nalashtuvannya-konvertaciyi"></a>
-
-Оскільки банк AlliancePay приймає платежі виключно у **гривні (UAH)**, необхідно правильно налаштувати поведінку системи, якщо ваша базова валюта відмінна від гривні (наприклад, USD).
-
-{% hint style="warning" %}
-Якщо в системі дефолтна валюта сайта гривня то додатково нічого робити не потрібно, якщо дефолтна валюта USD або EUR тоді в полі **Convert To For Processing** виставляємо UAH (Валюта має бути налаштована в System Settings → Currencies).&#x20;
-
-<img src="../../.gitbook/assets/image (7).png" alt="" data-size="original">
-
-<img src="../../.gitbook/assets/image (8).png" alt="" data-size="original">
-
-
-{% endhint %}
-
-
-
-1. Знайдіть поле **Convert To For Processing**.
-2. У випадаючому списку виберіть **UAH**.
-3. Це налаштування змусить WHMCS автоматично перераховувати суму інвойсу за внутрішнім курсом перед відправкою клієнта на сторінку оплати.
-
-### Завершення налаштування <a href="#id-5.-zavershennya-nalashtuvannya" id="id-5.-zavershennya-nalashtuvannya"></a>
-
-1. Натисніть кнопку **Save Changes** (Зберегти зміни).
-2. Після збереження внизу сторінки в розділі **Usage Notes** (Інформація про сесію) має з’явитися статус підключення. Якщо дані заповнені вірно, система відобразить інформацію про активну сесію та токени.
+| Повідомлення або ознака                             | Що перевірити                                                                                  |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `JWS Private Key (PEM) is not configured.`          | Заповніть **JWS Private Key** і збережіть налаштування.                                        |
+| `JWS Key ID (kid) is not configured.`               | Введіть виданий банком **JWS Key ID**.                                                         |
+| `JWS signing failed`                                | Перевірте тип RSA, формат PKCS#8, відсутність парольної фрази та цілісність скопійованого PEM. |
+| Банк повернув `401`                                 | Звірте середовище, **Merchant ID**, відповідність `kid` приватному ключу й час на сервері.     |
+| `JWS callback verification failed` у **Module Log** | Перевірте доступність API публічних ключів банку та повідомлення про перевірку підпису.        |
