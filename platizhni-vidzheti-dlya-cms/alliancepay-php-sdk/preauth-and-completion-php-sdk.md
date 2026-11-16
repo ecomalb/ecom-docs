@@ -4,124 +4,70 @@ description: >-
   потім мерчант підтверджує списання через операцію COMPLETION.
 ---
 
-# PreAuth and Completion
+# PreAuth and Completion PHP SDK
 
-## Створення PreAuth
+`PREAUTH` резервує кошти. `COMPLETION` окремим запитом підтверджує списання. Для підтвердження збережіть `operationId` успішного резервування та його початкову суму в копійках UAH.
 
-Для створення PREAUTH-замовлення використовуються ті самі класи, що й для звичайного `PURCHASE`; потрібно лише встановити `hppPayType` у значення `PREAUTH`.
+### Створення PREAUTH
 
-#### Поле `preAuthExpDate` — термін дії блокування <a href="#pole-preauthexpdate-termin-diyi-blokuvannya" id="pole-preauthexpdate-termin-diyi-blokuvannya"></a>
-
-| Сценарій           | Поведінка                                                             |
-| ------------------ | --------------------------------------------------------------------- |
-| Поле не передано   | SDK автоматично встановлює значення `now + 2 години`.                 |
-| Поле передано явно | Значення має бути в діапазоні від `now + 2 години` до `now + 28 діб`. |
-
-**Формат:** `YYYY-MM-DD HH:MM:SS.ss±HH:MM`, наприклад `2026-08-10 15:30:00.00+03:00`.
-
-#### Приклад створення PREAUTH-замовлення <a href="#priklad-stvorennya-preauth-zamovlennya" id="priklad-stvorennya-preauth-zamovlennya"></a>
+Сформуйте `$orderData` за прикладом «Створення замовлення». Перш ніж підтверджувати списання, дочекайтеся успішної операції PREAUTH.
 
 ```php
-use AlliancePay\Sdk\Payment\Order\CreateOrder;
 use AlliancePay\Sdk\Payment\Dto\Order\OrderRequestDTO;
+use AlliancePay\Sdk\Payment\Order\CreateOrder;
 use AlliancePay\Sdk\Services\RequestIdentification\GenerateRequestIdentification;
 
-$orderData = [
-    'merchantRequestId' => GenerateRequestIdentification::generateRequestId(),
-    'merchantId'        => $authDto->getMerchantId(),
-    'hppPayType'        => 'PREAUTH',
-    'directType'        => 'REDIRECT',
-    'coinAmount'        => 10050,
-    'paymentMethods'    => ['CARD'],
-    'successUrl'        => '<redacted URL>',
-    'failUrl'           => '<redacted URL>',
-    'statusPageType'    => 'STATUS_TIMER_PAGE',
-    'customerData'      => ['senderCustomerId' => 'customer_id_1'],
-    // Опціонально: від +2 год до +28 діб від поточного часу.
-    // 'preAuthExpDate' => '2026-08-10 15:30:00.00+03:00',
-];
-
-$orderRequest = OrderRequestDTO::fromArray($orderData);
-$createOrder  = new CreateOrder();
-
-try {
-    $response      = $createOrder->createOrder($orderRequest, $authDto);
-    $responseArray = $response->toArray();
-
-    // Збережіть ці значення для COMPLETION.
-    $hppOrderId  = $responseArray['hppOrderId'];
-    $redirectUrl = $responseArray['redirectUrl'];
-} catch (\AlliancePay\Sdk\Exceptions\CreateOrderException $e) {
-    echo "Помилка створення PREAUTH: " . $e->getMessage();
-} catch (\AlliancePay\Sdk\Exceptions\ValidateDataException $e) {
-    echo "Помилка валідації: " . $e->getMessage();
-}
+$orderData['merchantRequestId'] = GenerateRequestIdentification::generateRequestId();
+$orderData['hppPayType'] = 'PREAUTH';
+$orderData['paymentMethods'] = ['CARD'];
+$order = (new CreateOrder())->createOrder(OrderRequestDTO::fromArray($orderData), $authDto);
+$hppOrderId = $order->getHppOrderId();
+$redirectUrl = $order->getRedirectUrl();
 ```
 
-Після успішного створення PREAUTH-замовлення збережіть у своїй системі `hppOrderId`, `operationId` та `coinAmount` з відповіді. Ці значення потрібні для COMPLETION.
+#### Поля `OrderRequestDTO` для резервування
 
+| Поле                | Тип            | Опис                                                                                                                                                                                                                                                 |
+| ------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `merchantRequestId` | `string`       | Згенеруйте унікальний ID нового запиту через `GenerateRequestIdentification::generateRequestId()` і збережіть його у своєму застосунку.                                                                                                              |
+| `hppPayType`        | `string`       | Передайте `PREAUTH`, щоб зарезервувати кошти на картці покупця.                                                                                                                                                                                      |
+| `paymentMethods`    | `array`        | Для прикладу з банківською карткою передайте `['CARD']`.                                                                                                                                                                                             |
+| `preAuthExpDate`    | `string\|null` | Строк дії резерву. Якщо пропустити поле, SDK v1.5.0 додасть до поточного часу 2 години й 30 секунд. Власне значення має бути в межах від 2 годин до 28 діб. Формат включає дату, час, дві цифри дробової частини секунди та зміщення часового поясу. |
 
+### Підтвердження списання
 
-## Completion (Завершення попередньої авторизації) <a href="#id-7.-completion-zavershennya-poperednoyi-avtorizaciyi" id="id-7.-completion-zavershennya-poperednoyi-avtorizaciyi"></a>
+#### Поля `OrderRequestCompletionDTO`
 
-**COMPLETION** підтверджує та списує кошти, заблоковані операцією PREAUTH. Для цього використовуються клас `CreateOrderCompletion` і DTO `OrderRequestCompletionDTO`.
+| Поле                  | Тип                 | Опис                                                                                                                                    |
+| --------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `merchantRequestId`   | `string`            | Згенеруйте унікальний ID нового запиту через `GenerateRequestIdentification::generateRequestId()` і збережіть його у своєму застосунку. |
+| `merchantId`          | `string`            | Ідентифікатор мерчанта у вашому середовищі. Візьміть його з `$authDto->getMerchantId()`.                                                |
+| `originalOperationId` | `string`            | Ідентифікатор успішного резервування. Візьміть `operationId` операції PREAUTH з перевіреного callback або з історії операцій.           |
+| `coinAmount`          | `int`               | Сума списання в копійках гривні. SDK допускає відхилення до 20% в обидва боки від початкової суми PREAUTH.                              |
+| `date`                | `DateTimeImmutable` | Дата й час запиту. У прикладі значення створює `DateTimeImmutableProvider::nowByTimezone()` для часового поясу Києва.                   |
+| `notificationUrl`     | `string`            | HTTPS-адреса вашого сервера, на яку банк надсилає повідомлення про результат операції.                                                  |
 
-#### Ключові правила <a href="#klyuchovi-pravila" id="klyuchovi-pravila"></a>
-
-* `originalOperationId` — це поле `operationId` з відповіді на PREAUTH, а не `ecomOperationId`.
-* `coinAmount` — сума списання. Допускається відхилення **±20%** від оригінальної суми PREAUTH.
-* Третій аргумент методу `createCompletion()` — оригінальна сума PREAUTH у копійках. SDK використовує її для внутрішньої перевірки діапазону ±20%.
-
-#### Поля `OrderRequestCompletionDTO` <a href="#polya-orderrequestcompletiondto" id="polya-orderrequestcompletiondto"></a>
-
-| Поле                  | Тип               | Опис                                                      |
-| --------------------- | ----------------- | --------------------------------------------------------- |
-| `merchantRequestId`   | string            | Унікальний ID запиту, генерується для кожного COMPLETION. |
-| `merchantId`          | string            | Ідентифікатор мерчанта.                                   |
-| `originalOperationId` | string            | `operationId` з відповіді на PREAUTH.                     |
-| `coinAmount`          | int               | Сума списання в копійках (±20% від суми PREAUTH).         |
-| `date`                | DateTimeImmutable | Дата й час виконання запиту.                              |
-| `notificationUrl`     | string            | URL для webhook-сповіщення про результат.                 |
-
-#### Приклад виконання COMPLETION <a href="#priklad-vikonannya-completion" id="priklad-vikonannya-completion"></a>
+Третім аргументом `createCompletion()` передайте початкову суму резерву `$originalCoinAmount` у копійках UAH. Цю суму SDK порівнює із запитаним списанням, зокрема й для замовлень у USD або EUR.
 
 ```php
-use AlliancePay\Sdk\Payment\Order\CreateOrderCompletion;
 use AlliancePay\Sdk\Payment\Dto\Order\OrderRequestCompletionDTO;
+use AlliancePay\Sdk\Payment\Order\CreateOrderCompletion;
 use AlliancePay\Sdk\Services\DateTime\DateTimeImmutableProvider;
-use AlliancePay\Sdk\Services\RequestIdentification\GenerateRequestIdentification;
 
-// Дані з БД після успішного PREAUTH.
-$originalOperationId = 'OPERATION_ID_FROM_PREAUTH';
-$originalCoinAmount  = 10050;
-
-$completionData = [
+$completion = OrderRequestCompletionDTO::fromArray([
     'merchantRequestId'   => GenerateRequestIdentification::generateRequestId(),
     'merchantId'          => $authDto->getMerchantId(),
     'originalOperationId' => $originalOperationId,
-    'coinAmount'          => 10050,
-    'date'                => DateTimeImmutableProvider::nowByTimezone(DateTimeImmutableProvider::KYIV_TIMEZONE),
-    'notificationUrl'     => '<redacted URL>',
-];
-
-$completionDto    = OrderRequestCompletionDTO::fromArray($completionData);
-$createCompletion = new CreateOrderCompletion();
-
-try {
-    $response      = $createCompletion->createCompletion($completionDto, $authDto, $originalCoinAmount);
-    $responseArray = $response->toArray();
-
-    // status, operationId, rrn, rrnPreauth та інші поля відповіді.
-} catch (\AlliancePay\Sdk\Exceptions\CompletionAmountException $e) {
-    echo "Помилка суми COMPLETION: " . $e->getMessage();
-    print_r($e->getPayload());
-} catch (\AlliancePay\Sdk\Exceptions\CreateCompletionException $e) {
-    echo "Помилка COMPLETION: " . $e->getMessage();
-    print_r($e->getPayload());
-}
+    'coinAmount'          => $originalCoinAmount,
+    'date'                => DateTimeImmutableProvider::nowByTimezone(
+        DateTimeImmutableProvider::KYIV_TIMEZONE
+    ),
+    'notificationUrl'     => 'https://shop.example/webhooks/alliancepay',
+]);
+$result = (new CreateOrderCompletion())->createCompletion(
+    $completion, $authDto, $originalCoinAmount
+);
+$operation = $result->toArray();
 ```
 
-&#x20;
-
-
-
+SDK перевіряє допустиме відхилення ±20% від резерву. Наприклад, для `10000` копійок перевірку суми проходять значення від `8000` до `12000`. Банк окремо визначає результат списання. Збережіть його статус та `operationId`. Після тайм-ауту спочатку звірте операції за `hppOrderId`.

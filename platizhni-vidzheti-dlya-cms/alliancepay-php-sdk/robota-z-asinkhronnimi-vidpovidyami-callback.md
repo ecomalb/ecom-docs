@@ -1,39 +1,61 @@
-# Обробка зворотних викликів (Callback/Webhook)
+# Робота з асинхронними відповідями Callback
 
-Для автоматичної обробки повідомлень від платіжного шлюзу (Webhooks) використовуйте `CallbackHandler`. Це дозволяє вашій системі дізнатися про успішну оплату в реальному часі.
+На серверній адресі `notificationUrl` приймайте повідомлення про платіж. Перед зміною замовлення перевірте підпис банку, зв’язок із вашим замовленням, суму й валюту. Перехід покупця на сторінку успіху сам по собі оплату не підтверджує.
 
-**Важливо:**
+### Перевірка підпису
 
-Якщо ваша система має змогу отримати тіло запиту та серіалізувати JSON в масив тоді слід передавати в метод `handle()` другий параметр `$payload`. Якщо ні то метод `handle()` автоматично отримає тіло `php://input`
+Наведений приклад для endpoint, налаштованого на підписані повідомлення у форматі compact JWS. `ALLIANCEPAY_CALLBACK_ALG` — дозволений алгоритм підпису відповідей, погоджений із банком для цього середовища. Вихідні запити мерчанта й вхідні повідомлення банку мають різні ключі.
 
-```php
-$bodyJson = file_get_contents('php://input');
-$payload = json_decode($bodyJson, true);
-```
+#### Поля заголовка JWS
 
-**Приклад використання :**
+| Поле  | Тип      | Опис                                                                                                                                   |
+| ----- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `alg` | `string` | Алгоритм підпису вхідного повідомлення. Перед перевіркою підпису звірте його з алгоритмом, погодженим із банком для вашого середовища. |
+| `kid` | `string` | Ідентифікатор ключа банку. За ним SDK отримує публічний ключ для перевірки повідомлення.                                               |
 
 ```php
 use AlliancePay\Sdk\Payment\Callback\CallbackHandler;
-use AlliancePay\Sdk\Payment\Dto\Callback\CallbackDTO;
+use AlliancePay\Sdk\Services\Clients\HttpClientFactory;
+use AlliancePay\Sdk\Services\Jws\BankPublicKeyProvider;
+use AlliancePay\Sdk\Services\Jws\JwsVerificationService;
 
-// Отримуємо сирі дані від AlliancePay (JSON)
-$bodyJson = file_get_contents('php://input');
-$payload = json_decode($bodyJson, true);
-
-$callbackHandler = new CallbackHandler();
-
+$raw = trim((string) file_get_contents('php://input'));
+$allowedAlg = getenv('ALLIANCEPAY_CALLBACK_ALG');
+if (!$allowedAlg) {
+    http_response_code(500);
+    return;
+}
 try {
-    // Обробка вхідних даних з перевіркою підпису
-    /** @var CallbackDTO $callback */
-    $callback = $callbackHandler->handle($authDto, $payload);
-    
-    // Якщо обробка успішна, повертаємо 200 OK сервісу AlliancePay
-    http_response_code(200);
-    echo 'OK';
-} catch (\Exception $e) {
-    // Логування помилки та відповідь з помилкою
+    $header = JwsVerificationService::deserialiseHeader($raw);
+    if ($header['alg'] !== $allowedAlg) {
+        http_response_code(400);
+        return;
+    }
+    $key = BankPublicKeyProvider::fetch(
+        HttpClientFactory::create(), $authDto->getBaseUrl(), $header['kid']
+    );
+    $verified = JwsVerificationService::verify($raw, $key, $allowedAlg);
+    $callback = (new CallbackHandler())->handle($authDto, $verified);
+} catch (\Throwable $e) {
     http_response_code(400);
-    echo 'Error';
+    return;
 }
 ```
+
+У `handle()` передавайте вже перевірені дані. Якщо формат доставки для вашого мерчанта відрізняється, підтвердіть результат серверним запитом `CheckOrderData` перед зміною статусу. Якщо сервіс ключів тимчасово недоступний, зафіксуйте збій і звірте операцію після відновлення доступу.
+
+### Оновлення замовлення
+
+#### Поля перевіреного `CallbackDTO`
+
+| Поле                | Тип                                             | Опис                                                                                                                        |
+| ------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `hppOrderId`        | `string`                                        | Ідентифікатор замовлення в банку. За ним знайдіть відповідне замовлення у своїй системі.                                    |
+| `merchantId`        | `string`                                        | Ідентифікатор мерчанта, якому належить платіж. Звірте його зі своїм.                                                        |
+| `merchantRequestId` | `string`                                        | Ідентифікатор запиту мерчанта. Зіставте його зі збереженим запитом.                                                         |
+| `orderStatus`       | `string`                                        | Стан замовлення на момент повідомлення. Для обліку конкретного списання або повернення перевірте також відповідну операцію. |
+| `operation`         | `OperationPurchaseDTO` або `OperationRefundDTO` | Деталі операції. За її `operationId` визначте, чи обробляв магазин цей результат раніше.                                    |
+
+Перевірте тип і статус операції. Для валютного платежу звірте також вихідну валюту й суму. В одній транзакції збережіть ідентифікатор операції та зміну стану. Повторна доставка тієї самої завершеної операції має залишати баланс незмінним. Поверніть HTTP 200 після надійного збереження результату.
+
+Для повідомлень про регулярні платежі використовуйте `SubscriptionCallbackHandler`. Особливості часткових доставок описано на сторінці «Підписки на рекурентні платежі».

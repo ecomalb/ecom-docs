@@ -288,6 +288,7 @@
     * [Виконання повернень](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/vikonannya-povernen.md)
     * [Перевірка стану замовлення](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/perevirka-stanu-zamovlennya.md)
     * [PreAuth and Completion PHP SDK](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/preauth-and-completion-php-sdk.md)
+    * [Підписки на рекурентні платежі](platizhni-vidzheti-dlya-cms/alliancepay-php-sdk/pidpiski-na-rekurentni-platezhi.md)
   * [NodeJS SDK](platizhni-vidzheti-dlya-cms/nodejs-sdk/README.md)
     * [Встановлення](platizhni-vidzheti-dlya-cms/nodejs-sdk/vstanovlennya.md)
     * [Авторизація](platizhni-vidzheti-dlya-cms/nodejs-sdk/avtorizaciya.md)

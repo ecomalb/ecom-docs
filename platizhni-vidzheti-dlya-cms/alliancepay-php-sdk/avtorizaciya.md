@@ -1,70 +1,37 @@
 # Авторизація
 
-Для початку роботи необхідно ініціалізувати сесію авторизації. Для цього використовується клас `AuthorizationService`.
+У v1.5.0 застосунок створює `AuthorizationDTO` локально. SDK використовує його, щоб підписати вихідний запит приватним RSA-ключем мерчанта за алгоритмом RS256. Банк визначає зареєстрований ключ за заголовком `kid`.
 
-#### Приклад ініціалізації: <a href="#priklad-inicializaciyi" id="priklad-inicializaciyi"></a>
+#### Поля `AuthorizationDTO`
 
-```php
-use AlliancePay\Sdk\Services\Authorization\AuthorizationService;
+| Поле            | Тип      | Опис                                                                                                                                             |
+| --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `baseUrl`       | `string` | Базова HTTPS-адреса API, яку банк надав для вашого тестового або робочого середовища.                                                            |
+| `merchantId`    | `string` | Ідентифікатор вашого мерчанта. Використайте значення, видане банком для цього самого середовища.                                                 |
+| `jwsPrivateKey` | `string` | Вміст приватного RSA-ключа мерчанта у форматі PEM разом із початковим і кінцевим рядками. Якщо ключ зберігається у файлі, прочитайте його вміст. |
+| `jwsKeyId`      | `string` | Ідентифікатор публічного ключа, зареєстрованого в банку. SDK передає його в заголовку JWS `kid`.                                                 |
 
-$authService = new AuthorizationService();
+### Створення AuthorizationDTO
 
-$config = [
-    'baseUrl' => 'https://api-ecom-prod.bankalliance.ua/', // Базовий URL сервісу надається банком
-    'merchantId' => 'YOUR_MERCHANT_ID', // Надається банком
-    'serviceCode' => 'YOUR_SERVICE_CODE', // Надається банком
-    'authenticationKey' => 'YOUR_AUTH_KEY' // Надається банком
-];
-
-/** @var \AlliancePay\Sdk\Services\Authorization\Dto\AuthorizationDTO $authDto */
-$authDto = $authService->initAuthorization($config);
-
-// ВАЖЛИВО: Отриманий об'єкт $authDto необхідно зберегти у вашій базі даних.
-// Він містить токени (authToken, refreshToken) та термін їх дії, 
-// які будуть потрібні для всіх наступних запитів.
-```
-
-### **ВАЖЛИВО:**
-
-#### Приклад збереження та відновлення обʼєкту авторизації `AuthorizationDTO`. <a href="#priklad-zberezhennya-ta-vidnovlennya-ob-yektu-avtorizaciyi-authorizationdto" id="priklad-zberezhennya-ta-vidnovlennya-ob-yektu-avtorizaciyi-authorizationdto"></a>
+У прикладі змінна `ALLIANCEPAY_JWS_KEY_FILE` містить шлях до файла поза публічним каталогом вебсервера. Значення змінних задає ваш застосунок.
 
 ```php
-// Отримання окремих параметрів обʼєкту якщо планується зберігати як окрему сутність.
-    $baseUrl = $authDto->getBaseUrl();
-    $merchantId = $authDto->getMerchantId();
-    $serviceCode = $authDto->getServiceCode();
-    $authenticationKey = $authDto->getAuthenticationKey();
-    $refreshToken = $authDto->getRefreshToken();
-    $authToken = $authDto->getAuthToken();
-    $deviceId = $authDto->getDeviceId();
-    $serverPublic = $authDto->getServerPublic();
-    $tokenExpirationDateTime = $authDto->getTokenExpirationDateTime();
+use AlliancePay\Sdk\Services\Authorization\Dto\AuthorizationDTO;
 
-// або через JSON, якщо збереження відбувається в JSON строці
-$jsonAuth = json_encode($authDto->toArray()); 
-
-// Приклад відновлення
-$authDto = AuthorizationDTO::fromArray(json_decode($jsonFromDb, true));
+$keyFile = getenv('ALLIANCEPAY_JWS_KEY_FILE');
+if (!$keyFile || !is_readable($keyFile)) {
+    throw new RuntimeException('Файл приватного ключа недоступний.');
+}
+$authDto = AuthorizationDTO::fromArray([
+    'baseUrl'       => rtrim((string) getenv('ALLIANCEPAY_BASE_URL'), '/'),
+    'merchantId'    => (string) getenv('ALLIANCEPAY_MERCHANT_ID'),
+    'jwsPrivateKey' => file_get_contents($keyFile),
+    'jwsKeyId'      => (string) getenv('ALLIANCEPAY_JWS_KEY_ID'),
+]);
 ```
 
-#### Робота з авторизаційними даними. <a href="#robota-z-avtorizaciinimi-danimi" id="robota-z-avtorizaciinimi-danimi"></a>
+Передавайте `$authDto` у методи створення замовлення, перевірки стану, повернення й роботи з підписками. Застосунку не потрібно створювати технічну сесію або зберігати токени для цього сценарію.
 
-Якщо у вас є збережені авторизаційні дані вам потрібно відновити обʼєкт авторизації по вище описаному прикладу.
+### Діагностика
 
-Важливо памʼятати якщо термін дії технічної сессії завершився тоді метод `initAuthorization()` оновить дані в обʼєкті (відбудеться запит і оновлення сесії) та його потрібно зберегти в своїй системі.
-
-#### Структура об'єкта AuthorizationDTO: <a href="#struktura-obyekta-authorizationdto" id="struktura-obyekta-authorizationdto"></a>
-
-**Після успішного виклику ви отримаєте об'єкт з наступними даними:**
-
-* `baseUrl`, `merchantId`, `serviceCode`, `authenticationKey` — ваші конфігураційні дані.
-* `authToken` — токен для поточних запитів.
-* `refreshToken` — токен для оновлення авторизації.
-* `deviceId`, `serverPublic` — технічні ідентифікатори.
-* `tokenExpirationDateTime` — об'єкт DateTimeImmutable з часом закінчення дії токена.
-
-Збережений об'єкт `AuthorizationDTO` є обов'язковим аргументом для виконання інших операцій в API:
-
-* **create-order** `(/ecom/execute_request/hpp/v1/create-order)`: Створення нових платежів.
-* **refund** `(/ecom/execute_request/payments/v3/refund)`: Повернення коштів.
-* **operations** `(/ecom/execute_request/hpp/v1/operations)`: Перевірка статусу транзакцій.
+Якщо `fromArray()` повертає `AuthenticationException`, перевірте чотири обов’язкові поля. При помилці підпису звірте вміст PEM, пару ключів, `kid` та середовище. Для журналу достатньо номера запиту й типу помилки. `AuthorizationDTO::toArray()` містить приватний ключ, тому його вміст слід виключити з журналів.
