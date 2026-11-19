@@ -298,6 +298,7 @@
     * [Перевірка стану замовлення](platizhni-vidzheti-dlya-cms/nodejs-sdk/perevirka-stanu-zamovlennya.md)
     * [Обробка помилок](platizhni-vidzheti-dlya-cms/nodejs-sdk/obrobka-pomilok.md)
     * [PreAuth and Completion NodeJS SDK](platizhni-vidzheti-dlya-cms/nodejs-sdk/preauth-and-completion-nodejs-sdk.md)
+    * [Підписки](platizhni-vidzheti-dlya-cms/nodejs-sdk/pidpiski.md)
 * [1.0 Платіжні віджети для CMS](platizhni-vidzheti-dlya-cms-1/README.md)
   * [OpenCart](platizhni-vidzheti-dlya-cms-1/opencart/README.md)
     * [Інструкція по встановленню](platizhni-vidzheti-dlya-cms-1/opencart/instrukciya-po-vstanovlennyu.md)
