@@ -1,31 +1,30 @@
 # Створення замовлення
 
-Авторизація 1.0 decrypt\encrypt | `{{url}}/ecom/execute_request/hpp/v1/create-order`
+Авторизація 2.0 — JWS | POST \{{url\}}/ecom/jws/payments/hpp/create\_order\_v1
 
-Авторизація 2.0 JWS | `{{url}}/ecom/jws/payments/hpp/create_order_v1`
-
-
+Приклади нижче показують JSON payload до підписання запиту та після декодування відповіді. Підписуйте запити та перевіряйте відповіді за правилами розділу «Авторизація 2.0». Поля customerData.\* передаються всередині об’єкта customerData.
 
 **Вхідні параметри:**
 
-<table data-full-width="true"><thead><tr><th width="173">Параметр</th><th width="162">Опиc</th><th width="130.1038818359375">Формат даних</th><th width="116.399169921875">Обов'язковість</th><th>Приклад</th></tr></thead><tbody><tr><td>merchantRequestId</td><td>унікальний ідентифікатор згенерований системою мерчанта, використовується для можливості дізнатися статусоперації якщо запит закінчився невідомою помилкою чи дісконектом</td><td>string(36)</td><td>Так</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>merchantId</td><td>Id мерчанту згенерований в Єкомі</td><td>string(36)</td><td>Так</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>hppPayType</td><td>тип оплати</td><td>string</td><td>Так</td><td>Доступні значення -PURCHASE, A2A, PREAUTH, VERIFICATION</td></tr><tr><td>directType</td><td>спосіб перенаправлення клієнта на платіжні сторінку</td><td>enum</td><td>Ні</td><td><p></p><ul><li>REDIRECT - (по замовчуванню) редірект на сторінку HPP</li><li>BANK_LINK - редірект в мобільний додаток</li><li>STATIC_LINK - редірект в статичне посилання</li></ul></td></tr><tr><td>hppTryMode</td><td>тип hpp ордера</td><td>Enum</td><td>Ні</td><td><ul><li>ONE_TRY - ордер, в якому є можливість провести тільки одну операцю</li><li>MULTI_PAYMENT - ордер, в якому є можливість провести багато операцій (використовується для directType STATIC_LINK)</li></ul></td></tr><tr><td>expirationTimeMinutes</td><td>термін дії посилання</td><td><p>int (4) (значення передається в хвилинах)</p><ul><li>max значення 1440 хвилин </li><li>min значення 60 хвилин для hppPayType = A2A</li></ul></td><td>Ні</td><td>1440 </td></tr><tr><td>preAuthExpDate</td><td>дата та час до автоматичного реверса по операції PREAUTH</td><td><p>string</p><ul><li>Не більше 28 днів від дати переданої в create. </li><li>Не менше 2 годин від дати операції (creation date).</li></ul></td><td>Так, якщо hppPayType= PREAUTH</td><td>{{currentdateT}}.00+00:00</td></tr><tr><td>coinAmount</td><td>сума замовлення в копійках</td><td>long</td><td>Так</td><td>2000</td></tr><tr><td>currencyCode</td><td>валюта ордеру</td><td>string</td><td>Ні, по замовчуванню 980</td><td>978, 840, 980</td></tr><tr><td>paymentMethods</td><td>методи оплати </td><td>enum</td><td>Так</td><td>Доступні значення - CARD, APPLE_PAY, GOOGLE_PAY</td></tr><tr><td>language</td><td>мова платіжного віджета. ISO 639-1 2 digits</td><td>string (50)</td><td>Ні</td><td><p>Доступні значення : uk(за замовчуванням)</p><p>en,es,de,pl,fr,tr,it,nl,pt</p></td></tr><tr><td>notificationUrl</td><td>url, на який буде відправлено CallBack</td><td>string (255)</td><td>Ні</td><td>https://merchant.notification_url</td></tr><tr><td>notificationEncryption</td><td>ознака криптування данних CallBack</td><td>string</td><td>Ні</td><td>Якщо параметр не передано або передано false, то дані в CallBack будуть не закриптовані</td></tr><tr><td>successUrl</td><td>url, для редіректу на сайт мерчанту при успішному статусі </td><td>string (1000)</td><td>Так </td><td><p><a href="https://example.com/success">https://example.com/success</a></p><p></p></td></tr><tr><td>failUrl</td><td>url, для редіректу на сайт мерчанту при неуспішному статусі</td><td>string (1000)</td><td>Так</td><td><a href="https://example.com/fail">https://example.com/fail</a></td></tr><tr><td>statusPageType</td><td>тип сторінки статусу </td><td>enum</td><td>Так</td><td><p></p><p>Доступні значення: </p><ol><li>STATUS_TIMER_PAGE - сторінка за замовчуванням, якщо мерчант не обрав бажаний тип, таймер редірект автоматично 1 хвилина відображення статус сторінки з автоматичним редіректом юзера на сайт мерчанта (редірект урл)</li><li>STATUS_PAGE - редірект, на нашу статус сторінку (завантажити квитанцію …)</li></ol></td></tr><tr><td>purpose</td><td>призначення платежу яке заповнює мерчант</td><td>string (255)</td><td>Ні</td><td>За товар</td></tr><tr><td>merchantComment</td><td>додаткова інформація\коментар мерчанта по замовленню</td><td><p>string(255) </p><p>a-zA-Z0-9 ,.;:@#$%'-=+1,256$ <br><br>min 14, max 255 символів для hppPayType = A2A</p></td><td>Так, якщо hppPayType = A2A</td><td>merchant Comment id 1258728c1</td></tr><tr><td>priorityBankCode</td><td>id пріоритетного застосунку. Для генераціі QR НБУ</td><td>string</td><td>Ні</td><td><p><a href="../../dovidniki/dovidnik-prioritybankcode.md">Доступні значення</a>  </p><p></p><p>ALL_BANKS - повертає url сторінки з усіма доступними банками</p></td></tr><tr><td>paymentCategoryGoal</td><td>категорія ціль. Для генераціі QR НБУ</td><td>string</td><td>Ні</td><td>MP2B/OTHR</td></tr><tr><td>generateQrNbu</td><td>ознака генераціі QR НБУ</td><td>boolean</td><td>Ні</td><td>true|false, default = false</td></tr><tr><td>editableAmount</td><td>ознака редагування суми в QR НБУ</td><td>boolean</td><td>Ні</td><td>true|false, default = false</td></tr><tr><td>neverExpire</td><td>ознака безстроковості ордера для QR НБУ</td><td>boolean</td><td>Ні</td><td>true|false, default = false</td></tr><tr><td>customerData</td><td>об'єкт з customer даними </td><td>object</td><td>Так</td><td></td></tr><tr><td>senderCustomerId</td><td>Id клієнта відправника</td><td>string (255)</td><td>Так</td><td>1258728c1</td></tr><tr><td>senderFirstName</td><td>ім'я відправника </td><td><p>string (30)</p><ul><li>значення не може містити виключно цифри</li><li>не може містити крапки та інші спецсимволи</li><li>не може містити “NULL”, “3D SECURE”, “SURNAME”, “CARDHOLDER”, ”UNKNOWN”</li><li>дозволено приймати тільки літерно-цифрові значення</li><li>може приймати пробіл та дефіс, але НЕ може складатися виключно з “ “ или “-“</li><li>дефіс чи пробіл може бути всередині, але не може бути на початку чи кінці</li><li>Для символу апострофу використовуйте єдиний доступний символ utf8 - '<br>який в:<br>utf 16 - u0027<br>utf32 - 00000027</li></ul></td><td>Ні</td><td>Іваненко</td></tr><tr><td>senderLastName</td><td>прізвище відправника</td><td><p>string (30)</p><ul><li>значення не може містити виключно цифри</li><li>не може містити крапки та інші спецсимволи</li><li>дозволено приймати тільки літерно-цифрові значення</li><li>може приймати пробіл та дефіс, але НЕ може складатися виключно з “ “ или “-“</li><li>дефіс чи пробіл може бути всередині, але не може бути на початку чи кінці</li><li>Для символу апострофу використовуйте єдиний доступний символ utf8 - '<br>який в:<br>utf 16 - u0027<br>utf32 - 00000027</li></ul></td><td>Ні</td><td>Іван</td></tr><tr><td>senderMiddleName</td><td>по-батькові відправника</td><td><p>string (30)</p><ul><li>значення не може містити виключно цифри</li><li>не може містити крапки та інші спецсимволи</li><li>дозволено приймати тільки літерно-цифрові значення</li><li>може приймати пробіл та дефіс, але НЕ може складатися виключно з “ “ или “-“</li><li>дефіс чи пробіл може бути всередині, але не може бути на початку чи кінці</li><li>Для символу апострофу використовуйте єдиний доступний символ utf8 - '<br>який в:<br>utf 16 - u0027<br>utf32 - 00000027</li></ul></td><td>Ні</td><td>Іванович</td></tr><tr><td>senderEmail</td><td>пошта відправника </td><td>string (256)</td><td>Ні</td><td><a href="mailto:mail@gmail.com">mail@gmail.com</a></td></tr><tr><td>senderСountry</td><td>країна відправника</td><td>string (3) ISO 3166, 804 (Ukraine)</td><td>Ні</td><td>804</td></tr><tr><td>senderRegion</td><td>область відправника</td><td>string (255)</td><td>Ні</td><td>Київська</td></tr><tr><td>senderСity</td><td>місто відправника</td><td>string (25)</td><td>Ні</td><td>Київ</td></tr><tr><td>senderStreet</td><td>вулиця відправника</td><td>string (35)</td><td>Ні</td><td>Січових стрільців</td></tr><tr><td>senderAdditionalAddress</td><td>додаткові дані адреси відправника (поверх, номер дому, квартира)</td><td>string (255)</td><td>Ні</td><td>23</td></tr><tr><td>senderItn</td><td>іпн відправника</td><td>string (20)</td><td>Ні</td><td>123456789</td></tr><tr><td>senderPassport</td><td>паспорт відправника</td><td>string (255)</td><td>Ні</td><td>АН123456</td></tr><tr><td>senderIp</td><td><code class="expression">space.vars.senderIP_description</code></td><td>string (50)</td><td>Ні</td><td><code class="expression">space.vars.senderIP_example</code></td></tr><tr><td>senderPhone</td><td>номер телефону відправника</td><td>string (20)</td><td>Ні</td><td>380630000000</td></tr><tr><td>senderBirthday</td><td>день народження відправника</td><td>string (50)</td><td>Ні</td><td>31.12.2000</td></tr><tr><td>senderGender</td><td>Гендер відправника</td><td>string (50)</td><td>Ні</td><td>Male/Female</td></tr><tr><td>senderZipCode</td><td>Індекс відправника</td><td>string (50)</td><td>Ні</td><td> 49000</td></tr></tbody></table>
+<table data-full-width="true"><thead><tr><th width="173">Параметр</th><th width="162">Опиc</th><th width="130.1038818359375">Формат даних</th><th width="116.399169921875">Обов'язковість</th><th>Приклад</th></tr></thead><tbody><tr><td>merchantRequestId</td><td>унікальний ідентифікатор згенерований системою мерчанта, використовується для можливості дізнатися статусоперації якщо запит закінчився невідомою помилкою чи дісконектом</td><td>string(36)</td><td>Так</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>merchantId</td><td>Id мерчанту згенерований в Єкомі</td><td>string(36)</td><td>Так</td><td>137d9304-0368-11ed-b939-0242ac120002</td></tr><tr><td>hppPayType</td><td>тип оплати</td><td>string</td><td>Так</td><td>Доступні значення -PURCHASE, A2A, PREAUTH, VERIFICATION</td></tr><tr><td>directType</td><td>спосіб перенаправлення клієнта на платіжні сторінку</td><td>enum</td><td>Ні</td><td><p></p><ul><li>REDIRECT - (по замовчуванню) редірект на сторінку HPP</li><li>BANK_LINK - редірект в мобільний додаток</li><li>STATIC_LINK - редірект в статичне посилання</li></ul></td></tr><tr><td>hppTryMode</td><td>тип hpp ордера</td><td>Enum</td><td>Ні</td><td><ul><li>ONE_TRY - ордер, в якому є можливість провести тільки одну операцю</li><li>MULTI_PAYMENT - ордер, в якому є можливість провести багато операцій (використовується для directType STATIC_LINK)</li></ul></td></tr><tr><td>expirationTimeMinutes</td><td>термін дії посилання</td><td><p>int (4) (значення передається в хвилинах)</p><ul><li>max значення 1440 хвилин </li><li>min значення 60 хвилин для hppPayType = A2A</li></ul></td><td>Ні</td><td>1440 </td></tr><tr><td>preAuthExpDate</td><td>дата та час до автоматичного реверса по операції PREAUTH</td><td><p>string</p><ul><li>Не більше 28 днів від дати переданої в create. </li><li>Не менше 2 годин від дати операції (creation date).</li></ul></td><td>Так, якщо hppPayType= PREAUTH</td><td>{{currentdateT}}.00+00:00</td></tr><tr><td>coinAmount</td><td>сума замовлення в копійках</td><td>long</td><td>Так</td><td>2000</td></tr><tr><td>currencyCode</td><td>валюта ордеру</td><td>string</td><td>Ні, по замовчуванню 980</td><td>978, 840, 980</td></tr><tr><td>paymentMethods</td><td>методи оплати </td><td>array of string / Enum</td><td>Так</td><td>Доступні значення - CARD, APPLE_PAY, GOOGLE_PAY</td></tr><tr><td>language</td><td>мова платіжного віджета. ISO 639-1 2 digits</td><td>string (50)</td><td>Ні</td><td><p>Доступні значення : uk(за замовчуванням)</p><p>en,es,de,pl,fr,tr,it,nl,pt</p></td></tr><tr><td>notificationUrl</td><td>url, на який буде відправлено CallBack</td><td>string (255)</td><td>Ні</td><td>https://merchant.notification_url</td></tr><tr><td>notificationEncryption</td><td>ознака криптування данних CallBack</td><td>string</td><td>Ні</td><td>Якщо параметр не передано або передано false, то дані в CallBack будуть не закриптовані</td></tr><tr><td>successUrl</td><td>url, для редіректу на сайт мерчанту при успішному статусі </td><td>string (1000)</td><td>Так </td><td><p><a href="https://example.com/success">https://example.com/success</a></p><p></p></td></tr><tr><td>failUrl</td><td>url, для редіректу на сайт мерчанту при неуспішному статусі</td><td>string (1000)</td><td>Так</td><td><a href="https://example.com/fail">https://example.com/fail</a></td></tr><tr><td>statusPageType</td><td>тип сторінки статусу </td><td>enum</td><td>Так</td><td><p></p><p>Доступні значення: </p><ol><li>STATUS_TIMER_PAGE - сторінка за замовчуванням, якщо мерчант не обрав бажаний тип, таймер редірект автоматично 1 хвилина відображення статус сторінки з автоматичним редіректом юзера на сайт мерчанта (редірект урл)</li><li>STATUS_PAGE - редірект, на нашу статус сторінку (завантажити квитанцію …)</li></ol></td></tr><tr><td>purpose</td><td>призначення платежу яке заповнює мерчант</td><td>string (255)</td><td>Ні</td><td>За товар</td></tr><tr><td>merchantComment</td><td>додаткова інформація\коментар мерчанта по замовленню</td><td><p>string(255) </p><p>a-zA-Z0-9 ,.;:@#$%'-=+1,256$ <br><br>min 14, max 255 символів для hppPayType = A2A</p></td><td>Так, якщо hppPayType = A2A</td><td>merchant Comment id 1258728c1</td></tr><tr><td>priorityBankCode</td><td>id пріоритетного застосунку. Для генераціі QR НБУ</td><td>string</td><td>Ні</td><td><p><a href="../../dovidniki/dovidnik-prioritybankcode.md">Доступні значення</a>  </p><p></p><p>ALL_BANKS - повертає url сторінки з усіма доступними банками</p></td></tr><tr><td>paymentCategoryGoal</td><td>категорія ціль. Для генераціі QR НБУ</td><td>string</td><td>Ні</td><td>MP2B/OTHR</td></tr><tr><td>generateQrNbu</td><td>ознака генераціі QR НБУ</td><td>boolean</td><td>Ні</td><td>true|false, default = false</td></tr><tr><td>editableAmount</td><td>ознака редагування суми в QR НБУ</td><td>boolean</td><td>Ні</td><td>true|false, default = false</td></tr><tr><td>neverExpire</td><td>ознака безстроковості ордера для QR НБУ</td><td>boolean</td><td>Ні</td><td>true|false, default = false</td></tr><tr><td>customerData</td><td>об'єкт з customer даними </td><td>object</td><td>Так</td><td></td></tr><tr><td>customerData.senderCustomerId</td><td>Id клієнта відправника</td><td>string (255)</td><td>Так</td><td>1258728c1</td></tr><tr><td>customerData.senderFirstName</td><td>ім'я відправника </td><td><p>string (30)</p><ul><li>значення не може містити виключно цифри</li><li>не може містити крапки та інші спецсимволи</li><li>не може містити “NULL”, “3D SECURE”, “SURNAME”, “CARDHOLDER”, ”UNKNOWN”</li><li>дозволено приймати тільки літерно-цифрові значення</li><li>може приймати пробіл та дефіс, але НЕ може складатися виключно з “ “ или “-“</li><li>дефіс чи пробіл може бути всередині, але не може бути на початку чи кінці</li><li>Для символу апострофу використовуйте єдиний доступний символ utf8 - '<br>який в:<br>utf 16 - u0027<br>utf32 - 00000027</li></ul></td><td>Ні</td><td>Іван</td></tr><tr><td>customerData.senderLastName</td><td>прізвище відправника</td><td><p>string (30)</p><ul><li>значення не може містити виключно цифри</li><li>не може містити крапки та інші спецсимволи</li><li>дозволено приймати тільки літерно-цифрові значення</li><li>може приймати пробіл та дефіс, але НЕ може складатися виключно з “ “ или “-“</li><li>дефіс чи пробіл може бути всередині, але не може бути на початку чи кінці</li><li>Для символу апострофу використовуйте єдиний доступний символ utf8 - '<br>який в:<br>utf 16 - u0027<br>utf32 - 00000027</li></ul></td><td>Ні</td><td>Іваненко</td></tr><tr><td>customerData.senderMiddleName</td><td>по-батькові відправника</td><td><p>string (30)</p><ul><li>значення не може містити виключно цифри</li><li>не може містити крапки та інші спецсимволи</li><li>дозволено приймати тільки літерно-цифрові значення</li><li>може приймати пробіл та дефіс, але НЕ може складатися виключно з “ “ или “-“</li><li>дефіс чи пробіл може бути всередині, але не може бути на початку чи кінці</li><li>Для символу апострофу використовуйте єдиний доступний символ utf8 - '<br>який в:<br>utf 16 - u0027<br>utf32 - 00000027</li></ul></td><td>Ні</td><td>Іванович</td></tr><tr><td>customerData.senderEmail</td><td>пошта відправника </td><td>string (256)</td><td>Ні</td><td><a href="mailto:mail@gmail.com">mail@gmail.com</a></td></tr><tr><td>customerData.senderCountry</td><td>країна відправника</td><td>string (3) ISO 3166, 804 (Ukraine)</td><td>Ні</td><td>804</td></tr><tr><td>customerData.senderRegion</td><td>область відправника</td><td>string (255)</td><td>Ні</td><td>Київська</td></tr><tr><td>customerData.senderCity</td><td>місто відправника</td><td>string (25)</td><td>Ні</td><td>Київ</td></tr><tr><td>customerData.senderStreet</td><td>вулиця відправника</td><td>string (35)</td><td>Ні</td><td>Січових стрільців</td></tr><tr><td>customerData.senderAdditionalAddress</td><td>додаткові дані адреси відправника (поверх, номер дому, квартира)</td><td>string (255)</td><td>Ні</td><td>23</td></tr><tr><td>customerData.senderItn</td><td>іпн відправника</td><td>string (20)</td><td>Ні</td><td>123456789</td></tr><tr><td>customerData.senderPassport</td><td>паспорт відправника</td><td>string (255)</td><td>Ні</td><td>АН123456</td></tr><tr><td>customerData.senderIp</td><td>IP-адреса клієнта-відправника.</td><td>string (50)</td><td>Ні</td><td><code class="expression">space.vars.senderIP_example</code></td></tr><tr><td>customerData.senderPhone</td><td>номер телефону відправника</td><td>string (20)</td><td>Ні</td><td>380630000000</td></tr><tr><td>customerData.senderBirthday</td><td>день народження відправника</td><td>string (50)</td><td>Ні</td><td>31.12.2000</td></tr><tr><td>customerData.senderGender</td><td>Гендер відправника</td><td>string (50)</td><td>Ні</td><td>Male/Female</td></tr><tr><td>customerData.senderZipCode</td><td>Індекс відправника</td><td>string (50)</td><td>Ні</td><td> 49000</td></tr></tbody></table>
 
 **Вихідні параметри:**
 
-| Параметр          | Опис                                                                                                                                      | Формат даних | Приклад                                                                                                                                                                                                                                                                                                                                         |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| hppOrderId        | Id замовлення                                                                                                                             | string       | 1764688635274xVtoUo7bDcn                                                                                                                                                                                                                                                                                                                        |
-| merchantRequestId | унікальний ідентифікатор мерчанта                                                                                                         | string       | 64d9304-0368-11ed-b939-0242ac1221458                                                                                                                                                                                                                                                                                                            |
-| hppPayType        | тип оплати                                                                                                                                | string       | PURCHASE, A2A                                                                                                                                                                                                                                                                                                                                   |
-| paymentMethods    | методи оплати                                                                                                                             | enum         | CARD                                                                                                                                                                                                                                                                                                                                            |
-| orderStatus       | статус замовлення                                                                                                                         | string       | SUCCESS, FAIL, PENDING, REQUIRED\_3DS, CANCELED, PARTIAL\_REFUND                                                                                                                                                                                                                                                                                |
-| coinAmount        | сума замовлення в копійках                                                                                                                | long         | 2000                                                                                                                                                                                                                                                                                                                                            |
-| merchantId        | Id мерчанту згенерований в Єкомі                                                                                                          | string       | 37d9304-0368-11ed-b939-0242ac120002                                                                                                                                                                                                                                                                                                             |
-| expiredOrderDate  | дата та час дії замовлення                                                                                                                | string       | 2024-09-05 18:35:18.210+03:00                                                                                                                                                                                                                                                                                                                   |
-| redirectUrl       | <ul><li>посилання на перенаправлення клієнта на hpp сторінку </li><li>посилання на перенаправлення клієнта в мобільний додаток </li></ul> | string       | <ul><li>{{url}}/?hpp_id=1728551936236-DAfCP7wrKT</li><li>{{url}}/?redirectUrl=https%3A%2F%2Fbankalliance.go.link%2Fecomc2a%3Forder_id%3D1762950448860FERkLl76lCp%26adj_t%3D1rknh2ig%26adj_deep_link%3Dbankalliance%253A%252F%252Fecomc2a%253Forder_id%253D1762950448860FERkLl76lCp</li></ul>                                                    |
-| createDate        | дата та час створення замовлення                                                                                                          | string       | 2024-09-05 18:35:18.210+03:00                                                                                                                                                                                                                                                                                                                   |
-| statusUrl         | url для редіректу на сторінку статусу                                                                                                     | string       | \{{url\}}/?hpp\_id=1728551936236-DAfCP7wrKT                                                                                                                                                                                                                                                                                                     |
-| nbuQrCode         | url редіректу для відображення QR НБУ. Default: [https://bank.gov.ua/qr/](https://bank.gov.ua/qr)                                         | string       | https://bank.gov.ua/qr/QkNECjAwMwoxCklDVAoK0JrQvtCy0LDQu9GM0YHRjNC60LjQuSDQktC70LDQtNC40YHQu9Cw0LIg0KLQtdGB0YIKVUExMjMyMjAwMTAwMDAwMjYyMDYzNjM1MDU1MTMKVUFIMTAuMDAKMzQ2NzgwODE1MApNUDJCL09USFIKMTc2Mjk1MDQ0ODg2MEZFUmtMbDc2bENwCjEzN2Q5MzA0LTAzNjgtMTE9ZWI5MzkKUGF5bWVudCBmb3IgT3JkZXIg4oSWMTIzNDU2CkZGRkYKMjUxMTEyMTQ0MjI4CjI1MTExMjE0MjcyOAoK |
+| Параметр          | Опис                                                                                                                                      | Формат даних           | Приклад                                                                                                                                                                                                                                                                                                                                         |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| hppOrderId        | Id замовлення                                                                                                                             | string                 | 1764688635274xVtoUo7bDcn                                                                                                                                                                                                                                                                                                                        |
+| merchantRequestId | унікальний ідентифікатор мерчанта                                                                                                         | string                 | 64d9304-0368-11ed-b939-0242ac1221458                                                                                                                                                                                                                                                                                                            |
+| hppPayType        | тип оплати                                                                                                                                | string                 | PURCHASE, A2A, PREAUTH, VERIFICATION                                                                                                                                                                                                                                                                                                            |
+| paymentMethods    | методи оплати                                                                                                                             | array of string / Enum | \["CARD", "APPLE\_PAY", "GOOGLE\_PAY"]                                                                                                                                                                                                                                                                                                          |
+| orderStatus       | статус замовлення                                                                                                                         | string                 | SUCCESS, FAIL, PENDING, REQUIRED\_3DS, CANCELED, PARTIAL\_REFUND                                                                                                                                                                                                                                                                                |
+| coinAmount        | сума замовлення в копійках                                                                                                                | long                   | 2000                                                                                                                                                                                                                                                                                                                                            |
+| merchantId        | Id мерчанту згенерований в Єкомі                                                                                                          | string                 | 37d9304-0368-11ed-b939-0242ac120002                                                                                                                                                                                                                                                                                                             |
+| expiredOrderDate  | дата та час дії замовлення                                                                                                                | string                 | 2024-09-05 18:35:18.210+03:00                                                                                                                                                                                                                                                                                                                   |
+| redirectUrl       | <ul><li>посилання на перенаправлення клієнта на hpp сторінку </li><li>посилання на перенаправлення клієнта в мобільний додаток </li></ul> | string                 | <ul><li>{{url}}/?hpp_id=1728551936236-DAfCP7wrKT</li><li>{{url}}/?redirectUrl=https%3A%2F%2Fbankalliance.go.link%2Fecomc2a%3Forder_id%3D1762950448860FERkLl76lCp%26adj_t%3D1rknh2ig%26adj_deep_link%3Dbankalliance%253A%252F%252Fecomc2a%253Forder_id%253D1762950448860FERkLl76lCp</li></ul>                                                    |
+| createDate        | дата та час створення замовлення                                                                                                          | string                 | 2024-09-05 18:35:18.210+03:00                                                                                                                                                                                                                                                                                                                   |
+| statusUrl         | url для редіректу на сторінку статусу                                                                                                     | string                 | \{{url\}}/?hpp\_id=1728551936236-DAfCP7wrKT                                                                                                                                                                                                                                                                                                     |
+| nbuQrCode         | url редіректу для відображення QR НБУ. Default: [https://bank.gov.ua/qr/](https://bank.gov.ua/qr)                                         | string                 | https://bank.gov.ua/qr/QkNECjAwMwoxCklDVAoK0JrQvtCy0LDQu9GM0YHRjNC60LjQuSDQktC70LDQtNC40YHQu9Cw0LIg0KLQtdGB0YIKVUExMjMyMjAwMTAwMDAwMjYyMDYzNjM1MDU1MTMKVUFIMTAuMDAKMzQ2NzgwODE1MApNUDJCL09USFIKMTc2Mjk1MDQ0ODg2MEZFUmtMbDc2bENwCjEzN2Q5MzA0LTAzNjgtMTE9ZWI5MzkKUGF5bWVudCBmb3IgT3JkZXIg4oSWMTIzNDU2CkZGRkYKMjUxMTEyMTQ0MjI4CjI1MTExMjE0MjcyOAoK |
+| ecomOrderId       | Ідентифікатор замовлення в системі Ecom; відрізняється від hppOrderId.                                                                    | string                 | b68a9f2f-ad0d-4f52-a19e-11ee9c68d2a3                                                                                                                                                                                                                                                                                                            |
 
 **Приклад тіла запиту hppPayType = PURCHASE:**
 
@@ -93,49 +92,51 @@
 }
 ```
 
+Для A2A використовуйте hppPayType = A2A та directType = BANK\_LINK. merchantComment обов’язковий: від 14 до 255 символів. priorityBankCode визначає пріоритетний застосунок; ALL\_BANKS повертає сторінку вибору доступного банку. generateQrNbu передавайте як boolean true або false, без лапок.
+
 **Приклад тіла запиту hppPayType = A2A та priorityBankCode = null:**
 
 ```json
 {
-    "merchantId": "137d9304-0368-11ed-b939-0242ac120002",
-    "hppPayType": "A2A",
-    "directType": "BANK_LINK",
-    "failUrl": "https://example.com/fail",
-    "successUrl": "https://example.com/success",
-    "merchantRequestId": "137d93491081eb939",
-    "merchantComment": "137d9304-0368-11=eb939",
-    "statusPageType": "STATUS_PAGE",
-    "expirationTimeMinutes": 1440,
-    "priorityBankCode": null,
-    "paymentMethods": [
-        "CARD"
-    ],
-    "customerData": {
-        "senderCustomerId": "Id", 
-        "senderEmail": "aaaa@gmail.com",
-        "senderMiddleName": "senderMiddleName",
-        "senderRegion": "senderRegion",
-        "senderCountry": "804",
-        "senderAdditionalAddress": "senderAdditionalAddress",
-        "senderStreet": "senderStret",
-        "senderCity": "senderCity",
-        "senderIp": "255.255.244.255",
-        "senderBirthday": "22081989",
-        "senderGender": "Female",
-        "senderZipCode": "12345",
-        "senderPassport": "senderPassport",
-        "senderItn": "5555557777",
-        "senderPhone": "380957388888"
-    },
-    "coinAmount": 1000,
-    "purpose": "Payment for Order №123456",
-    "language": "uk",
-    "notificationUrl": "https://example.com/notify",
-    "generateQrNbu": "true"
+  "merchantId": "137d9304-0368-11ed-b939-0242ac120002",
+  "hppPayType": "A2A",
+  "directType": "BANK_LINK",
+  "failUrl": "https://example.com/fail",
+  "successUrl": "https://example.com/success",
+  "merchantRequestId": "137d93491081eb939",
+  "merchantComment": "137d9304-0368-11=eb939",
+  "statusPageType": "STATUS_PAGE",
+  "expirationTimeMinutes": 1440,
+  "priorityBankCode": null,
+  "paymentMethods": [
+    "CARD"
+  ],
+  "customerData": {
+    "senderCustomerId": "Id",
+    "senderEmail": "aaaa@gmail.com",
+    "senderMiddleName": "senderMiddleName",
+    "senderRegion": "senderRegion",
+    "senderCountry": "804",
+    "senderAdditionalAddress": "senderAdditionalAddress",
+    "senderStreet": "senderStret",
+    "senderCity": "senderCity",
+    "senderIp": "255.255.244.255",
+    "senderBirthday": "22081989",
+    "senderGender": "Female",
+    "senderZipCode": "12345",
+    "senderPassport": "senderPassport",
+    "senderItn": "5555557777",
+    "senderPhone": "380957388888"
+  },
+  "coinAmount": 1000,
+  "purpose": "Payment for Order №123456",
+  "language": "uk",
+  "notificationUrl": "https://example.com/notify",
+  "generateQrNbu": true
 }
 ```
 
-**Приклад тіла відповіді hppPayType = A2A та priorityBankCode = null::**
+Приклад тіла відповіді hppPayType = A2A та priorityBankCode = null:
 
 ```json
 {
@@ -161,41 +162,41 @@
 
 ```json
 {
-    "merchantId": "137d9304-0368-11ed-b939-0242ac120002",
-    "hppPayType": "A2A",
-    "directType": "BANK_LINK",
-    "failUrl": "https://example.com/fail",
-    "successUrl": "https://example.com/success",
-    "merchantRequestId": "137d93491081eb93",
-    "merchantComment": "137d9304-0368-11=eb939",
-    "statusPageType": "STATUS_PAGE",
-    "expirationTimeMinutes": 1440,
-    "priorityBankCode": "PRIVAT_BANK",
-    "paymentMethods": [
-        "CARD"
-    ],
-    "customerData": {
-        "senderCustomerId": "Id", 
-        "senderEmail": "aaaa@gmail.com",
-        "senderMiddleName": "senderMiddleName",
-        "senderRegion": "senderRegion",
-        "senderCountry": "804",
-        "senderAdditionalAddress": "senderAdditionalAddress",
-        "senderStreet": "senderStret",
-        "senderCity": "senderCity",
-        "senderIp": "255.255.244.255",
-        "senderBirthday": "22081989",
-        "senderGender": "Female",
-        "senderZipCode": "12345",
-        "senderPassport": "senderPassport",
-        "senderItn": "5555557777",
-        "senderPhone": "380957388888"
-    },
-    "coinAmount": 1000,
-    "purpose": "Payment for Order №123456",
-    "language": "uk",
-    "notificationUrl": "https://example.com/notify",
-    "generateQrNbu": "true"
+  "merchantId": "137d9304-0368-11ed-b939-0242ac120002",
+  "hppPayType": "A2A",
+  "directType": "BANK_LINK",
+  "failUrl": "https://example.com/fail",
+  "successUrl": "https://example.com/success",
+  "merchantRequestId": "137d93491081eb93",
+  "merchantComment": "137d9304-0368-11=eb939",
+  "statusPageType": "STATUS_PAGE",
+  "expirationTimeMinutes": 1440,
+  "priorityBankCode": "PRIVAT_BANK",
+  "paymentMethods": [
+    "CARD"
+  ],
+  "customerData": {
+    "senderCustomerId": "Id",
+    "senderEmail": "aaaa@gmail.com",
+    "senderMiddleName": "senderMiddleName",
+    "senderRegion": "senderRegion",
+    "senderCountry": "804",
+    "senderAdditionalAddress": "senderAdditionalAddress",
+    "senderStreet": "senderStret",
+    "senderCity": "senderCity",
+    "senderIp": "255.255.244.255",
+    "senderBirthday": "22081989",
+    "senderGender": "Female",
+    "senderZipCode": "12345",
+    "senderPassport": "senderPassport",
+    "senderItn": "5555557777",
+    "senderPhone": "380957388888"
+  },
+  "coinAmount": 1000,
+  "purpose": "Payment for Order №123456",
+  "language": "uk",
+  "notificationUrl": "https://example.com/notify",
+  "generateQrNbu": true
 }
 ```
 
